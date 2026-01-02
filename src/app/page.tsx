@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import Link from 'next/link';
@@ -136,8 +135,6 @@ function HomeComponent() {
         </p>
       </section>
       
-      <Stats />
-
       <div className="grid w-full gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {toolCategories.map((category, categoryIndex) => (
           <button
@@ -190,6 +187,7 @@ function HomeComponent() {
             </Link>
         </CardContent>
       </Card>
+      <Stats />
     </div>
   );
 }
