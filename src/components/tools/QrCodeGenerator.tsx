@@ -63,7 +63,7 @@ export function QrCodeGenerator() {
   const [activeTab, setActiveTab] = useState<QrType>('link');
 
   // Link State
-  const [link, setLink] = useState('https://firebasetoolbox.io');
+  const [link, setLink] = useState('www.yoursite.com');
 
   // Text State
   const [text, setText] = useState('Hello world!');
