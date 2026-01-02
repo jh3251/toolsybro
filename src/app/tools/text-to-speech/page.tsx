@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Text to Speech Converter',
-  description: 'Convert written text into natural-sounding speech online for free. Choose from various voices and adjust speed and pitch.',
+  title: 'Text to Speech Converter | Free Online TTS | ToolsyBro',
+  description: 'Convert written text into natural-sounding speech online for free. Choose from various voices and adjust speed and pitch with our 100% free tool.',
 };
 
 export default function TextToSpeechPage() {

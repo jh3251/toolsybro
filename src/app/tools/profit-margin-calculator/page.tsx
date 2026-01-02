@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { ProfitMarginCalculator } from '@/components/tools/ProfitMarginCalculator';
 
 export const metadata: Metadata = {
-  title: 'Profit Margin Calculator',
-  description: 'Calculate your profit margin, gross profit, and markup percentage based on cost and revenue. An essential tool for businesses to measure profitability.',
+  title: 'Profit Margin Calculator | Free Business Tool | ToolsyBro',
+  description: 'Calculate your profit margin, gross profit, and markup percentage based on cost and revenue. An essential 100% free tool for businesses.',
 };
 
 export default function ProfitMarginCalculatorPage() {

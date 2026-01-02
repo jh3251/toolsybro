@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Text Sorter (A–Z / Z–A)',
-  description: 'Sort lines of text alphabetically (A-Z or Z-A) with this free online tool.',
+  title: 'Text Sorter (A-Z / Z-A) | Free Online Tool | ToolsyBro',
+  description: 'Sort lines of text alphabetically (A-Z or Z-A) with this 100% free and simple online tool from ToolsyBro.',
 };
 
 export default function TextSorterPage() {

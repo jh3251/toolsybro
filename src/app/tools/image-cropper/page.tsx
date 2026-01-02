@@ -7,8 +7,8 @@ import { ImageCropperLoader } from '@/components/tools/ImageCropperLoader';
 
 
 export const metadata: Metadata = {
-  title: 'Image Cropper',
-  description: 'Easily crop and cut your images online. Select an area and download your perfectly cropped image.',
+  title: 'Image Cropper | Free Online Photo Cropping Tool | ToolsyBro',
+  description: 'Easily crop and cut your images online with our 100% free tool. Select an area and download your perfectly cropped image in seconds.',
 };
 
 export default function ImageCropperPage() {

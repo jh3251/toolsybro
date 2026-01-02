@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { HashChecker } from '@/components/tools/HashChecker';
 
 export const metadata: Metadata = {
-  title: 'File Hash Checker (SHA-256)',
-  description: 'Verify file integrity by comparing its calculated hash (SHA-256, SHA-384, SHA-512) against a known value.',
+  title: 'File Hash Checker (SHA-256) | Free Security Tool | ToolsyBro',
+  description: 'Verify file integrity by comparing its calculated hash (SHA-256, SHA-384, SHA-512) against a known value with our 100% free online tool.',
 };
 
 export default function HashCheckerPage() {

@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
 
 export const metadata: Metadata = {
-  title: 'Open Graph Preview Tool',
-  description: 'A placeholder for the Open Graph Preview Tool.',
+  title: 'Open Graph Preview Tool | Free SEO Tool (Coming Soon) | ToolsyBro',
+  description: 'Preview how your web pages will look when shared on social media. This feature is coming soon to our collection of 100% free tools.',
 };
 
 export default function PlaceholderPage() {

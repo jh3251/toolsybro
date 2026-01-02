@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { EmiCalculator } from '@/components/tools/EmiCalculator';
 
 export const metadata: Metadata = {
-  title: 'EMI Calculator',
-  description: 'Calculate your Equated Monthly Installment (EMI) for loans. Enter the loan amount, interest rate, and tenure to find out your monthly payment.',
+  title: 'EMI Calculator | Free Loan Calculator | ToolsyBro',
+  description: 'Calculate your Equated Monthly Installment (EMI) for loans with our 100% free tool. Enter loan amount, interest rate, and tenure to find your monthly payment.',
 };
 
 export default function EmiCalculatorPage() {

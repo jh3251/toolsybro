@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { ScientificCalculator } from '@/components/tools/ScientificCalculator';
 
 export const metadata: Metadata = {
-  title: 'Scientific Calculator',
-  description: 'An advanced online scientific calculator for complex calculations, including trigonometric, logarithmic, and exponential functions.',
+  title: 'Scientific Calculator | Free Online Math Tool | ToolsyBro',
+  description: 'An advanced 100% free online scientific calculator for complex calculations, including trigonometric, logarithmic, and exponential functions.',
 };
 
 export default function ScientificCalculatorPage() {

@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
 
 export const metadata: Metadata = {
-  title: 'Page Speed Checker',
-  description: 'A placeholder for the Page Speed Checker tool.',
+  title: 'Page Speed Checker | Free SEO Tool (Coming Soon) | ToolsyBro',
+  description: 'Analyze your website\'s loading speed and get performance recommendations. This feature is coming soon to our collection of 100% free tools.',
 };
 
 export default function PlaceholderPage() {

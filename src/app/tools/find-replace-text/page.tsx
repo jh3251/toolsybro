@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Find and Replace Text',
-  description: 'Quickly find and replace words or phrases in your text with this easy-to-use online tool.',
+  title: 'Find and Replace Text | Free Online Tool | ToolsyBro',
+  description: 'Quickly find and replace words or phrases in your text with this easy-to-use and 100% free online tool from ToolsyBro.',
 };
 
 export default function FindReplaceTextPage() {

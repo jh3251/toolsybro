@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Online Word Counter with Real-time Analysis',
+  title: 'Online Word Counter with AI Analysis | Free Tool | ToolsyBro',
   description: 'Count words, characters, sentences, and paragraphs in your text for free. Get real-time AI-powered analysis on the meaning and feeling of your words.',
 };
 

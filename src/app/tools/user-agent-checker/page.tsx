@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { UserAgentChecker } from '@/components/tools/UserAgentChecker';
 
 export const metadata: Metadata = {
-  title: 'User Agent Checker',
-  description: 'View your browser\'s user agent string. A simple tool for developers to check client information.',
+  title: 'What Is My User Agent? | Free Online Tool | ToolsyBro',
+  description: 'Instantly view your browser\'s user agent string. A simple, 100% free online tool for developers to check client information.',
 };
 
 export default function UserAgentCheckerPage() {

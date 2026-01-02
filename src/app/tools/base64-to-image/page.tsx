@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Base64 to Image Converter',
-  description: 'Easily decode a Base64 string into an image. Paste your Base64 data URI and instantly view and download the image.',
+  title: 'Base64 to Image Converter | Free Online Tool | ToolsyBro',
+  description: 'Instantly decode a Base64 string into an image. Paste your Base64 data URI and instantly view and download the resulting image with our 100% free tool.',
 };
 
 export default function Base64ToImagePage() {

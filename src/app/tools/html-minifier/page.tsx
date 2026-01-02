@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { CodeMinifier } from '@/components/tools/CodeMinifier';
 
 export const metadata: Metadata = {
-  title: 'HTML Minifier',
-  description: 'Paste your HTML code to minify it, reducing file size and improving performance.',
+  title: 'HTML Minifier | Free Online Tool for Developers | ToolsyBro',
+  description: 'Paste your HTML code to minify it, reducing file size and improving website performance. A 100% free tool from ToolsyBro.',
 };
 
 export default function HtmlMinifierPage() {

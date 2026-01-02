@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { InvoiceGenerator } from '@/components/tools/InvoiceGenerator';
 
 export const metadata: Metadata = {
-  title: 'Invoice Generator',
-  description: 'Create and download professional invoices for free. Customize items, quantities, rates, and tax.',
+  title: 'Free Invoice Generator | Online Tool | ToolsyBro',
+  description: 'Create and download professional invoices for free with our 100% free online tool. Customize items, quantities, rates, and tax.',
 };
 
 export default function InvoiceGeneratorPage() {

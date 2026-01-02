@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { BorderRadiusGenerator } from '@/components/tools/BorderRadiusGenerator';
 
 export const metadata: Metadata = {
-  title: 'Border Radius Previewer',
-  description: 'Visually generate CSS for border-radius properties. Control all four corners individually or together and copy the code instantly.',
+  title: 'CSS Border Radius Generator | Free UI Tool | ToolsyBro',
+  description: 'Visually generate CSS for border-radius properties. Control all four corners individually or together and copy the code instantly with our free online tool.',
 };
 
 export default function BorderRadiusGeneratorPage() {

@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Image to Base64 Converter',
-  description: 'Easily convert your images (JPG, PNG, WEBP) into Base64 encoded strings for embedding in HTML, CSS, or JSON.',
+  title: 'Image to Base64 Converter | Free Online Tool | ToolsyBro',
+  description: 'Easily convert your images (JPG, PNG, WEBP) into Base64 encoded strings for embedding in HTML, CSS, or JSON with our 100% free online tool.',
 };
 
 export default function ImageToBase64Page() {

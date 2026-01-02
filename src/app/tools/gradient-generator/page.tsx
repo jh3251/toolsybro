@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { GradientGenerator } from '@/components/tools/GradientGenerator';
 
 export const metadata: Metadata = {
-  title: 'CSS Gradient Generator',
-  description: 'Visually create stunning linear and radial CSS gradients. Add and remove color stops, change angles, and copy the generated code.',
+  title: 'CSS Gradient Generator | Free Online Tool | ToolsyBro',
+  description: 'Visually create stunning linear and radial CSS gradients with our 100% free tool. Add and remove color stops, change angles, and copy the generated code.',
 };
 
 export default function GradientGeneratorPage() {

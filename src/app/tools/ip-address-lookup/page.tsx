@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
 
 export const metadata: Metadata = {
-  title: 'IP Address Lookup',
-  description: 'A placeholder for the IP Address Lookup tool.',
+  title: 'IP Address Lookup | Free Tool (Coming Soon) | ToolsyBro',
+  description: 'Find the location and details of an IP address. This feature is coming soon to our collection of 100% free online tools.',
 };
 
 export default function PlaceholderPage() {

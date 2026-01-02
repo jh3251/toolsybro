@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Remove Duplicate Lines',
-  description: 'Easily remove duplicate lines from your text online.',
+  title: 'Remove Duplicate Lines | Free Online Text Tool | ToolsyBro',
+  description: 'Easily remove duplicate lines from your text, lists, or code with our simple and 100% free online tool.',
 };
 
 export default function RemoveDuplicateLinesPage() {

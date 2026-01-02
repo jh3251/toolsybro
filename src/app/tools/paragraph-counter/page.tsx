@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Paragraph Counter',
-  description: 'Count paragraphs in your text with our free online tool.',
+  title: 'Paragraph Counter | Free Online Text Tool | ToolsyBro',
+  description: 'Count paragraphs in your text with our 100% free and simple online paragraph counter. Instantly see how many paragraphs are in any block of text.',
 };
 
 export default function ParagraphCounterPage() {

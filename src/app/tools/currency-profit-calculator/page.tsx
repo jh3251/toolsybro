@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { CurrencyProfitCalculator } from '@/components/tools/CurrencyProfitCalculator';
 
 export const metadata: Metadata = {
-  title: 'Currency Profit Calculator',
-  description: 'Calculate the profit or loss from a currency exchange transaction based on buy and sell rates.',
+  title: 'Forex Profit Calculator | Free Online Tool | ToolsyBro',
+  description: 'Calculate the profit or loss from a currency exchange transaction based on buy and sell rates with our 100% free online finance tool.',
 };
 
 export default function CurrencyProfitCalculatorPage() {

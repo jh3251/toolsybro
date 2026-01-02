@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Character Counter',
-  description: 'Count characters, words, sentences, and paragraphs in your text with our free online tool.',
+  title: 'Free Character Counter Tool | Online Text Analyzer | ToolsyBro',
+  description: 'Count characters, words, sentences, and paragraphs in your text with our 100% free online character counter tool. Perfect for writers and students.',
 };
 
 export default function CharacterCounterPage() {

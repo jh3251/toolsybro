@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { ColorPaletteGenerator } from '@/components/tools/ColorPaletteGenerator';
 
 export const metadata: Metadata = {
-  title: 'Color Palette Generator',
-  description: 'Instantly generate beautiful and harmonious color palettes for your design projects. Click to generate and copy HEX codes.',
+  title: 'Color Palette Generator | Free Design Tool | ToolsyBro',
+  description: 'Instantly generate beautiful and harmonious color palettes for your design projects. Click to generate and copy HEX codes with our 100% free online tool.',
 };
 
 export default function ColorPaletteGeneratorPage() {

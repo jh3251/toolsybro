@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { UuidGenerator } from '@/components/tools/UuidGenerator';
 
 export const metadata: Metadata = {
-  title: 'UUID Generator',
-  description: 'Generate universally unique identifiers (UUIDs) with a single click.',
+  title: 'UUID Generator | Free Online GUID Tool | ToolsyBro',
+  description: 'Generate universally unique identifiers (UUIDs) version 4 with a single click using our 100% free online developer tool.',
 };
 
 export default function UuidGeneratorPage() {

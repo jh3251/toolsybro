@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { OnlineStopwatch } from '@/components/tools/OnlineStopwatch';
 
 export const metadata: Metadata = {
-  title: 'Online Stopwatch',
-  description: 'A simple, accurate, and easy-to-use online stopwatch with lap functionality.',
+  title: 'Online Stopwatch with Laps | Free Tool | ToolsyBro',
+  description: 'A simple, accurate, and easy-to-use 100% free online stopwatch with lap functionality. Perfect for sports, workouts, and timing tasks.',
 };
 
 export default function OnlineStopwatchPage() {

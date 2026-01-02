@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { ExamTimer } from '@/components/tools/ExamTimer';
 
 export const metadata: Metadata = {
-  title: 'Exam Timer',
-  description: 'A simple and clear timer for exams and study sessions to help you manage your time effectively.',
+  title: 'Exam Timer | Free Online Study Tool | ToolsyBro',
+  description: 'A simple and clear timer for exams and study sessions to help you manage your time effectively. One of our 100% free online tools for students.',
 };
 
 export default function ExamTimerPage() {

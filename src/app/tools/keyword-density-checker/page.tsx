@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { KeywordDensityChecker } from '@/components/tools/KeywordDensityChecker';
 
 export const metadata: Metadata = {
-  title: 'Keyword Density Checker',
-  description: 'Analyze your text to find the keyword density, helping you optimize your content for SEO.',
+  title: 'Keyword Density Checker | Free SEO Tool | ToolsyBro',
+  description: 'Analyze your text to find the keyword density with our 100% free online tool, helping you optimize your content for SEO.',
 };
 
 export default function KeywordDensityCheckerPage() {

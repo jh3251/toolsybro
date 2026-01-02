@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { HashGenerator } from '@/components/tools/HashGenerator';
 
 export const metadata: Metadata = {
-  title: 'Hash Generator (SHA-256, SHA-512)',
-  description: 'Generate SHA-256, SHA-384, and SHA-512 hashes from any text input securely in your browser.',
+  title: 'Hash Generator (SHA-256, SHA-512) | Free Tool | ToolsyBro',
+  description: 'Generate SHA-256, SHA-384, and SHA-512 hashes from any text input securely in your browser with our 100% free online developer tool.',
 };
 
 export default function HashGeneratorPage() {

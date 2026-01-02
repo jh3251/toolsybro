@@ -30,8 +30,8 @@ const ImageColorPicker = dynamic(
 // Since we must use 'use client', this won't be picked up for static metadata generation.
 /*
 export const metadata: Metadata = {
-  title: 'Image Color Picker',
-  description: 'Upload an image to pick colors, get HEX and RGB values, and generate a color palette.',
+  title: 'Image Color Picker | Free Online Tool | ToolsyBro',
+  description: 'Upload an image to pick colors, get HEX and RGB values, and generate a color palette with our 100% free online tool.',
 };
 */
 

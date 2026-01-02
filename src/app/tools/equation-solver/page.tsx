@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { EquationSolver } from '@/components/tools/EquationSolver';
 
 export const metadata: Metadata = {
-  title: 'Equation Solver',
-  description: 'Solve mathematical equations with a step-by-step AI-powered solver.',
+  title: 'AI Equation Solver | Free Math Tool | ToolsyBro',
+  description: 'Solve mathematical equations with our free, step-by-step AI-powered solver. Get instant solutions and explanations for your math problems.',
 };
 
 export default function EquationSolverPage() {

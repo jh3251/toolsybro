@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { RobotsTxtGenerator } from '@/components/tools/RobotsTxtGenerator';
 
 export const metadata: Metadata = {
-  title: 'Robots.txt Generator',
-  description: 'Easily generate a robots.txt file to manage how search engine crawlers interact with your website.',
+  title: 'Robots.txt Generator | Free SEO Tool | ToolsyBro',
+  description: 'Easily generate a robots.txt file to manage how search engine crawlers interact with your website. A 100% free online tool for webmasters.',
 };
 
 export default function RobotsTxtGeneratorPage() {

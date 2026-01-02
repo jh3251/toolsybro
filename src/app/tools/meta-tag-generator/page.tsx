@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { MetaTagGenerator } from '@/components/tools/MetaTagGenerator';
 
 export const metadata: Metadata = {
-  title: 'Meta Tag Generator',
-  description: 'Generate SEO-friendly meta tags (title, description, keywords) for your website to improve search engine visibility.',
+  title: 'Meta Tag Generator | Free SEO Tool | ToolsyBro',
+  description: 'Generate SEO-friendly meta tags (title, description, keywords) for your website to improve search engine visibility with our 100% free online tool.',
 };
 
 export default function MetaTagGeneratorPage() {

@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
 
 export const metadata: Metadata = {
-  title: 'Domain Age Checker',
-  description: 'A placeholder for the Domain Age Checker tool.',
+  title: 'Domain Age Checker | Free SEO Tool (Coming Soon) | ToolsyBro',
+  description: 'A free online tool to check the age of any domain. This feature is coming soon to ToolsyBro\'s collection of 100% free tools.',
 };
 
 export default function PlaceholderPage() {

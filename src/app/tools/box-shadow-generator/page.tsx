@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { BoxShadowGenerator } from '@/components/tools/BoxShadowGenerator';
 
 export const metadata: Metadata = {
-  title: 'CSS Box Shadow Generator',
-  description: 'Create beautiful, layered CSS box shadows with an intuitive visual editor. Customize offsets, blur, spread, and color.',
+  title: 'CSS Box Shadow Generator | Free Visual Tool | ToolsyBro',
+  description: 'Create beautiful, layered CSS box shadows with an intuitive visual editor. Customize offsets, blur, spread, and color with our 100% free tool.',
 };
 
 export default function BoxShadowGeneratorPage() {

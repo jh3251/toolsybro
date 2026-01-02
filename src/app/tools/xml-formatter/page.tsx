@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { XmlFormatter } from '@/components/tools/XmlFormatter';
 
 export const metadata: Metadata = {
-  title: 'XML Formatter',
-  description: 'Format, beautify, and validate your XML data for better readability.',
+  title: 'XML Formatter | Free Online Beautifier & Validator | ToolsyBro',
+  description: 'Format, beautify, and validate your XML data for better readability with our 100% free and simple online developer tool.',
 };
 
 export default function XmlFormatterPage() {

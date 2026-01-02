@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Image Resizer',
-  description: 'Easily resize your images online. Adjust width and height while maintaining aspect ratio.',
+  title: 'Image Resizer | Free Online Photo Resizing Tool | ToolsyBro',
+  description: 'Easily resize your images online for free. Adjust width and height while maintaining aspect ratio with our 100% free tool.',
 };
 
 export default function ImageResizerPage() {

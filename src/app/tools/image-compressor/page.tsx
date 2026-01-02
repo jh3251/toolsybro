@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Free Online Image Compressor',
-  description: 'Reduce the file size of your JPG, PNG, and WEBP images online for free. Optimize your images for the web to improve page load speed.',
+  title: 'Free Online Image Compressor | ToolsyBro',
+  description: 'Reduce the file size of your JPG, PNG, and WEBP images with our 100% free online tool. Optimize your images for the web to improve page load speed.',
 };
 
 export default function ImageCompressorPage() {

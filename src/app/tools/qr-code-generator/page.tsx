@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Free QR Code Generator',
-  description: 'Create custom QR codes from text or URLs online for free. Customize colors and download your high-quality QR code instantly.',
+  title: 'Free QR Code Generator | Online & Customizable | ToolsyBro',
+  description: 'Create custom QR codes from text or URLs online for free. Customize colors, add a logo, and download your high-quality QR code instantly with our 100% free tool.',
 };
 
 export default function QrCodeGeneratorPage() {

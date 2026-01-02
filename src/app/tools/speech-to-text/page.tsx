@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Speech to Text Converter',
-  description: 'Convert your speech into written text in real-time with our free online dictation tool.',
+  title: 'Speech to Text Converter | Free Online Dictation | ToolsyBro',
+  description: 'Convert your speech into written text in real-time with our 100% free online dictation tool. Just speak, and we\'ll type.',
 };
 
 export default function SpeechToTextPage() {

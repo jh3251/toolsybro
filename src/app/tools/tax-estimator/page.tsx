@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
 
 export const metadata: Metadata = {
-  title: 'Tax Estimator',
-  description: 'A placeholder for the Tax Estimator tool.',
+  title: 'Tax Estimator | Free Income Tax Calculator (Coming Soon) | ToolsyBro',
+  description: 'Estimate your income tax liability. This feature is coming soon to our collection of 100% free finance tools.',
 };
 
 export default function PlaceholderPage() {

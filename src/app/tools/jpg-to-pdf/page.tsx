@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { JpgToPdf } from '@/components/tools/JpgToPdf';
 
 export const metadata: Metadata = {
-  title: 'JPG to PDF Converter',
-  description: 'Combine one or more JPG images into a single, easy-to-share PDF file. Free, fast, and entirely client-side.',
+  title: 'JPG to PDF Converter | Free Online Tool | ToolsyBro',
+  description: 'Combine one or more JPG images into a single, easy-to-share PDF file with our 100% free, fast, and secure client-side converter.',
 };
 
 export default function JpgToPdfPage() {

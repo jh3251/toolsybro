@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Sentence Counter',
-  description: 'Count sentences in your text with our free online tool.',
+  title: 'Sentence Counter | Free Online Text Analysis Tool | ToolsyBro',
+  description: 'Count sentences in your text with our 100% free and simple online sentence counter. Instantly analyze your writing for free.',
 };
 
 export default function SentenceCounterPage() {

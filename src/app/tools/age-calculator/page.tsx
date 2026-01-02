@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { AgeCalculator } from '@/components/tools/AgeCalculator';
 
 export const metadata: Metadata = {
-  title: 'Age Calculator',
-  description: 'Calculate your age in years, months, days, and more. Find out exactly how old you are and when your next birthday is.',
+  title: 'Free Online Age Calculator | ToolsyBro',
+  description: 'Calculate your age in years, months, days, and more with our 100% free online age calculator tool. Find out exactly how old you are and when your next birthday is.',
 };
 
 export default function AgeCalculatorPage() {

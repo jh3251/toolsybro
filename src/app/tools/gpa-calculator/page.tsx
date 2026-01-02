@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { GpaCalculator } from '@/components/tools/GpaCalculator';
 
 export const metadata: Metadata = {
-  title: 'GPA Calculator',
-  description: 'Calculate your Grade Point Average (GPA) by entering your courses, credits, and grades.',
+  title: 'GPA Calculator | Free Student Tool | ToolsyBro',
+  description: 'Calculate your Grade Point Average (GPA) by entering your courses, credits, and grades with our 100% free online calculator for students.',
 };
 
 export default function GpaCalculatorPage() {

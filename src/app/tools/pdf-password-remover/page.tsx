@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { PdfPasswordRemover } from '@/components/tools/PdfPasswordRemover';
 
 export const metadata: Metadata = {
-  title: 'PDF Password Remover',
-  description: 'Upload a password-protected PDF, provide the password, and download an unlocked version of the file.',
+  title: 'PDF Password Remover | Free Online Unlocker | ToolsyBro',
+  description: 'Upload a password-protected PDF, provide the password, and download an unlocked version of the file with our 100% free and secure online tool.',
 };
 
 export default function PdfPasswordRemoverPage() {
@@ -31,4 +31,3 @@ export default function PdfPasswordRemoverPage() {
     </div>
   );
 }
-

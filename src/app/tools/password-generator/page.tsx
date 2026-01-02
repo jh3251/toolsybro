@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { PasswordGenerator } from '@/components/tools/PasswordGenerator';
 
 export const metadata: Metadata = {
-  title: 'Secure Password Generator',
-  description: 'Create strong, secure, and random passwords with customizable options for length and character types.',
+  title: 'Secure Password Generator | Free Online Tool | ToolsyBro',
+  description: 'Create strong, secure, and random passwords with our 100% free tool. Customize options for length and character types for maximum security.',
 };
 
 export default function PasswordGeneratorPage() {

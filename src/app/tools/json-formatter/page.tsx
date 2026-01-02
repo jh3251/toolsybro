@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Online JSON Formatter & Validator',
-  description: 'Easily format, beautify, and validate your JSON data online. Our tool helps improve readability and detect errors in your JSON code for free.',
+  title: 'Online JSON Formatter & Validator | Free Tool | ToolsyBro',
+  description: 'Easily format, beautify, and validate your JSON data online. Our 100% free tool helps improve readability and detect errors in your JSON code.',
 };
 
 export default function JsonFormatterPage() {

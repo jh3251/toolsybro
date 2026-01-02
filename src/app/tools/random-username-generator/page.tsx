@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { RandomUsernameGenerator } from '@/components/tools/RandomUsernameGenerator';
 
 export const metadata: Metadata = {
-  title: 'Random Username Generator',
-  description: 'Instantly generate unique and creative usernames for your online accounts.',
+  title: 'Random Username Generator | Free & Instant | ToolsyBro',
+  description: 'Instantly generate unique and creative usernames for your online accounts, games, and social media with our 100% free online tool.',
 };
 
 export default function RandomUsernameGeneratorPage() {

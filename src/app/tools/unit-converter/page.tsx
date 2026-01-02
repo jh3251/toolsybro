@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { UnitConverter } from '@/components/tools/UnitConverter';
 
 export const metadata: Metadata = {
-  title: 'Unit Converter',
-  description: 'Convert between various units of measurement like length, mass, temperature, and more.',
+  title: 'Unit Converter | Free Online Measurement Tool | ToolsyBro',
+  description: 'Convert between various units of measurement like length, mass, temperature, and more with our 100% free and comprehensive online tool.',
 };
 
 export default function UnitConverterPage() {

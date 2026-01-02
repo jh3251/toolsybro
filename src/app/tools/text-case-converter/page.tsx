@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Online Text Case Converter',
-  description: 'Easily convert text to uppercase, lowercase, title case, sentence case, and more with our free online tool. Simplify your text editing tasks instantly.',
+  title: 'Online Text Case Converter Tool | Free | ToolsyBro',
+  description: 'Easily convert text to uppercase, lowercase, title case, sentence case, and more with our 100% free online tool. Simplify your text editing tasks instantly.',
 };
 
 export default function TextCaseConverterPage() {

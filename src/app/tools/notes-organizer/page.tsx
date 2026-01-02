@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { NotesOrganizer } from '@/components/tools/NotesOrganizer';
 
 export const metadata: Metadata = {
-  title: 'Notes Organizer',
-  description: 'A placeholder for the Notes Organizer tool.',
+  title: 'Online Notes Organizer | Free & Secure Tool | ToolsyBro',
+  description: 'A 100% free and secure online tool to create, edit, and manage your notes. Your data is saved securely in your browser.',
 };
 
 export default function NotesOrganizerPage() {

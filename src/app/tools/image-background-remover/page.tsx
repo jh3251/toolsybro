@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { ImageBackgroundRemover } from '@/components/tools/ImageBackgroundRemover';
 
 export const metadata: Metadata = {
-  title: 'Image Background Remover',
-  description: 'Remove a color from an image to create a transparent background. Click a color and adjust the tolerance to erase the background.',
+  title: 'Free Image Background Remover | Online Tool | ToolsyBro',
+  description: 'Remove a color from an image to create a transparent background with our 100% free online tool. Click a color and adjust the tolerance to erase the background.',
 };
 
 export default function ImageBackgroundRemoverPage() {

@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { ImageWatermarkTool } from '@/components/tools/ImageWatermarkTool';
 
 export const metadata: Metadata = {
-  title: 'Image Watermark Tool',
-  description: 'Easily add a custom text or image watermark to your photos online. Adjust position, opacity, and size to protect your images.',
+  title: 'Add Watermark to Photo | Free Online Tool | ToolsyBro',
+  description: 'Easily add a custom text or image watermark to your photos online. Adjust position, opacity, and size to protect your images with our 100% free tool.',
 };
 
 export default function ImageWatermarkPage() {

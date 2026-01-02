@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { PdfCompressor } from '@/components/tools/PdfCompressor';
 
 export const metadata: Metadata = {
-  title: 'PDF Compressor',
-  description: 'Reduce the file size of your PDF files online for free. Optimize your PDFs for sharing and storage without sacrificing quality.',
+  title: 'PDF Compressor | Free Online PDF Size Reducer | ToolsyBro',
+  description: 'Reduce the file size of your PDF files online for free. Optimize your PDFs for sharing and storage without sacrificing quality with our 100% free tool.',
 };
 
 export default function PdfCompressorPage() {

@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { EncoderDecoder } from '@/components/tools/EncoderDecoder';
 
 export const metadata: Metadata = {
-  title: 'URL Encoder / Decoder',
-  description: 'Easily encode text for use in URLs or decode a URL-encoded string back to text.',
+  title: 'URL Encoder & Decoder | Free Online Tool | ToolsyBro',
+  description: 'Easily encode text for use in URLs or decode a URL-encoded string back to text with our 100% free online developer tool.',
 };
 
 export default function UrlEncoderDecoderPage() {

@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { FontPairingTool } from '@/components/tools/FontPairingTool';
 
 export const metadata: Metadata = {
-  title: 'Font Pairing Tool',
-  description: 'Discover beautiful and effective font pairings for your projects. Generate headline and body text combinations from Google Fonts.',
+  title: 'Font Pairing Tool | Free for Designers | ToolsyBro',
+  description: 'Discover beautiful and effective font pairings for your projects. Generate headline and body text combinations from Google Fonts with our 100% free tool.',
 };
 
 export default function FontPairingToolPage() {

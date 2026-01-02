@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { BreakEvenCalculator } from '@/components/tools/BreakEvenCalculator';
 
 export const metadata: Metadata = {
-  title: 'Break-Even Calculator',
-  description: 'Calculate the number of units you need to sell to cover your costs. An essential tool for business planning and financial forecasting.',
+  title: 'Break-Even Point Calculator | Free Business Tool | ToolsyBro',
+  description: 'Calculate the number of units you need to sell to cover your costs. An essential free online tool for business planning and financial forecasting.',
 };
 
 export default function BreakEvenCalculatorPage() {

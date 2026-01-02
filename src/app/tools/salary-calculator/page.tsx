@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { SalaryCalculator } from '@/components/tools/SalaryCalculator';
 
 export const metadata: Metadata = {
-  title: 'Salary Calculator',
-  description: 'Calculate your gross and net salary breakdown by year, month, week, and day. Estimate your take-home pay after deductions.',
+  title: 'Salary Calculator | Free Take-Home Pay Estimator | ToolsyBro',
+  description: 'Calculate your gross and net salary breakdown by year, month, week, and day. Estimate your take-home pay after deductions with our 100% free tool.',
 };
 
 export default function SalaryCalculatorPage() {

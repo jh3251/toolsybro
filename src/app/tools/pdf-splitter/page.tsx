@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { PdfSplitter } from '@/components/tools/PdfSplitter';
 
 export const metadata: Metadata = {
-  title: 'PDF Splitter',
-  description: 'Easily extract pages or ranges from your PDF files. Split a single PDF into multiple documents online.',
+  title: 'PDF Splitter | Free Online Tool to Extract Pages | ToolsyBro',
+  description: 'Easily extract pages or ranges from your PDF files with our 100% free online tool. Split a single PDF into multiple documents online securely.',
 };
 
 export default function PdfSplitterPage() {

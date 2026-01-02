@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { MathFormulaGenerator } from '@/components/tools/MathFormulaGenerator';
 
 export const metadata: Metadata = {
-  title: 'Math Formula Generator',
-  description: 'An AI-powered tool to generate mathematical formulas and explanations for various topics.',
+  title: 'AI Math Formula Generator | Free Student Tool | ToolsyBro',
+  description: 'A 100% free AI-powered tool to generate mathematical formulas and explanations for various topics. Perfect for students and educators.',
 };
 
 export default function MathFormulaGeneratorPage() {

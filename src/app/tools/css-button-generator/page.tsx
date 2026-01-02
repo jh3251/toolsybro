@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { CssButtonGenerator } from '@/components/tools/CssButtonGenerator';
 
 export const metadata: Metadata = {
-  title: 'CSS Button Generator',
-  description: 'Visually design and generate custom CSS for beautiful, modern buttons. Control padding, colors, shadows, and more.',
+  title: 'CSS Button Generator | Free Visual Tool | ToolsyBro',
+  description: 'Visually design and generate custom CSS for beautiful, modern buttons. Control padding, colors, shadows, and more with our 100% free online tool.',
 };
 
 export default function CssButtonGeneratorPage() {

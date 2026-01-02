@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { PasswordStrengthChecker } from '@/components/tools/PasswordStrengthChecker';
 
 export const metadata: Metadata = {
-  title: 'Password Strength Checker',
-  description: 'Analyze the strength of your password and get tips on how to make it more secure.',
+  title: 'Password Strength Checker | Free Security Tool | ToolsyBro',
+  description: 'Analyze the strength of your password in real-time and get tips on how to make it more secure with our 100% free online tool.',
 };
 
 export default function PasswordStrengthCheckerPage() {

@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { WordToPdf } from '@/components/tools/WordToPdf';
 
 export const metadata: Metadata = {
-  title: 'Word to PDF',
-  description: 'Convert the text content of a Word document into a simple PDF file.',
+  title: 'Word to PDF Converter | Free Text Extractor | ToolsyBro',
+  description: 'Convert the text content of a Word document (.docx) into a simple PDF file with our 100% free online tool.',
 };
 
 export default function WordToPdfPage() {

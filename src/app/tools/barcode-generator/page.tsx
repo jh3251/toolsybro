@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { BarcodeGenerator } from '@/components/tools/BarcodeGenerator';
 
 export const metadata: Metadata = {
-  title: 'Barcode Generator',
-  description: 'Create various types of barcodes like CODE128, UPC, and EAN for your products or inventory.',
+  title: 'Free Barcode Generator | ToolsyBro',
+  description: 'Create various types of barcodes like CODE128, UPC, and EAN for your products or inventory with our 100% free online barcode generator.',
 };
 
 export default function BarcodeGeneratorPage() {

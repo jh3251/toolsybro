@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { GstVatCalculator } from '@/components/tools/GstVatCalculator';
 
 export const metadata: Metadata = {
-  title: 'GST / VAT Calculator',
-  description: 'Easily add or remove GST (Goods and Services Tax) or VAT (Value Added Tax) from any price.',
+  title: 'GST / VAT Calculator | Free Finance Tool | ToolsyBro',
+  description: 'Easily add or remove GST (Goods and Services Tax) or VAT (Value Added Tax) from any price with our 100% free online calculator.',
 };
 
 export default function GstVatCalculatorPage() {

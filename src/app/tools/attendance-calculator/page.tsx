@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { AttendanceCalculator } from '@/components/tools/AttendanceCalculator';
 
 export const metadata: Metadata = {
-  title: 'Attendance Calculator',
-  description: 'Calculate your class attendance percentage and determine how many classes you can miss or need to attend.',
+  title: 'Free Attendance Calculator | ToolsyBro',
+  description: 'Calculate your class attendance percentage and determine how many classes you can miss or need to attend with our 100% free online attendance calculator.',
 };
 
 export default function AttendanceCalculatorPage() {

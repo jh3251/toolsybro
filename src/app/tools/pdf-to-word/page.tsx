@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { PdfToText } from '@/components/tools/PdfToText';
 
 export const metadata: Metadata = {
-  title: 'PDF to Word (Text Extractor)',
-  description: 'Extract text content from a PDF file to easily copy and paste into a Word document or other text editor.',
+  title: 'PDF to Word (Text Extractor) | Free Online Tool | ToolsyBro',
+  description: 'Extract text content from a PDF file to easily copy and paste into a Word document or other text editor with our 100% free tool.',
 };
 
 export default function PdfToWordPage() {

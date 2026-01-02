@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { StudyPlanner } from '@/components/tools/StudyPlanner';
 
 export const metadata: Metadata = {
-  title: 'Study Planner',
-  description: 'Organize your study schedule with an interactive Kanban board.',
+  title: 'Study Planner | Free Online Kanban Board | ToolsyBro',
+  description: 'Organize your study schedule and tasks with an interactive Kanban board. A 100% free online tool for students from ToolsyBro.',
 };
 
 export default function StudyPlannerPage() {

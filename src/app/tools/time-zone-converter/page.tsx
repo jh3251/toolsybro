@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { TimeZoneConverter } from '@/components/tools/TimeZoneConverter';
 
 export const metadata: Metadata = {
-  title: 'Time Zone Converter',
-  description: 'Convert times between different world time zones to coordinate meetings and events.',
+  title: 'Time Zone Converter | Free Online World Clock | ToolsyBro',
+  description: 'Convert times between different world time zones to coordinate meetings, calls, and events with our 100% free online tool.',
 };
 
 export default function TimeZoneConverterPage() {

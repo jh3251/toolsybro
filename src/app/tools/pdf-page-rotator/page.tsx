@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { PdfPageRotator } from '@/components/tools/PdfPageRotator';
 
 export const metadata: Metadata = {
-  title: 'PDF Page Rotator',
-  description: 'Easily rotate pages in your PDF files. Upload a document, rotate individual pages, and download the updated PDF.',
+  title: 'PDF Page Rotator | Free Online Tool | ToolsyBro',
+  description: 'Easily rotate pages in your PDF files with our 100% free tool. Upload a document, rotate individual pages, and download the updated PDF.',
 };
 
 export default function PdfPageRotatorPage() {

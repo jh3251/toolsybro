@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { PdfMetadataEditor } from '@/components/tools/PdfMetadataEditor';
 
 export const metadata: Metadata = {
-  title: 'PDF Metadata Editor',
-  description: 'An advanced tool to view and edit the metadata of your PDF files, including title, author, subject, and keywords.',
+  title: 'PDF Metadata Editor | Free Online Tool | ToolsyBro',
+  description: 'A 100% free and advanced tool to view and edit the metadata of your PDF files, including title, author, subject, and keywords.',
 };
 
 export default function PdfMetadataEditorPage() {

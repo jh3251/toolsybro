@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { CurrencyConverter } from '@/components/tools/CurrencyConverter';
 
 export const metadata: Metadata = {
-  title: 'Currency Converter',
-  description: 'Convert between different currencies with real-time exchange rates.',
+  title: 'Currency Converter | Free Real-time Rates | ToolsyBro',
+  description: 'Convert between different currencies with real-time exchange rates using our 100% free online currency converter tool.',
 };
 
 export default function CurrencyConverterPage() {

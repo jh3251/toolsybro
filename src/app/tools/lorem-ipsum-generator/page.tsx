@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { LoremIpsumGenerator } from '@/components/tools/LoremIpsumGenerator';
 
 export const metadata: Metadata = {
-  title: 'Lorem Ipsum Generator',
-  description: 'Generate placeholder text in paragraphs, sentences, or words.',
+  title: 'Lorem Ipsum Generator | Free Placeholder Text Tool | ToolsyBro',
+  description: 'Generate placeholder text in paragraphs, sentences, or words with our 100% free and simple online Lorem Ipsum generator.',
 };
 
 export default function LoremIpsumGeneratorPage() {

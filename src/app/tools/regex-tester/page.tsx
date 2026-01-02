@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { RegexTester } from '@/components/tools/RegexTester';
 
 export const metadata: Metadata = {
-  title: 'Regex Tester',
-  description: 'Test your regular expressions against a string with real-time matching and explanations.',
+  title: 'Regex Tester | Free Online Regular Expression Tool | ToolsyBro',
+  description: 'Test your regular expressions against a string with real-time matching and highlighting. A 100% free online tool for developers.',
 };
 
 export default function RegexTesterPage() {

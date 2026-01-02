@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { PdfToJpg } from '@/components/tools/PdfToJpg';
 
 export const metadata: Metadata = {
-  title: 'PDF to JPG',
-  description: 'Easily convert each page of a PDF file into a high-quality JPG image. Free, online, and instant.',
+  title: 'PDF to JPG Converter | Free Online Tool | ToolsyBro',
+  description: 'Easily convert each page of a PDF file into a high-quality JPG image. 100% free, online, and instant conversion.',
 };
 
 export default function PdfToJpgPage() {

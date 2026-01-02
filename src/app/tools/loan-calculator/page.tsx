@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { LoanCalculator } from '@/components/tools/LoanCalculator';
 
 export const metadata: Metadata = {
-  title: 'Loan Calculator',
-  description: 'A versatile loan calculator to determine your payments for mortgages, auto loans, or personal loans with various compounding options.',
+  title: 'Loan Calculator | Free Mortgage & Auto Loan Tool | ToolsyBro',
+  description: 'A versatile and 100% free loan calculator to determine your payments for mortgages, auto loans, or personal loans with various compounding options.',
 };
 
 export default function LoanCalculatorPage() {

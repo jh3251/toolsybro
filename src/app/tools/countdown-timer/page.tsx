@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { CountdownTimer } from '@/components/tools/CountdownTimer';
 
 export const metadata: Metadata = {
-  title: 'Countdown Timer',
-  description: 'Set a timer for any duration. Get an alert when time is up.',
+  title: 'Online Countdown Timer | Free Tool | ToolsyBro',
+  description: 'Set a timer for any duration with our easy-to-use and 100% free online countdown timer. Get an alert when time is up. Perfect for study, work, or cooking.',
 };
 
 export default function CountdownTimerPage() {

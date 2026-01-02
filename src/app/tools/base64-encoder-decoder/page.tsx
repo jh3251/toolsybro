@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { EncoderDecoder } from '@/components/tools/EncoderDecoder';
 
 export const metadata: Metadata = {
-  title: 'Base64 Encoder / Decoder',
-  description: 'Easily encode text to Base64 or decode a Base64 string back to text.',
+  title: 'Base64 Encoder & Decoder | Free Online Tool | ToolsyBro',
+  description: 'Easily encode text to Base64 or decode a Base64 string back to text with our 100% free and simple online developer tool.',
 };
 
 export default function Base64EncoderDecoderPage() {

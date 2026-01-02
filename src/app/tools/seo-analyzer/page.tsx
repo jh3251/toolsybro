@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
 
 export const metadata: Metadata = {
-  title: 'SEO Analyzer',
-  description: 'A placeholder for the SEO Analyzer tool.',
+  title: 'SEO Analyzer | Free Website Analysis (Coming Soon) | ToolsyBro',
+  description: 'Analyze your webpage for key SEO metrics and get recommendations for improvement. This feature is coming soon to our collection of 100% free tools.',
 };
 
 export default function PlaceholderPage() {

@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
 
 export const metadata: Metadata = {
-  title: 'Sitemap Generator',
-  description: 'A placeholder for the Sitemap Generator tool.',
+  title: 'Sitemap Generator | Free XML Sitemap Tool (Coming Soon) | ToolsyBro',
+  description: 'Create an XML sitemap for your website to help search engines crawl and index your pages. This feature is coming soon to our collection of 100% free tools.',
 };
 
 export default function PlaceholderPage() {

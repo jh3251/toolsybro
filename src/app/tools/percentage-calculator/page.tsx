@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { PercentageCalculator } from '@/components/tools/PercentageCalculator';
 
 export const metadata: Metadata = {
-  title: 'Percentage Calculator',
-  description: 'A versatile tool to calculate percentages, including "what is X% of Y", "X is what percent of Y", and percentage change.',
+  title: 'Percentage Calculator | Free Online Tool | ToolsyBro',
+  description: 'A versatile and 100% free tool to calculate percentages, including "what is X% of Y", "X is what percent of Y", and percentage change.',
 };
 
 export default function PercentageCalculatorPage() {

@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
 
 export const metadata: Metadata = {
-  title: 'HTTP Status Checker',
-  description: 'A placeholder for the HTTP Status Checker tool.',
+  title: 'HTTP Status Checker | Free SEO Tool (Coming Soon) | ToolsyBro',
+  description: 'Check the HTTP status code of any URL to diagnose redirects or server errors. This feature is coming soon to our collection of 100% free tools.',
 };
 
 export default function PlaceholderPage() {

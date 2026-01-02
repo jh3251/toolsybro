@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { ImageConverter } from '@/components/tools/ImageConverter';
 
 export const metadata: Metadata = {
-  title: 'Image Converter',
-  description: 'Convert images between JPG, PNG, and WEBP formats online for free. Fast, easy, and secure.',
+  title: 'Image Converter (JPG, PNG, WEBP) | Free Online Tool | ToolsyBro',
+  description: 'Convert images between JPG, PNG, and WEBP formats online for free. Fast, easy, and secure image conversion with our 100% free tool.',
 };
 
 export default function ImageConverterPage() {

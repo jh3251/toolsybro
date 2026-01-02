@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { PdfMerger } from '@/components/tools/PdfMerger';
 
 export const metadata: Metadata = {
-  title: 'PDF Merger',
-  description: 'Combine multiple PDF files into one document for free. Merge PDFs online easily and securely.',
+  title: 'PDF Merger | Combine PDFs for Free Online | ToolsyBro',
+  description: 'Combine multiple PDF files into one document for free. Merge PDFs online easily and securely with our 100% free tool.',
 };
 
 export default function PdfMergerPage() {

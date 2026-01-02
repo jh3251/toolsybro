@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { PrimeNumberChecker } from '@/components/tools/PrimeNumberChecker';
 
 export const metadata: Metadata = {
-  title: 'Prime Number Checker',
-  description: 'Check if a number is a prime number with this free online tool.',
+  title: 'Prime Number Checker | Free Math Tool | ToolsyBro',
+  description: 'Check if a number is a prime number with this 100% free and instant online tool. Perfect for students and math enthusiasts.',
 };
 
 export default function PrimeNumberCheckerPage() {

@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { InterestCalculator } from '@/components/tools/InterestCalculator';
 
 export const metadata: Metadata = {
-  title: 'Interest Calculator',
-  description: 'Calculate simple and compound interest. Enter your principal, rate, and time to see how your investment grows.',
+  title: 'Simple & Compound Interest Calculator | Free Tool | ToolsyBro',
+  description: 'Calculate simple and compound interest with our 100% free online tool. Enter your principal, rate, and time to see how your investment grows.',
 };
 
 export default function InterestCalculatorPage() {

@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { ImageMetadataViewer } from '@/components/tools/ImageMetadataViewer';
 
 export const metadata: Metadata = {
-  title: 'Image Metadata Viewer',
-  description: 'Upload an image to view its EXIF metadata, including camera settings, location, and date.',
+  title: 'Image Metadata Viewer (EXIF) | Free Tool | ToolsyBro',
+  description: 'Upload an image to view its EXIF metadata, including camera settings, location, and date, with our 100% free and secure online tool.',
 };
 
 export default function ImageMetadataViewerPage() {
