@@ -19,7 +19,7 @@ export default function Home() {
     <div className="flex flex-col space-y-16">
       <section className="text-center">
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-headline">
-          The Ultimate Suite of Free Online Tools
+          All Your Online Tools, One Platform
         </h1>
         <p className="mx-auto mt-6 max-w-[700px] text-muted-foreground md:text-xl">
           A comprehensive collection of utilities to boost your productivity.
