@@ -1,28 +1,21 @@
 import type { Metadata } from 'next';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ImageResizer } from '@/components/tools/ImageResizer';
 
 export const metadata: Metadata = {
   title: 'Image Resizer',
-  description: 'A placeholder for the Image Resizer tool.',
+  description: 'Easily resize your images online. Adjust width and height while maintaining aspect ratio.',
 };
 
-export default function PlaceholderPage() {
+export default function ImageResizerPage() {
   return (
     <div className="space-y-8">
       <header>
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Image Resizer</h1>
         <p className="mt-4 text-xl text-muted-foreground">
-          This tool is coming soon!
+          Change the dimensions of your images quickly and easily.
         </p>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <ImageResizer />
     </div>
   );
 }
