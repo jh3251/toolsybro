@@ -292,6 +292,7 @@ export type BlogPost = {
   date: string;
   excerpt: string;
   content: string;
+  imageUrl: string;
 };
 
 export const blogPosts: BlogPost[] = [
@@ -300,6 +301,7 @@ export const blogPosts: BlogPost[] = [
     title: 'Maximize Your Writing Efficiency with a Word Counter',
     date: '2023-10-26',
     excerpt: 'Discover how using an online word counter can streamline your writing process, improve readability, and help you meet strict length requirements for articles, essays, and social media posts.',
+    imageUrl: 'https://picsum.photos/seed/1/1200/800',
     content: `
 <p class="text-lg text-muted-foreground">In the digital age, content is king. Whether you're a professional writer, a student, or a social media manager, the ability to produce concise and effective text is crucial. This is where an online word counter becomes an indispensable tool in your arsenal. It's more than just a utility for counting words; it's a partner in crafting perfect prose.</p>
 <h2 class="text-3xl font-bold my-6 font-headline">Meeting Requirements with Precision</h2>
@@ -319,6 +321,7 @@ export const blogPosts: BlogPost[] = [
     title: 'Why Image Compression is a Must-Have for Your Website',
     date: '2023-10-22',
     excerpt: 'Slow-loading websites lose visitors. Learn how compressing your images can dramatically improve your site\'s performance, boost your SEO ranking, and enhance user experience.',
+    imageUrl: 'https://picsum.photos/seed/2/1200/800',
     content: `
 <p class="text-lg text-muted-foreground">In today's fast-paced digital world, user attention spans are shorter than ever. If your website takes more than a few seconds to load, you risk losing a significant portion of your visitors. One of the biggest culprits behind slow websites is large, unoptimized images. This is why image compression is not just a recommendation; it's a necessity.</p>
 <h2 class="text-3xl font-bold my-6 font-headline">The Impact on Page Speed</h2>
@@ -333,11 +336,12 @@ export const blogPosts: BlogPost[] = [
 <p class="text-lg text-muted-foreground">You don't need to be a graphic designer to compress your images. There are many free online image compressors that make the process incredibly simple. Just upload your image, and the tool will automatically apply the best compression techniques to reduce its file size. Download the optimized image and upload it to your website. It's a small step that yields huge results.</p>
     `,
   },
-  {
+    {
     slug: 'creative-qr-code-uses',
     title: '5 Creative Ways to Use QR Codes for Your Business',
     date: '2023-10-25',
     excerpt: 'QR codes are more than just black and white squares. Discover five creative ways you can use our QR Code Generator to engage customers, share information, and grow your business.',
+    imageUrl: 'https://picsum.photos/seed/3/1200/800',
     content: `
 <p class="text-lg text-muted-foreground">QR (Quick Response) codes have become a powerful tool for bridging the gap between the physical and digital worlds. With a simple scan from a smartphone, you can direct users to a website, a video, a contact card, and so much more. Our QR Code Generator makes it easy to create custom codes. Here are five creative ways to use them for your business.</p>
 <h2 class="text-3xl font-bold my-6 font-headline">1. Enhance Your Business Cards</h2>
@@ -359,6 +363,7 @@ export const blogPosts: BlogPost[] = [
     title: 'What is JSON? A Beginner\'s Guide for Developers',
     date: '2023-10-24',
     excerpt: 'JSON is the backbone of modern web applications. Learn what it is, why it\'s so popular, and how using a JSON Formatter can save you from frustrating debugging sessions.',
+    imageUrl: 'https://picsum.photos/seed/4/1200/800',
     content: `
 <p class="text-lg text-muted-foreground">If you're a developer, you've almost certainly encountered JSON (JavaScript Object Notation). It's a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate. This has made it the de facto standard for APIs and configuration files across the web.</p>
 <h2 class="text-3xl font-bold my-6 font-headline">The Structure of JSON</h2>
@@ -384,6 +389,7 @@ export const blogPosts: BlogPost[] = [
     title: 'Are Your Passwords Secure? Why You Need a Strong Password Generator',
     date: '2023-10-23',
     excerpt: 'In an era of constant data breaches, a weak password is an open invitation for hackers. Learn why creating strong, unique passwords for every account is crucial and how a password generator can help.',
+    imageUrl: 'https://picsum.photos/seed/5/1200/800',
     content: `
 <p class="text-lg text-muted-foreground">How many online accounts do you have? Ten? Fifty? A hundred? Now, how many unique passwords do you use for them? If you're like most people, you probably reuse the same one or two passwords across multiple services. While convenient, this is a massive security risk.</p>
 <h2 class="text-3xl font-bold my-6 font-headline">The Problem with Human-Made Passwords</h2>
@@ -395,6 +401,77 @@ export const blogPosts: BlogPost[] = [
 <h2 class="text-3xl font-bold my-6 font-headline">One Unique Password Per Account</h2>
 <p class="text-lg text-muted-foreground">Using a password generator makes it easy to follow the golden rule of password security: use a different, unique password for every single online account. This practice, known as "password hygiene," contains the damage if one of your accounts is ever compromised in a data breach. If you reuse passwords, a hacker who gets your password for one site can then access your email, banking, and social media accounts.</p>
 <p class="text-lg text-muted-foreground">Stop taking chances with your digital security. Start using a password generator today, and combine it with a password manager to safely store all your unique, complex passwords. Your future self will thank you.</p>
+    `,
+  },
+  {
+    slug: 'qr-code-deep-dive',
+    title: 'A Deep Dive into QR Codes and How They Work',
+    date: '2023-10-21',
+    excerpt: 'Ever wondered what\'s behind those pixelated squares? This article explores the technology behind QR codes, their error correction capabilities, and how our generator can help you create customized, scannable codes.',
+    imageUrl: 'https://picsum.photos/seed/6/1200/800',
+    content: `
+<p class="text-lg text-muted-foreground">QR codes are everywhere, from restaurant menus to product packaging. But what are they, and how do they store so much information in such a small space? This article takes a deep dive into the fascinating world of QR codes.</p>
+<h2 class="text-3xl font-bold my-6 font-headline">From Car Parts to Contactless Menus</h2>
+<p class="text-lg text-muted-foreground">Invented in 1994 by Denso Wave, a Toyota subsidiary, QR codes were initially used to track vehicle parts during manufacturing. Their ability to store more information than a standard barcode and their high-speed readability led to their wider adoption. A single QR code can store up to 4,296 alphanumeric characters, making them perfect for URLs, contact information, Wi-Fi credentials, and more.</p>
+<!-- In-content ad placeholder -->
+<h2 class="text-3xl font-bold my-6 font-headline">The Magic of Error Correction</h2>
+<p class="text-lg text-muted-foreground">One of the most remarkable features of QR codes is their built-in error correction. This allows the code to be scanned even if it's partially damaged or obscured. There are four levels of error correction, from Low (recovering up to 7% of data) to High (recovering up to 30%). This robustness is why a QR code with a logo in the middle can still be scanned perfectly.</p>
+<h2 class="text-3xl font-bold my-6 font-headline">Anatomy of a QR Code</h2>
+<p class="text-lg text-muted-foreground">Those pixelated squares are not random. They consist of several key components:</p>
+<ul>
+    <li class="text-lg text-muted-foreground ml-4"><strong>Finder Patterns:</strong> The three large squares in the corners help the scanner identify the code and its orientation.</li>
+    <li class="text-lg text-muted-foreground ml-4"><strong>Alignment Pattern:</strong> A smaller square that helps the scanner correct for distortion, especially in larger codes.</li>
+    <li class="text-lg text-muted-foreground ml-4"><strong>Timing Patterns:</strong> Alternating black and white modules that help the scanner determine the size of the data matrix.</li>
+    <li class="text-lg text-muted-foreground ml-4"><strong>Data and Error Correction Keys:</strong> The rest of the modules that store the actual information and the error correction data.</li>
+</ul>
+<p class="text-lg text-muted-foreground">Understanding these components helps appreciate the genius of QR code design. With our <a href="/tools/qr-code-generator" class="text-primary hover:underline">QR Code Generator</a>, you can not only encode your data but also customize the look of your code, adding colors and logos to make it stand out.</p>
+    `,
+  },
+  {
+    slug: 'json-vs-xml',
+    title: 'JSON vs. XML: Choosing the Right Data Format',
+    date: '2023-10-20',
+    excerpt: 'Both JSON and XML are used for data interchange, but they have key differences. This post breaks down the pros and cons of each, helping you decide which is better for your project, and introduces our handy formatters.',
+    imageUrl: 'https://picsum.photos/seed/7/1200/800',
+    content: `
+<p class="text-lg text-muted-foreground">When it comes to storing and transporting data, JSON and XML have been the two dominant formats for years. While they serve a similar purpose, their structure, verbosity, and use cases differ significantly.</p>
+<h2 class="text-3xl font-bold my-6 font-headline">JSON: The Lightweight Champion</h2>
+<p class="text-lg text-muted-foreground">JSON (JavaScript Object Notation) is a lightweight, text-based format that's easy for humans to read and for machines to parse. Its syntax is a subset of JavaScript, making it the natural choice for web applications.</p>
+<ul>
+    <li class="text-lg text-muted-foreground ml-4"><strong>Pros:</strong> Less verbose, easier to read, faster to parse, uses arrays.</li>
+    <li class="text-lg text-muted-foreground ml-4"><strong>Cons:</strong> Doesn't support comments, less formal schema support compared to XML.</li>
+</ul>
+<p class="text-lg text-muted-foreground">Due to its simplicity and speed, JSON has become the standard for modern APIs. When your data looks messy, our <a href="/tools/json-formatter" class="text-primary hover:underline">JSON Formatter</a> can instantly clean it up for you.</p>
+<!-- In-content ad placeholder -->
+<h2 class="text-3xl font-bold my-6 font-headline">XML: The Structured Veteran</h2>
+<p class="text-lg text-muted-foreground">XML (eXtensible Markup Language) is a markup language that defines a set of rules for encoding documents in a format that is both human-readable and machine-readable. It's highly flexible and was the standard for web services for many years.</p>
+<ul>
+    <li class="text-lg text-muted-foreground ml-4"><strong>Pros:</strong> Supports comments, has robust schema and namespace support (XSD, DTD), can represent more complex structures.</li>
+    <li class="text-lg text-muted-foreground ml-4"><strong>Cons:</strong> More verbose, slower to parse, doesn't have a native array type.</li>
+</ul>
+<p class="text-lg text-muted-foreground">XML is still widely used in enterprise systems, configuration files, and document-centric applications where validation and structure are paramount. Our <a href="/tools/xml-formatter" class="text-primary hover:underline">XML Formatter</a> helps make sense of complex XML files.</p>
+<h2 class="text-3xl font-bold my-6 font-headline">Which One Should You Use?</h2>
+<p class="text-lg text-muted-foreground">For most modern web development and APIs, **JSON is the preferred choice** due to its speed and simplicity. However, **XML is still the better option** for projects that require strict document validation, namespaces, or comments within the data itself, such as in many financial or governmental systems.</p>
+    `,
+  },
+  {
+    slug: 'the-art-of-passwords',
+    title: 'The Art and Science of Password Security',
+    date: '2023-10-19',
+    excerpt: 'Beyond just using a generator, what truly makes a password secure? We explore concepts like entropy, brute-force attacks, and social engineering to give you a deeper understanding of password security.',
+    imageUrl: 'https://picsum.photos/seed/8/1200/800',
+    content: `
+<p class="text-lg text-muted-foreground">We all know we should use strong passwords, but what does "strong" actually mean? It's a combination of length, complexity, and unpredictability. Let's delve into the science behind password security.</p>
+<h2 class="text-3xl font-bold my-6 font-headline">Entropy: The Measure of Randomness</h2>
+<p class="text-lg text-muted-foreground">In the context of passwords, entropy is a measure of its unpredictability. A password like "password" has very low entropy because it's one of the first things a hacker will try. A password like "Tr0ub4dor&3" has higher entropy. But a password like "qF$!7zP#9b@*K" generated by a tool has the highest entropy because it lacks any discernible pattern.</p>
+<p class="text-lg text-muted-foreground">The strength of a password is directly related to its entropy. The more entropy, the more possible combinations a hacker would have to try to guess it.</p>
+<!-- In-content ad placeholder -->
+<h2 class="text-3xl font-bold my-6 font-headline">Brute-Force and Dictionary Attacks</h2>
+<p class="text-lg text-muted-foreground">Hackers use automated tools to try and guess passwords. A **dictionary attack** uses a list of common words and phrases. A **brute-force attack** systematically tries every possible combination of characters. A short, simple password can be cracked in seconds by modern computers. A long, complex password with high entropy could take trillions of years.</p>
+<p class="text-lg text-muted-foreground">This is why length is so important. Every additional character you add to a password exponentially increases the number of possible combinations, making brute-force attacks impractical. Our <a href="/tools/password-strength-checker" class="text-primary hover:underline">Password Strength Checker</a> gives you a real-time estimate of how your password would stand up to these attacks.</p>
+<h2 class="text-3xl font-bold my-6 font-headline">The Human Element: Phishing and Social Engineering</h2>
+<p class="text-lg text-muted-foreground">The most sophisticated password in the world can't protect you if you're tricked into giving it away. **Phishing** is when an attacker sends a fraudulent email or message that appears to be from a legitimate source, trying to lure you into entering your credentials on a fake website.</p>
+<p class="text-lg text-muted-foreground">Always be skeptical of unsolicited emails asking for your login information. Check the sender's email address and hover over links to see the actual destination URL before clicking. Combining a strong, unique password (created with our <a href="/tools/password-generator" class="text-primary hover:underline">Password Generator</a>) with cautious online behavior is the ultimate defense for your digital life.</p>
     `,
   },
 ];
