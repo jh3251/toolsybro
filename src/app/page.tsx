@@ -63,7 +63,7 @@ export default function Home() {
            </div>
         </header>
 
-        <div className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {selectedCategory.tools.map((tool, toolIndex) => (
                 <Link href={tool.href} key={tool.name} className="group">
                 <div className={cn(
@@ -96,11 +96,11 @@ export default function Home() {
     <div className="flex flex-col space-y-8 animate-in fade-in duration-500">
       <section className="text-center">
         <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight font-headline animate-fade-in-down">
-          All Your Online Tools, One Platform
+          The Ultimate Suite of Free Online Tools
         </h1>
       </section>
 
-      <div className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {toolCategories.map((category, categoryIndex) => (
           <button
             key={category.name}
