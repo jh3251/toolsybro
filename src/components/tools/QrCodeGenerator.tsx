@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useMemo, ChangeEvent, useRef, useEffect } from 'react';
@@ -110,6 +109,7 @@ export function QrCodeGenerator() {
 
   useEffect(() => {
     if (qrRef.current) {
+      qrRef.current.innerHTML = '';
       qrCodeInstanceRef.current = new QRCodeStyling({
         width: 300,
         height: 300,
@@ -179,7 +179,7 @@ export function QrCodeGenerator() {
   return (
     <Card>
       <CardContent className="pt-6">
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8">
           <div className="space-y-6">
             <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as QrType)} className="w-full">
               <TabsList className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-transparent p-0">
@@ -187,10 +187,10 @@ export function QrCodeGenerator() {
                   <TabsTrigger
                     key={type.id}
                     value={type.id}
-                    className="flex-col h-16 gap-1 border data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary"
+                    className="flex-col h-20 gap-2 border data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary"
                   >
-                    <type.icon className="w-5 h-5" />
-                    <span className="text-xs">{type.name}</span>
+                    <type.icon className="w-6 h-6" />
+                    <span className="text-sm font-semibold">{type.name}</span>
                   </TabsTrigger>
                 ))}
               </TabsList>
@@ -233,7 +233,17 @@ export function QrCodeGenerator() {
               </TabsContent>
             </Tabs>
 
-            <Accordion type="multiple" className="w-full">
+            
+          </div>
+          <div className="flex flex-col items-center justify-start space-y-4">
+              <div className='p-4 bg-muted/50 rounded-lg'>
+                 <div ref={qrRef} />
+              </div>
+              <Button onClick={handleDownload} disabled={!qrCodeData} className="w-full">
+                <Download className="mr-2 h-4 w-4" />
+                Download QR Code
+              </Button>
+               <Accordion type="multiple" className="w-full">
               <AccordionItem value="colors">
                 <AccordionTrigger className='font-semibold'><Palette className="mr-2" />Colors</AccordionTrigger>
                 <AccordionContent>
@@ -254,19 +264,19 @@ export function QrCodeGenerator() {
                 <AccordionContent>
                    <div className="pt-2 space-y-4">
                     <div>
-                        <Label>Body (Modello)</Label>
+                        <Label>Body Style</Label>
                         <QrCodeBodyStyle selected={dotStyle} onSelect={setDotStyle} />
                     </div>
                      <div>
-                        <Label>Eye Frame (Bordo)</Label>
+                        <Label>Eye Frame Style</Label>
                         <QrCodeEyeFrameStyle selected={eyeFrameStyle} onSelect={setEyeFrameStyle} />
                     </div>
                      <div>
-                        <Label>Eye Ball (Centro)</Label>
+                        <Label>Eye Ball Style</Label>
                          <QrCodeEyeBallStyle selected={eyeBallStyle} onSelect={setEyeBallStyle} />
                     </div>
                     <div className="flex items-center justify-between">
-                         <Label htmlFor="marker-colors">Marker Colors (Colori)</Label>
+                         <Label htmlFor="marker-colors">Separate Eye Colors</Label>
                         <Switch id="marker-colors" checked={useMarkerColors} onCheckedChange={setUseMarkerColors} />
                     </div>
                     {useMarkerColors && (
@@ -326,13 +336,6 @@ export function QrCodeGenerator() {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
-          </div>
-          <div className="flex flex-col items-center justify-center space-y-4 bg-muted/50 p-4 rounded-lg sticky top-24">
-              <div ref={qrRef} />
-              <Button onClick={handleDownload} disabled={!qrCodeData} className="w-full">
-                <Download className="mr-2 h-4 w-4" />
-                Download QR Code
-              </Button>
           </div>
         </div>
       </CardContent>

@@ -1,4 +1,3 @@
-
 'use client';
 
 import { type DotType, type CornerSquareType, type CornerDotType } from 'qr-code-styling';
@@ -21,7 +20,7 @@ const eyeBallStyles: CornerDotType[] = [
 const StyleButton = ({ selected, onClick, children }: { selected: boolean; onClick: () => void; children: React.ReactNode }) => (
     <Button
         variant={selected ? 'secondary' : 'outline'}
-        className={cn('h-16 w-16 p-1 flex items-center justify-center flex-shrink-0', selected && 'border-2 border-primary')}
+        className={cn('h-20 w-20 p-1 flex items-center justify-center flex-shrink-0', selected && 'border-2 border-primary')}
         onClick={onClick}
     >
         {children}
@@ -34,7 +33,7 @@ export function QrCodeBodyStyle({ selected, onSelect }: { selected: DotType, onS
             <div className="flex w-max space-x-2 p-1">
                 {bodyStyles.map(style => (
                     <StyleButton key={style} selected={selected === style} onClick={() => onSelect(style)}>
-                        <svg width="48" height="48" viewBox="0 0 100 100">
+                        <svg width="64" height="64" viewBox="0 0 100 100">
                             {/* This is a simplified representation */}
                             {style === 'square' && <rect x="10" y="10" width="80" height="80" />}
                             {style === 'dots' && <circle cx="50" cy="50" r="40" />}
@@ -57,7 +56,7 @@ export function QrCodeEyeFrameStyle({ selected, onSelect }: { selected: CornerSq
             <div className="flex w-max space-x-2 p-1">
                 {eyeFrameStyles.map(style => (
                     <StyleButton key={style} selected={selected === style} onClick={() => onSelect(style)}>
-                        <svg width="48" height="48" viewBox="0 0 100 100" fill="none" stroke="black" strokeWidth="12">
+                        <svg width="64" height="64" viewBox="0 0 100 100" fill="none" stroke="black" strokeWidth="12">
                             {style === 'square' && <rect x="10" y="10" width="80" height="80" />}
                             {style === 'extra-rounded' && <rect x="10" y="10" width="80" height="80" rx="35" />}
                             {style === 'dot' && <rect x="10" y="10" width="80" height="80" rx="50" />}
@@ -76,7 +75,7 @@ export function QrCodeEyeBallStyle({ selected, onSelect }: { selected: CornerDot
             <div className="flex w-max space-x-2 p-1">
                 {eyeBallStyles.map(style => (
                     <StyleButton key={style} selected={selected === style} onClick={() => onSelect(style)}>
-                        <svg width="48" height="48" viewBox="0 0 100 100" fill="black">
+                        <svg width="64" height="64" viewBox="0 0 100 100" fill="black">
                             {style === 'square' && <rect x="25" y="25" width="50" height="50" />}
                             {style === 'dot' && <circle cx="50" cy="50" r="25" />}
                         </svg>
