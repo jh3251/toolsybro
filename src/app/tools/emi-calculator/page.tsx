@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { EmiCalculator } from '@/components/tools/EmiCalculator';
 
 export const metadata: Metadata = {
   title: 'EMI Calculator',
-  description: 'A placeholder for the EMI Calculator tool.',
+  description: 'Calculate your Equated Monthly Installment (EMI) for loans. Enter the loan amount, interest rate, and tenure to find out your monthly payment.',
 };
 
-export default function PlaceholderPage() {
+export default function EmiCalculatorPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">EMI Calculator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Plan your loan repayments by calculating your monthly installment.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <EmiCalculator />
     </div>
   );
 }
