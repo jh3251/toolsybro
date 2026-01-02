@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { SalaryCalculator } from '@/components/tools/SalaryCalculator';
 
 export const metadata: Metadata = {
   title: 'Salary Calculator',
-  description: 'A placeholder for the Salary Calculator tool.',
+  description: 'Calculate your gross and net salary breakdown by year, month, week, and day. Estimate your take-home pay after deductions.',
 };
 
-export default function PlaceholderPage() {
+export default function SalaryCalculatorPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Salary Calculator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            See a breakdown of your gross and net pay.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <SalaryCalculator />
     </div>
   );
 }
