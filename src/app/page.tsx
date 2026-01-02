@@ -1,15 +1,13 @@
+'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 import { toolCategories } from '@/lib/data';
+import type { ToolCategory } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { AdPlaceholder } from '@/components/layout/AdPlaceholder';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import { ChevronDown } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const toolColors = [
   'border-blue-500',
@@ -42,9 +40,58 @@ const iconTextColors = [
   'text-pink-500',
   'text-indigo-500',
   'text-teal-500',
-]
+];
 
 export default function Home() {
+  const [selectedCategory, setSelectedCategory] = useState<ToolCategory | null>(null);
+
+  if (selectedCategory) {
+    return (
+      <div className="flex flex-col space-y-8 animate-in fade-in duration-500">
+        <header className="flex items-center gap-4">
+           <Button variant="outline" size="icon" onClick={() => setSelectedCategory(null)}>
+             <ArrowLeft className="h-4 w-4" />
+             <span className="sr-only">Back to Categories</span>
+           </Button>
+           <div>
+             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight font-headline">
+               {selectedCategory.name}
+             </h1>
+             <p className="mt-2 text-xl text-muted-foreground">
+                Browse all {selectedCategory.tools.length} tools in this category.
+             </p>
+           </div>
+        </header>
+
+        <div className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {selectedCategory.tools.map((tool, toolIndex) => (
+                <Link href={tool.href} key={tool.name} className="group">
+                <div className={cn(
+                    "h-full rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 p-6 flex flex-col items-start gap-4",
+                )}>
+                    <div className={cn("flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg", iconBgColors[toolIndex % iconBgColors.length])}>
+                    <tool.icon className={cn("h-6 w-6", iconTextColors[toolIndex % iconTextColors.length])} />
+                    </div>
+                    <div className="flex-grow">
+                    <h3 className="font-bold text-lg tracking-tight font-headline">
+                        {tool.name}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mt-1">
+                        {tool.description}
+                    </p>
+                    </div>
+                </div>
+                </Link>
+            ))}
+        </div>
+
+        <div className="flex justify-center pt-8">
+            <AdPlaceholder width={728} height={90} title="Horizontal Ad" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col space-y-8 animate-in fade-in duration-500">
       <section className="text-center">
@@ -53,60 +100,41 @@ export default function Home() {
         </h1>
       </section>
 
-      <Accordion type="multiple" className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-3" defaultValue={[toolCategories[0].name]}>
+      <div className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-3">
         {toolCategories.map((category, categoryIndex) => (
-          <AccordionItem value={category.name} key={category.name} className="border-b-0">
-             <AccordionTrigger className={cn(
-                "h-full rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg p-6 flex items-center gap-4 hover:no-underline [&[data-state=open]]:rounded-b-none",
-                "border-t-4",
-                toolColors[categoryIndex % toolColors.length]
-              )}>
-                <div className="flex-1 flex items-start gap-4">
-                    <div className={cn("flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg", iconBgColors[categoryIndex % iconBgColors.length])}>
-                        <category.icon className={cn("h-6 w-6", iconTextColors[categoryIndex % iconTextColors.length])} />
-                    </div>
-                    <div className="text-left">
-                        <h3 className="font-bold text-lg tracking-tight font-headline text-foreground">
-                        {category.name}
-                        </h3>
-                        <p className="text-sm text-muted-foreground mt-1">
-                        Contains {category.tools.length} tools
-                        </p>
-                    </div>
-                </div>
-                <ChevronDown className="h-5 w-5 shrink-0 transition-transform duration-200" />
-            </AccordionTrigger>
-            <AccordionContent className="border border-t-0 rounded-b-lg bg-card p-6">
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                {category.tools.map((tool, toolIndex) => (
-                  <Link href={tool.href} key={tool.name} className="group">
-                    <div className={cn(
-                      "h-full rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 p-6 flex flex-col items-start gap-4",
-                    )}>
-                      <div className={cn("flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg", iconBgColors[(categoryIndex + toolIndex) % iconBgColors.length])}>
-                        <tool.icon className={cn("h-6 w-6", iconTextColors[(categoryIndex + toolIndex) % iconTextColors.length])} />
-                      </div>
-                      <div className="flex-grow">
-                        <h3 className="font-bold text-lg tracking-tight font-headline">
-                          {tool.name}
-                        </h3>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          {tool.description}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-              {categoryIndex === 0 && (
-                <div className="flex justify-center pt-8">
-                  <AdPlaceholder width={300} height={250} title="Horizontal Ad" />
-                </div>
+          <button
+            key={category.name}
+            onClick={() => setSelectedCategory(category)}
+            className={cn(
+              'h-full rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg p-6 flex items-start gap-4 text-left',
+              'border-t-4',
+              toolColors[categoryIndex % toolColors.length]
+            )}
+          >
+            <div
+              className={cn(
+                'flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg',
+                iconBgColors[categoryIndex % iconBgColors.length]
               )}
-            </AccordionContent>
-          </AccordionItem>
+            >
+              <category.icon
+                className={cn(
+                  'h-6 w-6',
+                  iconTextColors[categoryIndex % iconTextColors.length]
+                )}
+              />
+            </div>
+            <div>
+              <h3 className="font-bold text-lg tracking-tight font-headline text-foreground">
+                {category.name}
+              </h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Contains {category.tools.length} tools
+              </p>
+            </div>
+          </button>
         ))}
-      </Accordion>
+      </div>
     </div>
   );
 }
