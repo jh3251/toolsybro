@@ -1,9 +1,27 @@
 
 import type { Metadata } from 'next';
-import { ImageCropper } from '@/components/tools/ImageCropper';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const ImageCropper = dynamic(
+  () => import('@/components/tools/ImageCropper').then((mod) => mod.ImageCropper),
+  {
+    ssr: false,
+    loading: () => (
+        <div className="space-y-6">
+            <Skeleton className="w-full h-48" />
+            <div className="flex gap-2">
+                <Skeleton className="h-10 w-48" />
+                <Skeleton className="h-10 w-36" />
+            </div>
+        </div>
+    )
+  }
+);
+
 
 export const metadata: Metadata = {
   title: 'Image Cropper',
