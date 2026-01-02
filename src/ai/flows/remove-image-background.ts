@@ -47,7 +47,7 @@ const removeImageBackgroundFlow = ai.defineFlow(
         },
     });
 
-    if (!media.url) {
+    if (!media?.url) {
         throw new Error('The AI model did not return an image. Please try again.');
     }
     
