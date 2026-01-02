@@ -50,21 +50,30 @@ function HomeComponent() {
   const [selectedCategory, setSelectedCategory] = useState<ToolCategory | null>(null);
 
   useEffect(() => {
-    if (categoryParam) {
-      const category = toolCategories.find(c => c.name === decodeURIComponent(categoryParam));
-      if (category) {
-        setSelectedCategory(category);
-      }
+    const categoryName = searchParams.get('category');
+    if (categoryName) {
+      const category = toolCategories.find(c => c.name === decodeURIComponent(categoryName));
+      setSelectedCategory(category || null);
     } else {
-        setSelectedCategory(null);
+      setSelectedCategory(null);
     }
-  }, [categoryParam]);
+  }, [searchParams]);
+
+  const handleCategoryClick = (category: ToolCategory) => {
+    setSelectedCategory(category);
+    window.history.pushState(null, '', `/?category=${encodeURIComponent(category.name)}`);
+  };
+
+  const handleBackClick = () => {
+    setSelectedCategory(null);
+    window.history.pushState(null, '', '/');
+  };
 
   if (selectedCategory) {
     return (
       <div className="flex flex-col space-y-8 animate-in fade-in duration-500">
         <header className="flex items-center gap-4">
-           <Button variant="outline" size="icon" onClick={() => window.history.pushState(null, '', '/')}>
+           <Button variant="outline" size="icon" onClick={handleBackClick}>
              <ArrowLeft className="h-4 w-4" />
              <span className="sr-only">Back to Categories</span>
            </Button>
@@ -110,36 +119,34 @@ function HomeComponent() {
   return (
     <div className="flex flex-col space-y-8 animate-in fade-in duration-500">
       <section className="text-center">
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight font-headline animate-fade-in-down">
+        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent animate-fade-in-down">
           All Your Online Tools, One Platform
         </h1>
       </section>
 
-      <div className="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid w-full gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {toolCategories.map((category, categoryIndex) => (
           <button
             key={category.name}
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => handleCategoryClick(category)}
             className={cn(
-              'h-full rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg p-6 flex items-start gap-4 text-left',
-              'border-t-4',
-              toolColors[categoryIndex % toolColors.length]
+              'group h-full rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 p-6 flex flex-col items-center justify-center gap-4 text-center'
             )}
           >
             <div
               className={cn(
-                'flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg',
+                'flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full transition-colors duration-300 group-hover:bg-primary',
                 iconBgColors[categoryIndex % iconBgColors.length]
               )}
             >
               <category.icon
                 className={cn(
-                  'h-6 w-6',
+                  'h-8 w-8 transition-colors duration-300 group-hover:text-primary-foreground',
                   iconTextColors[categoryIndex % iconTextColors.length]
                 )}
               />
             </div>
-            <div>
+            <div className="flex-grow">
               <h3 className="font-bold text-lg tracking-tight font-headline text-foreground">
                 {category.name}
               </h3>
