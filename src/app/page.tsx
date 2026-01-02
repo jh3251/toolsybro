@@ -124,25 +124,6 @@ function HomeComponent() {
         </h1>
       </section>
 
-      <Card className="bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg">
-        <CardHeader className="flex flex-row items-center gap-4">
-            <div className="p-3 bg-white/20 rounded-full">
-                <Heart className="h-6 w-6 text-white"/>
-            </div>
-            <div>
-                <CardTitle>Support Our Mission</CardTitle>
-                <CardDescription className="text-white/80">Enjoying the free tools? Consider supporting the site!</CardDescription>
-            </div>
-        </CardHeader>
-        <CardContent>
-             <Link href="https://www.paypal.com/donate/?business=YOUR_PAYPAL_ID" target="_blank" rel="noopener noreferrer">
-              <Button className="w-full bg-white text-pink-600 hover:bg-white/90 font-bold text-lg py-6 rounded-full shadow-lg transition-transform transform hover:scale-105">
-                Donate Now
-              </Button>
-            </Link>
-        </CardContent>
-      </Card>
-      
       <div className="grid w-full gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {toolCategories.map((category, categoryIndex) => (
           <button
@@ -176,6 +157,24 @@ function HomeComponent() {
           </button>
         ))}
       </div>
+      <Card className="bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg">
+        <CardHeader className="flex flex-row items-center gap-4">
+            <div className="p-3 bg-white/20 rounded-full">
+                <Heart className="h-6 w-6 text-white"/>
+            </div>
+            <div>
+                <CardTitle>Support Our Mission</CardTitle>
+                <CardDescription className="text-white/80">Enjoying the free tools? Consider supporting the site!</CardDescription>
+            </div>
+        </CardHeader>
+        <CardContent>
+             <Link href="https://www.paypal.com/donate/?business=YOUR_PAYPAL_ID" target="_blank" rel="noopener noreferrer">
+              <Button className="w-full bg-white text-pink-600 hover:bg-white/90 font-bold text-lg py-6 rounded-full shadow-lg transition-transform transform hover:scale-105">
+                Donate Now
+              </Button>
+            </Link>
+        </CardContent>
+      </Card>
     </div>
   );
 }
