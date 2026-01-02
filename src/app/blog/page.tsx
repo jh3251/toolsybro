@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -8,8 +9,8 @@ import { format } from 'date-fns';
 import { ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'ToolsyBro Blog | Tips & Tricks for Free Tools',
-  description: 'Articles, tips, and tutorials on productivity and using our free online tools to their full potential.',
+  title: 'ToolsyBro Blog | Tips & Tricks for Our 100% Free Tools',
+  description: 'Explore articles, tips, and tutorials on how to maximize your productivity using our extensive collection of 100% free online tools.',
 };
 
 export default function BlogPage() {
@@ -23,7 +24,7 @@ export default function BlogPage() {
           The ToolsyBro Blog
         </h1>
         <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
-          Tips, tutorials, and insights on productivity and using our free tools to work smarter.
+          Tips, tutorials, and insights on using our 100% free tools to work smarter, not harder.
         </p>
       </header>
 
@@ -75,5 +76,3 @@ export default function BlogPage() {
     </div>
   );
 }
-
-    

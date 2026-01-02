@@ -1,8 +1,9 @@
+
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About ToolsyBro | Our Mission for Free Tools',
-  description: 'Learn more about ToolsyBro, our mission to provide free and high-quality online tools, and the team behind it.',
+  title: 'About ToolsyBro | Our Mission for 100% Free Tools',
+  description: 'Learn more about ToolsyBro, our mission to provide high-quality online tools, 100% free for a lifetime, and the team behind our suite of free tools.',
 };
 
 export default function AboutPage() {
@@ -11,7 +12,7 @@ export default function AboutPage() {
       <header>
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">About ToolsyBro</h1>
         <p className="mt-4 text-xl text-muted-foreground">
-          Our mission is to provide simple, powerful, and accessible free tools for everyone.
+          Our mission is to provide simple, powerful, and accessible tools, 100% free for a lifetime.
         </p>
       </header>
       <article className="prose prose-lg dark:prose-invert max-w-none space-y-4 text-muted-foreground">
@@ -29,7 +30,7 @@ export default function AboutPage() {
           <strong>Performance:</strong> We believe in speed. Our website and tools are optimized to be as fast as possible, so you can get your work done without waiting.
         </p>
         <p>
-          <strong>Accessibility:</strong> Our tools are free for everyone, forever. We support our work through unobtrusive advertising that complies with all industry standards, ensuring a great user experience.
+          <strong>Accessibility:</strong> Our tools are 100% free for everyone, for a lifetime. We support our work through unobtrusive advertising that complies with all industry standards, ensuring a great user experience.
         </p>
         <p>
           Thank you for using ToolsyBro. We're constantly working on adding new free tools and improving existing ones. If you have any feedback or suggestions, please don't hesitate to reach out to us through our contact page.
