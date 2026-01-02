@@ -201,6 +201,46 @@
         "createdAt",
         "lastModified"
       ]
+    },
+    "StudyTask": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "StudyTask",
+      "type": "object",
+      "description": "Represents a single task in the study planner.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the task."
+        },
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user who created the task."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title or description of the task."
+        },
+        "subject": {
+          "type": "string",
+          "description": "The subject or course this task belongs to."
+        },
+        "dueDate": {
+          "type": "string",
+          "description": "The date when the task is due.",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the task.",
+          "enum": ["To Do", "In Progress", "Done"]
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp of when the task was created.",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "userId", "title", "status", "createdAt"]
     }
   },
   "auth": {
@@ -243,6 +283,26 @@
             {
               "name": "noteId",
               "description": "The unique identifier of the note."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/studyTasks/{taskId}",
+        "definition": {
+          "entityName": "StudyTask",
+          "schema": {
+            "$ref": "#/backend/entities/StudyTask"
+          },
+          "description": "Collection of study tasks for each user.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user."
+            },
+            {
+              "name": "taskId",
+              "description": "The unique identifier of the study task."
             }
           ]
         }
@@ -296,6 +356,6 @@
         }
       }
     ],
-    "reasoning": "The Firestore data structure is designed to support the MultiToolSuite application, emphasizing security, scalability, and ease of debugging.  The structure adheres to the core design principles of Authorization Independence, Clarity of Intent, DBAC (Database-Based Access Control), QAPs (Rules are not Filters), and Invariants.\n\n**Authorization Independence:**  Path-based ownership (`/users/{userId}/notes/{noteId}`) inherently provides Authorization Independence, as access control rules can be based solely on the path and the `request.auth.uid` without requiring `get()` calls to parent documents.  There is no need to denormalize any data for ownership because the ownership is built into the structure of the data paths.\n\n**QAPs (Rules are not Filters):**  The segregation of user-specific data into `/users/{userId}/notes/{noteId}` ensures secure `list` operations.  A user can only list notes under their own user ID, preventing unauthorized access to other users' notes. Public data (tools, blog posts) will use separate collections to avoid mixing access requirements and enabling QAPs.\n\n**Structure and Rationale:**\n*   `/users/{userId}/notes/{noteId}`:  Each user has their own collection of notes. This structure provides clear ownership and avoids the need for complex queries or security rules to determine access.  Authorization is based solely on the `userId` path parameter matching the `request.auth.uid`.\n\n*   `/tools/{toolId}`:  A collection of tools available on the platform.  These are global and accessible, so no user-specific data is mixed in.  Authorization is separate, likely public read access with admin-only write access.\n\n*   `/blog_posts/{blogPostId}`:  A collection of blog posts. Like tools, these are global and publicly accessible with restricted write access.\n\n*   `/contact_messages/{messageId}`: A collection of contact messages.  Creation will be public, but reading should be restricted to administrators. \n\nThe design prioritizes path-based ownership for user-generated content (notes) and segregates public data (tools, blog posts) into separate collections.  This segregation simplifies security rules and ensures QAPs. The structure promotes clear authorization intent, debuggability, and adherence to the core design principles."
+    "reasoning": "The Firestore data structure is designed to support the MultiToolSuite application, emphasizing security, scalability, and ease of debugging.  The structure adheres to the core design principles of Authorization Independence, Clarity of Intent, DBAC (Database-Based Access Control), QAPs (Rules are not Filters), and Invariants.\n\n**Authorization Independence:**  Path-based ownership (`/users/{userId}/notes/{noteId}`) inherently provides Authorization Independence, as access control rules can be based solely on the path and the `request.auth.uid` without requiring `get()` calls to parent documents.  There is no need to denormalize any data for ownership because the ownership is built into the structure of the data paths.\n\n**QAPs (Rules are not Filters):**  The segregation of user-specific data into `/users/{userId}/notes/{noteId}` ensures secure `list` operations.  A user can only list notes under their own user ID, preventing unauthorized access to other users' notes. Public data (tools, blog posts) will use separate collections to avoid mixing access requirements and enabling QAPs.\n\n**Structure and Rationale:**\n*   `/users/{userId}/notes/{noteId}`:  Each user has their own collection of notes. This structure provides clear ownership and avoids the need for complex queries or security rules to determine access.  Authorization is based solely on the `userId` path parameter matching the `request.auth.uid`.\n\n*   `/users/{userId}/studyTasks/{taskId}`: Each user has their own collection of study tasks. This provides clear ownership and simplifies security rules.\n\n*   `/tools/{toolId}`:  A collection of tools available on the platform.  These are global and accessible, so no user-specific data is mixed in.  Authorization is separate, likely public read access with admin-only write access.\n\n*   `/blog_posts/{blogPostId}`:  A collection of blog posts. Like tools, these are global and publicly accessible with restricted write access.\n\n*   `/contact_messages/{messageId}`: A collection of contact messages.  Creation will be public, but reading should be restricted to administrators. \n\nThe design prioritizes path-based ownership for user-generated content (notes, study tasks) and segregates public data (tools, blog posts) into separate collections.  This segregation simplifies security rules and ensures QAPs. The structure promotes clear authorization intent, debuggability, and adherence to the core design principles."
   }
 }

@@ -121,6 +121,17 @@ service cloud.firestore {
       allow delete: if isExistingOwner(userId);
     }
 
+    /**
+     * @description Secures the study tasks subcollection for each user.
+     * @path /users/{userId}/studyTasks/{taskId}
+     */
+    match /users/{userId}/studyTasks/{taskId} {
+      allow get, list: if isOwner(userId);
+      allow create: if isOwner(userId) && request.resource.data.userId == userId;
+      allow update: if isExistingOwner(userId) && request.resource.data.userId == resource.data.userId;
+      allow delete: if isExistingOwner(userId);
+    }
+
     // -------------------------------------------------------------------------
     // Public Content Rules (/tools, /blog_posts)
     // -------------------------------------------------------------------------
