@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
 
 export const metadata: Metadata = {
   title: 'Scientific Calculator',
-  description: 'A placeholder for the Scientific Calculator tool.',
+  description: 'An advanced online scientific calculator for complex calculations.',
 };
 
-export default function PlaceholderPage() {
+export default function ScientificCalculatorPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Scientific Calculator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Perform advanced mathematical calculations.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <AdvancedFeaturePlaceholder title="Scientific Calculator" />
     </div>
   );
 }
