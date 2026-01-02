@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { AgeCalculator } from '@/components/tools/AgeCalculator';
 
 export const metadata: Metadata = {
   title: 'Age Calculator',
-  description: 'A placeholder for the Age Calculator tool.',
+  description: 'Calculate your age in years, months, days, and more. Find out exactly how old you are and when your next birthday is.',
 };
 
-export default function PlaceholderPage() {
+export default function AgeCalculatorPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Age Calculator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Find out your exact age in years, months, and days.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <AgeCalculator />
     </div>
   );
 }
