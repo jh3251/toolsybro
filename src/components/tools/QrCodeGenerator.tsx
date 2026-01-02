@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Download, Link, Type, Mail, Wifi, Palette, Brush, Square, Image as ImageIcon, Briefcase, Phone, MessageSquare, Calendar, Video, FileText, Music, Star, MapPin, ZoomIn, Bitcoin, Facebook, Youtube } from 'lucide-react';
+import { cn } from "@/lib/utils";
 
 type QrType = 'link' | 'text' | 'email' | 'wifi';
 
