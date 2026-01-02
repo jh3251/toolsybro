@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { ImageWatermarkTool } from '@/components/tools/ImageWatermarkTool';
 
 export const metadata: Metadata = {
   title: 'Image Watermark Tool',
-  description: 'A placeholder for the Image Watermark Tool.',
+  description: 'Easily add a custom text or image watermark to your photos online. Adjust position, opacity, and size to protect your images.',
 };
 
-export default function PlaceholderPage() {
+export default function ImageWatermarkPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Image Watermark Tool</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Protect your images by adding a custom watermark.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <ImageWatermarkTool />
     </div>
   );
 }
