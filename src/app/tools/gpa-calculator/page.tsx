@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { GpaCalculator } from '@/components/tools/GpaCalculator';
 
 export const metadata: Metadata = {
   title: 'GPA Calculator',
-  description: 'A placeholder for the GPA Calculator tool.',
+  description: 'Calculate your Grade Point Average (GPA) by entering your courses, credits, and grades.',
 };
 
-export default function PlaceholderPage() {
+export default function GpaCalculatorPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">GPA Calculator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Enter your courses and grades to find out your GPA.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <GpaCalculator />
     </div>
   );
 }
