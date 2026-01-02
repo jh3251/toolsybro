@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -19,7 +18,7 @@ export function AdvancedFeaturePlaceholder({ title }: AdvancedFeaturePlaceholder
       </CardHeader>
       <CardContent>
         <p className="text-muted-foreground">
-          This is an advanced tool that we are currently working on. Due to the complexity involved in processing these files directly in the browser, we are developing a robust server-side solution to ensure the best performance and reliability.
+          This is an advanced tool that we are currently working on. Due to the complexity involved, we are developing a robust server-side solution to ensure the best performance and reliability.
         </p>
         <p className="text-muted-foreground mt-4">
           Please check back soon for updates. We appreciate your patience!

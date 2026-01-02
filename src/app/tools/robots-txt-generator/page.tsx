@@ -3,14 +3,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+import { RobotsTxtGenerator } from '@/components/tools/RobotsTxtGenerator';
 
 export const metadata: Metadata = {
   title: 'Robots.txt Generator',
-  description: 'A placeholder for the Robots.txt Generator tool.',
+  description: 'Easily generate a robots.txt file to manage how search engine crawlers interact with your website.',
 };
 
-export default function PlaceholderPage() {
+export default function RobotsTxtGeneratorPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,11 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Robots.txt Generator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Control how search engines crawl and index your site.
             </p>
         </div>
       </header>
-      <AdvancedFeaturePlaceholder title="Robots.txt Generator" />
+      <RobotsTxtGenerator />
     </div>
   );
 }
