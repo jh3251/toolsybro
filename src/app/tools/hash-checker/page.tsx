@@ -3,14 +3,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+import { HashChecker } from '@/components/tools/HashChecker';
 
 export const metadata: Metadata = {
-  title: 'Hash Checker',
-  description: 'A placeholder for the Hash Checker tool.',
+  title: 'File Hash Checker (SHA-256)',
+  description: 'Verify file integrity by comparing its calculated hash (SHA-256, SHA-384, SHA-512) against a known value.',
 };
 
-export default function PlaceholderPage() {
+export default function HashCheckerPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -21,13 +21,13 @@ export default function PlaceholderPage() {
             </Button>
         </Link>
         <div>
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Hash Checker</h1>
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">File Hash Checker</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Verify file integrity by calculating and comparing its hash.
             </p>
         </div>
       </header>
-      <AdvancedFeaturePlaceholder title="Hash Checker" />
+      <HashChecker />
     </div>
   );
 }
