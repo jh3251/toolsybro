@@ -1,16 +1,20 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy',
-  description: 'Read the Privacy Policy for MultiToolSuite to understand how we collect, use, and protect your data.',
-};
-
 export default function PrivacyPolicyPage() {
+  const [lastUpdated, setLastUpdated] = useState('');
+
+  useEffect(() => {
+    setLastUpdated(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }));
+  }, []);
+
   return (
     <div className="space-y-8">
       <header>
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Privacy Policy</h1>
-        <p className="mt-4 text-xl text-muted-foreground">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        {lastUpdated && <p className="mt-4 text-xl text-muted-foreground">Last updated: {lastUpdated}</p>}
       </header>
       <article className="prose prose-lg dark:prose-invert max-w-none space-y-4 text-muted-foreground">
         <p>
