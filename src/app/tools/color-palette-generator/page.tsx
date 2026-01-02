@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { ColorPaletteGenerator } from '@/components/tools/ColorPaletteGenerator';
 
 export const metadata: Metadata = {
   title: 'Color Palette Generator',
-  description: 'A placeholder for the Color Palette Generator tool.',
+  description: 'Instantly generate beautiful and harmonious color palettes for your design projects. Click to generate and copy HEX codes.',
 };
 
-export default function PlaceholderPage() {
+export default function ColorPaletteGeneratorPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Color Palette Generator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Click "Generate" to create a new harmonious color scheme.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <ColorPaletteGenerator />
     </div>
   );
 }
