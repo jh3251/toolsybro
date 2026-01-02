@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+import { PdfSplitter } from '@/components/tools/PdfSplitter';
 
 export const metadata: Metadata = {
   title: 'PDF Splitter',
-  description: 'An advanced tool to split a single PDF into multiple files. Coming soon!',
+  description: 'Easily extract pages or ranges from your PDF files. Split a single PDF into multiple documents online.',
 };
 
 export default function PdfSplitterPage() {
@@ -23,11 +23,11 @@ export default function PdfSplitterPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">PDF Splitter</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            Split a PDF into separate pages or ranges.
+            Extract pages from a PDF to create a new document.
             </p>
         </div>
       </header>
-      <AdvancedFeaturePlaceholder title="PDF Splitter" />
+      <PdfSplitter />
     </div>
   );
 }
