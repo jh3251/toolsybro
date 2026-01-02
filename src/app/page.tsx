@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import Link from 'next/link';
@@ -147,7 +148,7 @@ function HomeComponent() {
               <h3 className="font-bold text-lg tracking-tight font-headline text-foreground">
                 {category.name}
               </h3>
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="text-sm text-muted-foreground mt-1 transition-all group-hover:scale-105 group-hover:text-primary">
                 Contains {category.tools.length} tools
               </p>
             </div>
