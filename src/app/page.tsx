@@ -16,19 +16,24 @@ import {
 
 export default function Home() {
   return (
-    <div className="flex flex-col space-y-16">
+    <div className="flex flex-col space-y-12 animate-in fade-in duration-500">
       <section className="text-center">
-        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-headline">
+        <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl font-headline">
           All Your Online Tools, One Platform
         </h1>
       </section>
 
-      <Accordion type="multiple" className="w-full space-y-4">
-        {toolCategories.map((category) => (
+      <Accordion
+        type="multiple"
+        className="w-full space-y-4"
+        defaultValue={[toolCategories[0].name]}
+      >
+        {toolCategories.map((category, index) => (
           <AccordionItem
             value={category.name}
             key={category.name}
-            className="rounded-xl border bg-card text-card-foreground shadow-sm transition-all hover:shadow-md"
+            className="rounded-xl border bg-card text-card-foreground shadow-sm transition-all hover:shadow-md animate-in fade-in slide-in-from-bottom-4 duration-500"
+            style={{ animationDelay: `${index * 100}ms` }}
           >
             <AccordionTrigger className="p-6 text-left hover:no-underline">
               <div className="flex items-center gap-4">
