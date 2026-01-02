@@ -91,13 +91,13 @@ function HomeComponent() {
             {selectedCategory.tools.map((tool, toolIndex) => (
                 <Link href={tool.href} key={tool.name} className="group">
                 <div className={cn(
-                    "h-full rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 p-6 flex flex-col items-start gap-4",
+                    "h-full rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 p-6 flex flex-col items-center justify-center gap-4 text-center",
                 )}>
-                    <div className={cn("flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg", iconBgColors[toolIndex % iconBgColors.length])}>
-                    <tool.icon className={cn("h-6 w-6", iconTextColors[toolIndex % iconTextColors.length])} />
+                    <div className={cn("flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full transition-colors duration-300 group-hover:bg-primary", iconBgColors[toolIndex % iconBgColors.length])}>
+                    <tool.icon className={cn("h-8 w-8 transition-colors duration-300 group-hover:text-primary-foreground", iconTextColors[toolIndex % iconTextColors.length])} />
                     </div>
                     <div className="flex-grow">
-                    <h3 className="font-bold text-lg tracking-tight font-headline">
+                    <h3 className="font-bold text-lg tracking-tight font-headline text-foreground">
                         {tool.name}
                     </h3>
                     <p className="text-sm text-muted-foreground mt-1">
