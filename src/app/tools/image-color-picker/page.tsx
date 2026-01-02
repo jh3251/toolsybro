@@ -1,5 +1,23 @@
+
 import type { Metadata } from 'next';
-import { ImageColorPicker } from '@/components/tools/ImageColorPicker';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const ImageColorPicker = dynamic(
+  () => import('@/components/tools/ImageColorPicker').then(mod => mod.ImageColorPicker),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="space-y-6">
+        <Skeleton className="w-full h-48" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Skeleton className="w-full h-64" />
+            <Skeleton className="w-full h-64" />
+        </div>
+      </div>
+    )
+  }
+);
 
 export const metadata: Metadata = {
   title: 'Image Color Picker',
