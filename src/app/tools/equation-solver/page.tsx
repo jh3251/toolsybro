@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { EquationSolver } from '@/components/tools/EquationSolver';
 
 export const metadata: Metadata = {
   title: 'Equation Solver',
-  description: 'A placeholder for the Equation Solver tool.',
+  description: 'Solve mathematical equations with a step-by-step AI-powered solver.',
 };
 
-export default function PlaceholderPage() {
+export default function EquationSolverPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -21,20 +21,13 @@ export default function PlaceholderPage() {
             </Button>
         </Link>
         <div>
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Equation Solver</h1>
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">AI Equation Solver</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Get step-by-step solutions to your math problems.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <EquationSolver />
     </div>
   );
 }
