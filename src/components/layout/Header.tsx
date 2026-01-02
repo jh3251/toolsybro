@@ -66,7 +66,7 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           </nav>
-            <Link href="https://www.paypal.com/donate/?business=jhshifat21@gmail.com" target="_blank" rel="noopener noreferrer">
+            <Link href="https://www.paypal.com/donate/?business=introcarditaly@gmail.com" target="_blank" rel="noopener noreferrer">
               <Button className="bg-pink-500 hover:bg-pink-600 text-white rounded-full shadow-lg transition-transform transform hover:scale-105">
                 <Heart className="mr-2 h-4 w-4" />
                 Donate

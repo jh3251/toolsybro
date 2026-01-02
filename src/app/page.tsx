@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 import { AdPlaceholder } from '@/components/layout/AdPlaceholder';
 import { ArrowLeft, Heart, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 
 const toolColors = [
   'border-blue-500',
@@ -79,7 +79,7 @@ function HomeComponent() {
              <ArrowLeft className="h-4 w-4" />
              <span className="sr-only">Back to Categories</span>
            </Button>
-           <div>
+           <div className="py-2">
              <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent py-2">
                {selectedCategory.name}
              </h1>
@@ -176,7 +176,7 @@ function HomeComponent() {
             </div>
         </CardHeader>
         <CardContent>
-             <Link href="https://www.paypal.com/donate/?business=jhshifat21@gmail.com" target="_blank" rel="noopener noreferrer">
+             <Link href="https://www.paypal.com/donate/?business=introcarditaly@gmail.com" target="_blank" rel="noopener noreferrer">
               <Button className="w-full bg-white text-pink-600 hover:bg-white/90 font-bold text-lg py-6 rounded-full shadow-lg transition-transform transform hover:scale-105">
                 Donate Now
               </Button>
