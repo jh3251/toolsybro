@@ -9,6 +9,7 @@ import { Footer } from '@/components/layout/Footer';
 import { AdPlaceholder } from '@/components/layout/AdPlaceholder';
 import { Toaster } from '@/components/ui/toaster';
 import { useEffect, useState } from 'react';
+import { FirebaseClientProvider } from '@/firebase';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -64,22 +65,24 @@ export default function RootLayout({
           plusJakartaSans.variable
         )}
       >
-        <div className="relative flex min-h-dvh flex-col bg-background">
-          <Header />
-          <div className="container mx-auto flex-1 px-4 py-8 md:px-6">
-            <div className="flex flex-col gap-8 lg:flex-row">
-              <main className="flex-1 lg:w-3/4">{children}</main>
-              <aside className="w-full lg:w-1/4">
-                <div className="sticky top-24 space-y-6">
-                   <h3 className="font-semibold text-center text-muted-foreground">Advertisement</h3>
-                   <AdPlaceholder width={300} height={600} title="Vertical Ad" className="mx-auto" />
+        <FirebaseClientProvider>
+            <div className="relative flex min-h-dvh flex-col bg-background">
+            <Header />
+            <div className="container mx-auto flex-1 px-4 py-8 md:px-6">
+                <div className="flex flex-col gap-8 lg:flex-row">
+                <main className="flex-1 lg:w-3/4">{children}</main>
+                <aside className="w-full lg:w-1/4">
+                    <div className="sticky top-24 space-y-6">
+                    <h3 className="font-semibold text-center text-muted-foreground">Advertisement</h3>
+                    <AdPlaceholder width={300} height={600} title="Vertical Ad" className="mx-auto" />
+                    </div>
+                </aside>
                 </div>
-              </aside>
             </div>
-          </div>
-          <Footer />
-        </div>
-        {isClient && <Toaster />}
+            <Footer />
+            </div>
+            {isClient && <Toaster />}
+        </FirebaseClientProvider>
       </body>
     </html>
   );
