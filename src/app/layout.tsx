@@ -18,33 +18,6 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: '--font-headline',
 });
 
-// Metadata and viewport are not used in a client component, 
-// but we can keep them here for reference or move them to a parent layout if needed.
-/*
-export const metadata: Metadata = {
-  title: {
-    default: 'MultiToolSuite - Free Online Tools for Everyone',
-    template: '%s | MultiToolSuite',
-  },
-  description:
-    'A collection of free, simple, and powerful online tools including a word counter, image compressor, QR code generator, and more. Boost your productivity with MultiToolSuite.',
-  keywords: [
-    'online tools',
-    'free tools',
-    'word counter',
-    'image compressor',
-    'qr code generator',
-    'text converter',
-    'json formatter',
-  ],
-};
-
-export const viewport: Viewport = {
-  themeColor: '#4f46e5',
-  colorScheme: 'light dark',
-};
-*/
-
 export default function RootLayout({
   children,
 }: Readonly<{

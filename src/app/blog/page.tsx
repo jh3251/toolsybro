@@ -37,7 +37,7 @@ export default function BlogPage() {
                 alt={featuredPost.title} 
                 fill 
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
-                data-ai-hint={`${featuredPost.slug} post`}
+                data-ai-hint={featuredPost.imageHint}
               />
             </div>
             <div className="p-8 flex flex-col justify-center">
@@ -58,7 +58,7 @@ export default function BlogPage() {
           <Link href={`/blog/${post.slug}`} key={post.slug} className="group">
             <Card className="flex h-full flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary hover:-translate-y-1">
               <div className="relative h-48 w-full">
-                  <Image src={post.imageUrl} alt={post.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={`${post.slug} article`} />
+                  <Image src={post.imageUrl} alt={post.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={post.imageHint} />
               </div>
               <CardHeader className="flex-grow">
                 <p className="text-sm text-muted-foreground">{format(new Date(post.date), 'MMMM d, yyyy')}</p>
@@ -75,3 +75,5 @@ export default function BlogPage() {
     </div>
   );
 }
+
+    

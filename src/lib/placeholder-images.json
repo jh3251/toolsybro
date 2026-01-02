@@ -1,3 +1,52 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "maximize-writing-efficiency",
+      "description": "A person writing at a desk with a laptop, focused and efficient.",
+      "imageUrl": "https://images.unsplash.com/photo-1758876020200-1e19cddaf656?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx3cml0aW5nJTIwZWZmaWNpZW5jeXxlbnwwfHx8fDE3NjczNzk2Njd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "writing efficiency"
+    },
+    {
+      "id": "why-image-compression-matters",
+      "description": "A visual representation of a large image file being shrunk down, showing improved website speed.",
+      "imageUrl": "https://images.unsplash.com/photo-1752080193168-666b49805486?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxpbWFnZSUyMGNvbXByZXNzaW9ufGVufDB8fHx8MTc2NzM3OTY2N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "image compression"
+    },
+    {
+      "id": "creative-qr-code-uses",
+      "description": "A person scanning a creative QR code on a product in a modern retail setting.",
+      "imageUrl": "https://images.unsplash.com/photo-1550482768-88b710a445fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cXIlMjBjb2RlfGVufDB8fHx8MTc2NzI3OTcwNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "qr code"
+    },
+    {
+      "id": "what-is-json",
+      "description": "An abstract visualization of JSON data structures, with connected nodes and brackets.",
+      "imageUrl": "https://images.unsplash.com/photo-1765445666518-7d08d8c45d3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8anNvbiUyMGRhdGF8ZW58MHx8fHwxNzY3Mzc5NjY4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "json data"
+    },
+    {
+      "id": "why-use-password-generator",
+      "description": "A digital padlock graphic with complex, randomly generated characters flowing around it.",
+      "imageUrl": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwYXNzd29yZCUyMHNlY3VyaXR5fGVufDB8fHx8MTc2NzM3OTY2N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "password security"
+    },
+    {
+      "id": "qr-code-deep-dive",
+      "description": "A close-up, detailed view of a QR code's patterns, with finder patterns highlighted.",
+      "imageUrl": "https://images.unsplash.com/photo-1706759755851-6163305080f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxxciUyMGNvZGUlMjB0ZWNobm9sb2d5fGVufDB8fHx8MTc2NzM3OTY2N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "qr code technology"
+    },
+    {
+      "id": "json-vs-xml",
+      "description": "A split screen showing a clean JSON object on one side and a verbose XML document on the other.",
+      "imageUrl": "https://images.unsplash.com/photo-1761223976145-a85ffe11fc57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkYXRhJTIwZm9ybWF0fGVufDB8fHx8MTc2NzM3OTY2N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "data format"
+    },
+    {
+      "id": "the-art-of-passwords",
+      "description": "An abstract representation of digital security, showing layers of protection and data encryption.",
+      "imageUrl": "https://images.unsplash.com/photo-1614064643392-8dd713152ae9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxkaWdpdGFsJTIwc2VjdXJpdHl8ZW58MHx8fHwxNzY3MjgxNjUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "digital security"
+    }
+  ]
 }

@@ -84,6 +84,7 @@ import {
   FileKey2,
   FileLock,
 } from 'lucide-react';
+import { PlaceHolderImages } from './placeholder-images';
 
 export type Tool = {
   name: string;
@@ -293,15 +294,15 @@ export type BlogPost = {
   excerpt: string;
   content: string;
   imageUrl: string;
+  imageHint: string;
 };
 
-export const blogPosts: BlogPost[] = [
+const blogPostData = [
   {
     slug: 'maximize-writing-efficiency',
     title: 'Maximize Your Writing Efficiency with a Word Counter',
     date: '2023-10-26',
     excerpt: 'Discover how using an online word counter can streamline your writing process, improve readability, and help you meet strict length requirements for articles, essays, and social media posts.',
-    imageUrl: 'https://picsum.photos/seed/1/1200/800',
     content: `
 <p class="text-lg text-muted-foreground">In the digital age, content is king. Whether you're a professional writer, a student, or a social media manager, the ability to produce concise and effective text is crucial. This is where an online word counter becomes an indispensable tool in your arsenal. It's more than just a utility for counting words; it's a partner in crafting perfect prose.</p>
 <h2 class="text-3xl font-bold my-6 font-headline">Meeting Requirements with Precision</h2>
@@ -321,7 +322,6 @@ export const blogPosts: BlogPost[] = [
     title: 'Why Image Compression is a Must-Have for Your Website',
     date: '2023-10-22',
     excerpt: 'Slow-loading websites lose visitors. Learn how compressing your images can dramatically improve your site\'s performance, boost your SEO ranking, and enhance user experience.',
-    imageUrl: 'https://picsum.photos/seed/2/1200/800',
     content: `
 <p class="text-lg text-muted-foreground">In today's fast-paced digital world, user attention spans are shorter than ever. If your website takes more than a few seconds to load, you risk losing a significant portion of your visitors. One of the biggest culprits behind slow websites is large, unoptimized images. This is why image compression is not just a recommendation; it's a necessity.</p>
 <h2 class="text-3xl font-bold my-6 font-headline">The Impact on Page Speed</h2>
@@ -341,7 +341,6 @@ export const blogPosts: BlogPost[] = [
     title: '5 Creative Ways to Use QR Codes for Your Business',
     date: '2023-10-25',
     excerpt: 'QR codes are more than just black and white squares. Discover five creative ways you can use our QR Code Generator to engage customers, share information, and grow your business.',
-    imageUrl: 'https://picsum.photos/seed/3/1200/800',
     content: `
 <p class="text-lg text-muted-foreground">QR (Quick Response) codes have become a powerful tool for bridging the gap between the physical and digital worlds. With a simple scan from a smartphone, you can direct users to a website, a video, a contact card, and so much more. Our QR Code Generator makes it easy to create custom codes. Here are five creative ways to use them for your business.</p>
 <h2 class="text-3xl font-bold my-6 font-headline">1. Enhance Your Business Cards</h2>
@@ -363,7 +362,6 @@ export const blogPosts: BlogPost[] = [
     title: 'What is JSON? A Beginner\'s Guide for Developers',
     date: '2023-10-24',
     excerpt: 'JSON is the backbone of modern web applications. Learn what it is, why it\'s so popular, and how using a JSON Formatter can save you from frustrating debugging sessions.',
-    imageUrl: 'https://picsum.photos/seed/4/1200/800',
     content: `
 <p class="text-lg text-muted-foreground">If you're a developer, you've almost certainly encountered JSON (JavaScript Object Notation). It's a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate. This has made it the de facto standard for APIs and configuration files across the web.</p>
 <h2 class="text-3xl font-bold my-6 font-headline">The Structure of JSON</h2>
@@ -389,7 +387,6 @@ export const blogPosts: BlogPost[] = [
     title: 'Are Your Passwords Secure? Why You Need a Strong Password Generator',
     date: '2023-10-23',
     excerpt: 'In an era of constant data breaches, a weak password is an open invitation for hackers. Learn why creating strong, unique passwords for every account is crucial and how a password generator can help.',
-    imageUrl: 'https://picsum.photos/seed/5/1200/800',
     content: `
 <p class="text-lg text-muted-foreground">How many online accounts do you have? Ten? Fifty? A hundred? Now, how many unique passwords do you use for them? If you're like most people, you probably reuse the same one or two passwords across multiple services. While convenient, this is a massive security risk.</p>
 <h2 class="text-3xl font-bold my-6 font-headline">The Problem with Human-Made Passwords</h2>
@@ -408,7 +405,6 @@ export const blogPosts: BlogPost[] = [
     title: 'A Deep Dive into QR Codes and How They Work',
     date: '2023-10-21',
     excerpt: 'Ever wondered what\'s behind those pixelated squares? This article explores the technology behind QR codes, their error correction capabilities, and how our generator can help you create customized, scannable codes.',
-    imageUrl: 'https://picsum.photos/seed/6/1200/800',
     content: `
 <p class="text-lg text-muted-foreground">QR codes are everywhere, from restaurant menus to product packaging. But what are they, and how do they store so much information in such a small space? This article takes a deep dive into the fascinating world of QR codes.</p>
 <h2 class="text-3xl font-bold my-6 font-headline">From Car Parts to Contactless Menus</h2>
@@ -432,7 +428,6 @@ export const blogPosts: BlogPost[] = [
     title: 'JSON vs. XML: Choosing the Right Data Format',
     date: '2023-10-20',
     excerpt: 'Both JSON and XML are used for data interchange, but they have key differences. This post breaks down the pros and cons of each, helping you decide which is better for your project, and introduces our handy formatters.',
-    imageUrl: 'https://picsum.photos/seed/7/1200/800',
     content: `
 <p class="text-lg text-muted-foreground">When it comes to storing and transporting data, JSON and XML have been the two dominant formats for years. While they serve a similar purpose, their structure, verbosity, and use cases differ significantly.</p>
 <h2 class="text-3xl font-bold my-6 font-headline">JSON: The Lightweight Champion</h2>
@@ -459,7 +454,6 @@ export const blogPosts: BlogPost[] = [
     title: 'The Art and Science of Password Security',
     date: '2023-10-19',
     excerpt: 'Beyond just using a generator, what truly makes a password secure? We explore concepts like entropy, brute-force attacks, and social engineering to give you a deeper understanding of password security.',
-    imageUrl: 'https://picsum.photos/seed/8/1200/800',
     content: `
 <p class="text-lg text-muted-foreground">We all know we should use strong passwords, but what does "strong" actually mean? It's a combination of length, complexity, and unpredictability. Let's delve into the science behind password security.</p>
 <h2 class="text-3xl font-bold my-6 font-headline">Entropy: The Measure of Randomness</h2>
@@ -475,3 +469,8 @@ export const blogPosts: BlogPost[] = [
     `,
   },
 ];
+
+export const blogPosts: BlogPost[] = PlaceHolderImages.map((img) => {
+  const post = blogPostData.find((p) => p.slug === img.id);
+  return { ...post, imageUrl: img.imageUrl, imageHint: img.imageHint } as BlogPost;
+});

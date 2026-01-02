@@ -49,7 +49,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                 alt={post.title} 
                 fill 
                 className="object-cover" 
-                data-ai-hint={`${post.slug} cover`}
+                data-ai-hint={post.imageHint}
             />
         </div>
         <div className="space-y-2 text-center">
@@ -71,3 +71,5 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     </article>
   );
 }
+
+    
