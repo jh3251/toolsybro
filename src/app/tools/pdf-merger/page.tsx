@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+import { PdfMerger } from '@/components/tools/PdfMerger';
 
 export const metadata: Metadata = {
   title: 'PDF Merger',
-  description: 'An advanced tool to combine multiple PDF files into one. Coming soon!',
+  description: 'Combine multiple PDF files into one document for free. Merge PDFs online easily and securely.',
 };
 
 export default function PdfMergerPage() {
@@ -27,7 +27,7 @@ export default function PdfMergerPage() {
             </p>
         </div>
       </header>
-      <AdvancedFeaturePlaceholder title="PDF Merger" />
+      <PdfMerger />
     </div>
   );
 }
