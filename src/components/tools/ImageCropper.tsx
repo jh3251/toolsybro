@@ -6,7 +6,7 @@ import { useState, useRef, ChangeEvent } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { UploadCloud, Download, Trash2, Scissors } from 'lucide-react';
+import { UploadCloud, Download, Trash2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
 
@@ -14,7 +14,6 @@ export function ImageCropper() {
   const [imgSrc, setImgSrc] = useState('');
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<Crop>();
-  const [previewUrl, setPreviewUrl] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const { toast } = useToast();
@@ -32,7 +31,6 @@ export function ImageCropper() {
     setImgSrc('');
     setCrop(undefined);
     setCompletedCrop(undefined);
-    setPreviewUrl('');
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
