@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+import { PdfPageRotator } from '@/components/tools/PdfPageRotator';
 
 export const metadata: Metadata = {
   title: 'PDF Page Rotator',
-  description: 'An advanced tool to rotate pages in your PDF files. Coming soon!',
+  description: 'Easily rotate pages in your PDF files. Upload a document, rotate individual pages, and download the updated PDF.',
 };
 
 export default function PdfPageRotatorPage() {
@@ -23,11 +23,11 @@ export default function PdfPageRotatorPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">PDF Page Rotator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            Rotate pages within a PDF file.
+            Rotate pages within your PDF files.
             </p>
         </div>
       </header>
-      <AdvancedFeaturePlaceholder title="PDF Page Rotator" />
+      <PdfPageRotator />
     </div>
   );
 }
