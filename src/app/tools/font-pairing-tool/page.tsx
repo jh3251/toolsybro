@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { FontPairingTool } from '@/components/tools/FontPairingTool';
 
 export const metadata: Metadata = {
   title: 'Font Pairing Tool',
-  description: 'A placeholder for the Font Pairing Tool.',
+  description: 'Discover beautiful and effective font pairings for your projects. Generate headline and body text combinations from Google Fonts.',
 };
 
-export default function PlaceholderPage() {
+export default function FontPairingToolPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Font Pairing Tool</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Discover beautiful Google Font combinations for your projects.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <FontPairingTool />
     </div>
   );
 }
