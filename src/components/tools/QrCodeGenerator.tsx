@@ -45,6 +45,7 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { cn } from '@/lib/utils';
 import { Slider } from '../ui/slider';
+import { Switch } from '../ui/switch';
 
 type QrType = 'link' | 'text' | 'email' | 'wifi';
 
