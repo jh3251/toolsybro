@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { KeywordDensityChecker } from '@/components/tools/KeywordDensityChecker';
 
 export const metadata: Metadata = {
   title: 'Keyword Density Checker',
-  description: 'A placeholder for the Keyword Density Checker tool.',
+  description: 'Analyze your text to find the keyword density, helping you optimize your content for SEO.',
 };
 
-export default function PlaceholderPage() {
+export default function KeywordDensityCheckerPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Keyword Density Checker</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Analyze your content to ensure optimal keyword usage.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <KeywordDensityChecker />
     </div>
   );
 }
