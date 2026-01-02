@@ -53,7 +53,7 @@ export default function Home() {
         </h1>
       </section>
 
-      <Accordion type="multiple" className="w-full space-y-4" defaultValue={[toolCategories[0].name]}>
+      <Accordion type="multiple" className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-3" defaultValue={[toolCategories[0].name]}>
         {toolCategories.map((category, categoryIndex) => (
           <AccordionItem value={category.name} key={category.name} className="border-b-0">
              <AccordionTrigger className={cn(
@@ -77,7 +77,7 @@ export default function Home() {
                 <ChevronDown className="h-5 w-5 shrink-0 transition-transform duration-200" />
             </AccordionTrigger>
             <AccordionContent className="border border-t-0 rounded-b-lg bg-card p-6">
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 {category.tools.map((tool, toolIndex) => (
                   <Link href={tool.href} key={tool.name} className="group">
                     <div className={cn(
@@ -100,7 +100,7 @@ export default function Home() {
               </div>
               {categoryIndex === 0 && (
                 <div className="flex justify-center pt-8">
-                  <AdPlaceholder width={728} height={90} title="Horizontal Ad" />
+                  <AdPlaceholder width={300} height={250} title="Horizontal Ad" />
                 </div>
               )}
             </AccordionContent>
