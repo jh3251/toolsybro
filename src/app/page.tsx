@@ -117,6 +117,7 @@ function HomeComponent() {
   return (
     <div className="flex flex-col space-y-8 animate-in fade-in duration-500">
       <section className="text-center">
+        <h2 className="text-3xl font-semibold text-primary mb-2 animate-fade-in-down" style={{ animationDelay: '0.2s' }}>100% Free</h2>
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent animate-fade-in-down">
           All Your Online Tools, One Platform
         </h1>
