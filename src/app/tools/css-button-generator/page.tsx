@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { CssButtonGenerator } from '@/components/tools/CssButtonGenerator';
 
 export const metadata: Metadata = {
   title: 'CSS Button Generator',
-  description: 'A placeholder for the CSS Button Generator tool.',
+  description: 'Visually design and generate custom CSS for beautiful, modern buttons. Control padding, colors, shadows, and more.',
 };
 
-export default function PlaceholderPage() {
+export default function CssButtonGeneratorPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">CSS Button Generator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Visually design your perfect button and copy the CSS.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <CssButtonGenerator />
     </div>
   );
 }
