@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { BreakEvenCalculator } from '@/components/tools/BreakEvenCalculator';
 
 export const metadata: Metadata = {
   title: 'Break-Even Calculator',
-  description: 'A placeholder for the Break-Even Calculator tool.',
+  description: 'Calculate the number of units you need to sell to cover your costs. An essential tool for business planning and financial forecasting.',
 };
 
-export default function PlaceholderPage() {
+export default function BreakEvenCalculatorPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Break-Even Calculator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Find the point where your revenue equals your costs.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <BreakEvenCalculator />
     </div>
   );
 }
