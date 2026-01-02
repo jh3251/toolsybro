@@ -168,7 +168,7 @@ function HomeComponent() {
             </div>
         </CardHeader>
         <CardContent>
-             <Link href="https://www.paypal.com/donate/?business=jhshifat21@gmail.com" target="_blank" rel="noopener noreferrer">
+             <Link href="https://www.paypal.com/donate/?business=introcarditaly@gmail.com" target="_blank" rel="noopener noreferrer">
               <Button className="w-full bg-white text-pink-600 hover:bg-white/90 font-bold text-lg py-6 rounded-full shadow-lg transition-transform transform hover:scale-105">
                 Donate Now
               </Button>
