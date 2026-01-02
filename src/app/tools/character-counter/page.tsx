@@ -1,28 +1,21 @@
 import type { Metadata } from 'next';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { CharacterCounter } from '@/components/tools/CharacterCounter';
 
 export const metadata: Metadata = {
   title: 'Character Counter',
-  description: 'A placeholder for the Character Counter tool.',
+  description: 'Count characters, words, sentences, and paragraphs in your text with our free online tool.',
 };
 
-export default function PlaceholderPage() {
+export default function CharacterCounterPage() {
   return (
     <div className="space-y-8">
       <header>
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Character Counter</h1>
         <p className="mt-4 text-xl text-muted-foreground">
-          This tool is coming soon!
+          Instantly count characters, words, sentences, and paragraphs.
         </p>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <CharacterCounter />
     </div>
   );
 }
