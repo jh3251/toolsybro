@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { CountdownTimer } from '@/components/tools/CountdownTimer';
 
 export const metadata: Metadata = {
   title: 'Countdown Timer',
-  description: 'A placeholder for the Countdown Timer tool.',
+  description: 'Set a timer for any duration. Get an alert when time is up.',
 };
 
-export default function PlaceholderPage() {
+export default function CountdownTimerPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Countdown Timer</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Set, start, and get notified.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <CountdownTimer />
     </div>
   );
 }
