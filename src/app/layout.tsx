@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FFFFFF',
+  themeColor: '#4f46e5',
   colorScheme: 'light dark',
 };
 
@@ -53,24 +53,8 @@ export default function RootLayout({
       >
         <div className="relative flex min-h-dvh flex-col bg-background">
           <Header />
-          <div className="container mx-auto flex-1 px-4 py-8 md:px-6">
-            <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_300px]">
-              <main className="flex-1">{children}</main>
-              <aside className="hidden lg:block">
-                <div className="sticky top-24 space-y-8">
-                  <AdPlaceholder
-                    width={300}
-                    height={250}
-                    title="Ad (300x250)"
-                  />
-                  <AdPlaceholder
-                    width={300}
-                    height={600}
-                    title="Ad (300x600)"
-                  />
-                </div>
-              </aside>
-            </div>
+          <div className="container mx-auto flex-1 px-4 py-12 md:px-6">
+            <main className="flex-1">{children}</main>
           </div>
           <Footer />
         </div>

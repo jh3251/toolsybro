@@ -1,75 +1,77 @@
 import Link from 'next/link';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card';
 import { toolCategories } from '@/lib/data';
-import { ArrowRight } from 'lucide-react';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
+import { cn } from '@/lib/utils';
+
+const toolColors = [
+  'border-blue-500',
+  'border-red-500',
+  'border-purple-500',
+  'border-green-500',
+  'border-yellow-500',
+  'border-pink-500',
+  'border-indigo-500',
+  'border-teal-500',
+];
+
+const iconBgColors = [
+  'bg-blue-100 dark:bg-blue-900/30',
+  'bg-red-100 dark:bg-red-900/30',
+  'bg-purple-100 dark:bg-purple-900/30',
+  'bg-green-100 dark:bg-green-900/30',
+  'bg-yellow-100 dark:bg-yellow-900/30',
+  'bg-pink-100 dark:bg-pink-900/30',
+  'bg-indigo-100 dark:bg-indigo-900/30',
+  'bg-teal-100 dark:bg-teal-900/30',
+];
+
+const iconTextColors = [
+  'text-blue-500',
+  'text-red-500',
+  'text-purple-500',
+  'text-green-500',
+  'text-yellow-500',
+  'text-pink-500',
+  'text-indigo-500',
+  'text-teal-500',
+]
 
 export default function Home() {
+  const allTools = toolCategories.flatMap(category => category.tools);
+
   return (
     <div className="flex flex-col space-y-12 animate-in fade-in duration-500">
       <section className="text-center">
-        <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl font-headline">
-          All Your Online Tools, One Platform
+        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl font-headline">
+          Choose Your Tool
         </h1>
+        <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+          Select from our collection of professional tools designed for precision and ease of use.
+        </p>
       </section>
 
-      <Accordion
-        type="multiple"
-        className="w-full space-y-4"
-        defaultValue={[toolCategories[0].name]}
-      >
-        {toolCategories.map((category, index) => (
-          <AccordionItem
-            value={category.name}
-            key={category.name}
-            className="rounded-xl border bg-card text-card-foreground shadow-sm transition-all hover:shadow-md animate-in fade-in slide-in-from-bottom-4 duration-500"
-            style={{ animationDelay: `${index * 100}ms` }}
-          >
-            <AccordionTrigger className="p-6 text-left hover:no-underline">
-              <div className="flex items-center gap-4">
-                <category.icon className="h-8 w-8 text-primary" />
-                <h2 className="text-2xl font-bold tracking-tight font-headline">
-                  {category.name}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {allTools.map((tool, index) => (
+          <Link href={tool.href} key={tool.name} className="group">
+            <div className={cn(
+              "h-full rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 p-6 flex flex-col items-start gap-4",
+              "border-t-4",
+              toolColors[index % toolColors.length]
+            )}>
+              <div className={cn("flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg", iconBgColors[index % iconBgColors.length])}>
+                <tool.icon className={cn("h-6 w-6", iconTextColors[index % iconTextColors.length])} />
+              </div>
+              <div className="flex-grow">
+                <h2 className="font-bold text-lg tracking-tight font-headline">
+                  {tool.name}
                 </h2>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {tool.description}
+                </p>
               </div>
-            </AccordionTrigger>
-            <AccordionContent className="p-6 pt-0">
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {category.tools.map((tool) => (
-                  <Link href={tool.href} key={tool.name} className="group">
-                    <Card className="h-full border-2 border-transparent transition-all duration-300 hover:border-primary hover:shadow-lg hover:-translate-y-1">
-                      <CardHeader className="flex flex-row items-center gap-4">
-                        <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                          <tool.icon className="h-6 w-6" />
-                        </div>
-                        <div className="flex-grow">
-                          <CardTitle className="font-headline text-lg">
-                            {tool.name}
-                          </CardTitle>
-                          <CardDescription className="text-sm">
-                            {tool.description}
-                          </CardDescription>
-                        </div>
-                        <ArrowRight className="h-5 w-5 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary" />
-                      </CardHeader>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
+            </div>
+          </Link>
         ))}
-      </Accordion>
+      </div>
     </div>
   );
 }
