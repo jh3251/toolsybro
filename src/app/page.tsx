@@ -12,6 +12,7 @@ import { AdPlaceholder } from '@/components/layout/AdPlaceholder';
 import { ArrowLeft, Heart, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { FeatureHighlights } from '@/components/FeatureHighlights';
 
 const toolColors = [
   'border-blue-500',
@@ -165,6 +166,7 @@ function HomeComponent() {
           </button>
         ))}
       </div>
+      <FeatureHighlights />
       <Card className="bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg">
         <CardHeader className="flex flex-row items-center gap-4">
             <div className="p-3 bg-white/20 rounded-full">
