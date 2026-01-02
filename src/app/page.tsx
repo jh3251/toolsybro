@@ -9,7 +9,7 @@ import { toolCategories } from '@/lib/data';
 import type { ToolCategory } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { AdPlaceholder } from '@/components/layout/AdPlaceholder';
-import { ArrowLeft, Heart } from 'lucide-react';
+import { ArrowLeft, Heart, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -86,26 +86,34 @@ function HomeComponent() {
            </div>
         </header>
 
-        <div className="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {selectedCategory.tools.map((tool, toolIndex) => (
-                <Link href={tool.href} key={tool.name} className="group">
-                <div className={cn(
-                    "h-full rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 p-6 flex flex-col items-center justify-center gap-4 text-center",
-                )}>
-                    <div className={cn("flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full transition-colors duration-300 group-hover:bg-primary", iconBgColors[toolIndex % iconBgColors.length])}>
-                    <tool.icon className={cn("h-8 w-8 transition-colors duration-300 group-hover:text-primary-foreground", iconTextColors[toolIndex % iconTextColors.length])} />
+        <div className="grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {selectedCategory.tools.map((tool, toolIndex) => (
+            <Link href={tool.href} key={tool.name} className="group">
+              <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary">
+                <CardHeader className="flex-row items-center gap-4">
+                  <div
+                    className={cn(
+                      'flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg',
+                      iconBgColors[toolIndex % iconBgColors.length]
+                    )}
+                  >
+                    <tool.icon
+                      className={cn('h-6 w-6', iconTextColors[toolIndex % iconTextColors.length])}
+                    />
+                  </div>
+                  <CardTitle className="font-headline text-lg">{tool.name}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground line-clamp-2">{tool.description}</p>
+                </CardContent>
+                <CardFooter>
+                    <div className="flex items-center text-sm font-semibold text-primary">
+                        Open Tool <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </div>
-                    <div className="flex-grow">
-                    <h3 className="font-bold text-lg tracking-tight font-headline text-foreground">
-                        {tool.name}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                        {tool.description}
-                    </p>
-                    </div>
-                </div>
-                </Link>
-            ))}
+                </CardFooter>
+              </Card>
+            </Link>
+          ))}
         </div>
 
         <div className="flex justify-center pt-8">
