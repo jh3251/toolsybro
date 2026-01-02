@@ -99,21 +99,18 @@ export function QrCodeGenerator() {
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8">
           <div className="space-y-6">
             <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as QrType)} className="w-full">
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
+                <TabsList className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 bg-transparent p-0">
                     {qrTypes.slice(0, 4).map(type => (
-                        <TabsTrigger key={type.id} value={type.id} className="flex-col h-16 gap-1" asChild>
-                             <button className={cn(
-                                "flex flex-col items-center justify-center gap-1 h-16 w-full rounded-md p-2 border transition-colors",
-                                activeTab === type.id
-                                ? "bg-primary text-primary-foreground border-primary"
-                                : "bg-muted hover:bg-muted/80"
-                            )}>
-                                <type.icon className="w-5 h-5"/>
-                                <span className="text-xs">{type.name}</span>
-                            </button>
+                        <TabsTrigger 
+                            key={type.id} 
+                            value={type.id} 
+                            className="flex-col h-16 gap-1 border data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary"
+                        >
+                            <type.icon className="w-5 h-5"/>
+                            <span className="text-xs">{type.name}</span>
                         </TabsTrigger>
                     ))}
-                </div>
+                </TabsList>
 
                 <TabsContent value="link" className="pt-4">
                     <div className="space-y-2">
