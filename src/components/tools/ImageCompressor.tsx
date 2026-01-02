@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useRef, ChangeEvent } from 'react';
@@ -6,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { UploadCloud, FileImage, Trash2, Download } from 'lucide-react';
 import Image from 'next/image';
+import { Progress } from '../ui/progress';
 
 interface ImageFile {
   name: string;
@@ -17,15 +19,18 @@ interface ImageFile {
 export function ImageCompressor() {
   const [image, setImage] = useState<ImageFile | null>(null);
   const [isCompressing, setIsCompressing] = useState(false);
+  const [progress, setProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && file.type.startsWith('image/')) {
       setIsCompressing(true);
+      setProgress(30);
       const reader = new FileReader();
       reader.onloadend = () => {
         // Simulate compression
+        setProgress(70);
         setTimeout(() => {
           const originalSize = file.size;
           // Simulate 40-70% reduction
@@ -36,6 +41,7 @@ export function ImageCompressor() {
             originalSize,
             compressedSize,
           });
+          setProgress(100);
           setIsCompressing(false);
         }, 1000);
       };
@@ -45,6 +51,7 @@ export function ImageCompressor() {
 
   const handleReset = () => {
     setImage(null);
+    setProgress(0);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -71,9 +78,9 @@ export function ImageCompressor() {
   return (
     <Card>
       <CardContent className="pt-6 relative">
-        {!image ? (
+        {!image && !isCompressing ? (
           <div
-            className="flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-lg cursor-pointer hover:border-primary transition-colors"
+            className="flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-lg cursor-pointer hover:border-primary transition-colors min-h-[400px]"
             onClick={() => fileInputRef.current?.click()}
           >
             <UploadCloud className="w-16 h-16 text-muted-foreground" />
@@ -87,57 +94,47 @@ export function ImageCompressor() {
               onChange={handleFileChange}
             />
           </div>
+        ) : (isCompressing || !image) ? (
+            <div className="flex flex-col items-center justify-center min-h-[400px]">
+                <p className='text-lg font-semibold mb-4'>Compressing your image...</p>
+                <Progress value={progress} className="w-full max-w-sm" />
+                <p className='text-muted-foreground text-sm mt-2'>{progress}%</p>
+            </div>
         ) : (
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                 <div className="w-full">
-                    <p className="font-semibold mb-2 text-center">Original</p>
-                    <div className="relative aspect-square w-full">
+                    <p className="font-semibold mb-2 text-center text-muted-foreground">Original</p>
+                    <div className="relative aspect-square w-full bg-muted/30 rounded-lg p-2">
                       <Image
                           src={image.url}
                           alt="Original"
                           fill
-                          className="rounded-lg object-contain"
+                          className="rounded-md object-contain"
                       />
                     </div>
+                     <p className='text-center text-sm font-medium mt-2'>{formatFileSize(image.originalSize)}</p>
                 </div>
                 <div className="w-full">
-                     <p className="font-semibold mb-2 text-center">Compressed (Preview)</p>
-                     <div className="relative aspect-square w-full">
+                     <p className="font-semibold mb-2 text-center text-muted-foreground">Compressed</p>
+                     <div className="relative aspect-square w-full bg-muted/30 rounded-lg p-2">
                       <Image
                           src={image.url}
                           alt="Compressed"
                           fill
-                          className="rounded-lg object-contain"
+                          className="rounded-md object-contain"
                       />
                     </div>
+                     <p className='text-center text-sm font-medium mt-2'>{formatFileSize(image.compressedSize)}</p>
                 </div>
             </div>
 
-            <Card className="bg-muted/50">
-                <CardContent className="p-4">
-                    <div className="flex flex-wrap justify-between items-center text-sm gap-4">
-                        <div className="flex items-center gap-2 truncate">
-                           <FileImage className="w-5 h-5 flex-shrink-0" />
-                           <span className="font-medium truncate">{image.name}</span>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <div className="text-right">
-                                <p className="text-muted-foreground">Original Size</p>
-                                <p className="font-semibold">{formatFileSize(image.originalSize)}</p>
-                            </div>
-                            <div className="text-right text-primary">
-                                <p>Compressed Size</p>
-                                <p className="font-semibold">{formatFileSize(image.compressedSize)}</p>
-                            </div>
-                            <div className="text-right text-green-600 dark:text-green-500">
-                                <p>Reduction</p>
-                                <p className="font-semibold">
-                                    -{((1 - image.compressedSize / image.originalSize) * 100).toFixed(1)}%
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+            <Card className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800">
+                <CardContent className="p-4 text-center">
+                    <p className='text-2xl font-bold text-green-700 dark:text-green-400'>
+                        - {((1 - image.compressedSize / image.originalSize) * 100).toFixed(1)}%
+                    </p>
+                    <p className='text-sm font-medium text-green-600 dark:text-green-500'>Compression Achieved</p>
                 </CardContent>
             </Card>
 
@@ -152,14 +149,6 @@ export function ImageCompressor() {
                 </Button>
             </div>
           </div>
-        )}
-        {isCompressing && (
-             <div className="absolute inset-0 bg-background/80 flex items-center justify-center rounded-lg">
-                <div className="flex items-center gap-2 text-lg">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-                    <span>Compressing...</span>
-                </div>
-            </div>
         )}
       </CardContent>
     </Card>
