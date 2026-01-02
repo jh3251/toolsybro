@@ -15,7 +15,7 @@ export default function ImageCropperPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
-        <Link href="/">
+        <Link href="/?category=Image+Tools">
             <Button variant="outline" size="icon">
                 <ArrowLeft className="h-4 w-4" />
                 <span className="sr-only">Back to Tools</span>
