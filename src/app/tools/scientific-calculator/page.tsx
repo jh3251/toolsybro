@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+import { ScientificCalculator } from '@/components/tools/ScientificCalculator';
 
 export const metadata: Metadata = {
   title: 'Scientific Calculator',
-  description: 'An advanced online scientific calculator for complex calculations.',
+  description: 'An advanced online scientific calculator for complex calculations, including trigonometric, logarithmic, and exponential functions.',
 };
 
 export default function ScientificCalculatorPage() {
@@ -27,7 +27,7 @@ export default function ScientificCalculatorPage() {
             </p>
         </div>
       </header>
-      <AdvancedFeaturePlaceholder title="Scientific Calculator" />
+      <ScientificCalculator />
     </div>
   );
 }
