@@ -9,6 +9,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { ChevronDown } from 'lucide-react';
 
 const toolColors = [
   'border-blue-500',
@@ -55,9 +56,25 @@ export default function Home() {
       <Accordion type="multiple" className="w-full space-y-4" defaultValue={[toolCategories[0].name]}>
         {toolCategories.map((category, categoryIndex) => (
           <AccordionItem value={category.name} key={category.name} className="border-b-0">
-            <AccordionTrigger className="text-2xl font-bold tracking-tight font-headline flex items-center gap-3 bg-card border rounded-lg p-4 hover:no-underline hover:bg-muted/50 transition-colors [&[data-state=open]]:rounded-b-none">
-              <category.icon className="h-7 w-7 text-primary" />
-              <span>{category.name}</span>
+             <AccordionTrigger className={cn(
+                "h-full rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg p-6 flex items-center gap-4 hover:no-underline [&[data-state=open]]:rounded-b-none",
+                "border-t-4",
+                toolColors[categoryIndex % toolColors.length]
+              )}>
+                <div className="flex-1 flex items-start gap-4">
+                    <div className={cn("flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg", iconBgColors[categoryIndex % iconBgColors.length])}>
+                        <category.icon className={cn("h-6 w-6", iconTextColors[categoryIndex % iconTextColors.length])} />
+                    </div>
+                    <div className="text-left">
+                        <h3 className="font-bold text-lg tracking-tight font-headline text-foreground">
+                        {category.name}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mt-1">
+                        Contains {category.tools.length} tools
+                        </p>
+                    </div>
+                </div>
+                <ChevronDown className="h-5 w-5 shrink-0 transition-transform duration-200" />
             </AccordionTrigger>
             <AccordionContent className="border border-t-0 rounded-b-lg bg-card p-6">
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -65,8 +82,6 @@ export default function Home() {
                   <Link href={tool.href} key={tool.name} className="group">
                     <div className={cn(
                       "h-full rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 p-6 flex flex-col items-start gap-4",
-                      "border-t-4",
-                      toolColors[(categoryIndex + toolIndex) % toolColors.length]
                     )}>
                       <div className={cn("flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg", iconBgColors[(categoryIndex + toolIndex) % iconBgColors.length])}>
                         <tool.icon className={cn("h-6 w-6", iconTextColors[(categoryIndex + toolIndex) % iconTextColors.length])} />
