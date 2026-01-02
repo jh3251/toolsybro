@@ -1,3 +1,4 @@
+
 import type { LucideIcon } from 'lucide-react';
 import {
   Calculator,
@@ -236,10 +237,6 @@ export const toolCategories: ToolCategory[] = [
       { name: 'Box Shadow Generator', description: 'Generate CSS box shadows.', href: '/tools/box-shadow-generator', icon: AppWindow },
       { name: 'CSS Button Generator', description: 'Generate CSS for buttons.', href: '/tools/css-button-generator', icon: AppWindow },
       { name: 'Border Radius Generator', description: 'Generate CSS for border radius.', href: '/tools/border-radius-generator', icon: AppWindow },
-      { name: 'SVG Optimizer', description: 'Optimize SVG files.', href: '/tools/svg-optimizer', icon: Scissors },
-      { name: 'Favicon Generator', description: 'Create favicons for your site.', href: '/tools/favicon-generator', icon: Image },
-      { name: 'Icon Converter', description: 'Convert between icon formats.', href: '/tools/icon-converter', icon: ArrowRightLeft },
-      { name: 'Wireframe Generator', description: 'Generate simple wireframes.', href: '/tools/wireframe-generator', icon: Monitor },
     ],
   },
   {
@@ -248,14 +245,8 @@ export const toolCategories: ToolCategory[] = [
     tools: [
       { name: 'Hash Generator (MD5, SHA)', description: 'Generate hashes from text.', href: '/tools/hash-generator', icon: Hash },
       { name: 'Hash Checker', description: 'Compare hashes to check integrity.', href: '/tools/hash-checker', icon: BadgeCheck },
-      { name: 'SSL Checker', description: 'Check the SSL certificate of a site.', href: '/tools/ssl-checker', icon: Lock },
       { name: 'Random Username Generator', description: 'Generate random usernames.', href: '/tools/random-username-generator', icon: User },
-      { name: 'Email Validator', description: 'Validate an email address.', href: '/tools/email-validator', icon: Mail },
-      { name: 'IP Location Finder', description: 'Find the location of an IP address.', href: '/tools/ip-location-finder', icon: LocateFixed },
-      { name: 'Port Checker', description: 'Check if a port is open.', href: '/tools/port-checker', icon: Plug },
       { name: 'User Agent Checker', description: 'Check your browser\'s user agent.', href: '/tools/user-agent-checker', icon: Binary },
-      { name: 'WHOIS Lookup', description: 'Perform a WHOIS lookup.', href: '/tools/whois-lookup', icon: Search },
-      { name: 'Password Leak Checker', description: 'Check if your password was leaked.', href: '/tools/password-leak-checker', icon: FileLock },
     ],
   },
 ];
