@@ -10,6 +10,7 @@ import { AdPlaceholder } from '@/components/layout/AdPlaceholder';
 import { Toaster } from '@/components/ui/toaster';
 import { useEffect, useState } from 'react';
 import { FirebaseClientProvider } from '@/firebase';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -31,6 +32,14 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
+       <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
       <body
         suppressHydrationWarning={true}
         className={cn(
