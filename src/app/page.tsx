@@ -78,7 +78,7 @@ function HomeComponent() {
              <span className="sr-only">Back to Categories</span>
            </Button>
            <div>
-             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight font-headline">
+             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
                {selectedCategory.name}
              </h1>
              <p className="mt-2 text-xl text-muted-foreground">
