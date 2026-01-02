@@ -111,7 +111,7 @@ function HomeComponent() {
     <div className="flex flex-col space-y-8 animate-in fade-in duration-500">
       <section className="text-center">
         <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight font-headline animate-fade-in-down">
-          The Ultimate Suite of Free Online Tools
+          All Your Online Tools, One Platform
         </h1>
       </section>
 
