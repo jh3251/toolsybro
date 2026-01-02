@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+import { PdfPasswordRemover } from '@/components/tools/PdfPasswordRemover';
 
 export const metadata: Metadata = {
   title: 'PDF Password Remover',
-  description: 'An advanced tool to remove passwords from your PDF files. Coming soon!',
+  description: 'Upload a password-protected PDF, provide the password, and download an unlocked version of the file.',
 };
 
 export default function PdfPasswordRemoverPage() {
@@ -27,7 +27,8 @@ export default function PdfPasswordRemoverPage() {
             </p>
         </div>
       </header>
-      <AdvancedFeaturePlaceholder title="PDF Password Remover" />
+      <PdfPasswordRemover />
     </div>
   );
 }
+
