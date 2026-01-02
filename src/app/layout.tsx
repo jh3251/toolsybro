@@ -1,4 +1,6 @@
 
+'use client';
+
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
@@ -7,6 +9,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AdPlaceholder } from '@/components/layout/AdPlaceholder';
 import { Toaster } from '@/components/ui/toaster';
+import { useEffect, useState } from 'react';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -15,6 +18,9 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: '--font-headline',
 });
 
+// Metadata and viewport are not used in a client component, 
+// but we can keep them here for reference or move them to a parent layout if needed.
+/*
 export const metadata: Metadata = {
   title: {
     default: 'MultiToolSuite - Free Online Tools for Everyone',
@@ -37,12 +43,19 @@ export const viewport: Viewport = {
   themeColor: '#4f46e5',
   colorScheme: 'light dark',
 };
+*/
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -67,7 +80,7 @@ export default function RootLayout({
           </div>
           <Footer />
         </div>
-        <Toaster />
+        {isClient && <Toaster />}
       </body>
     </html>
   );
