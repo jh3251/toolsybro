@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { OnlineStopwatch } from '@/components/tools/OnlineStopwatch';
 
 export const metadata: Metadata = {
   title: 'Online Stopwatch',
-  description: 'A placeholder for the Online Stopwatch tool.',
+  description: 'A simple, accurate, and easy-to-use online stopwatch with lap functionality.',
 };
 
-export default function PlaceholderPage() {
+export default function OnlineStopwatchPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Online Stopwatch</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Measure time with precision.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <OnlineStopwatch />
     </div>
   );
 }
