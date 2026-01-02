@@ -25,7 +25,6 @@ import {
   ArrowRightLeft,
   Crop,
   Droplet,
-  FileLock,
   FileSliders,
   FileJson,
   FileCode,
@@ -82,6 +81,7 @@ import {
   RotateCcw,
   Book,
   FileKey2,
+  FileLock,
 } from 'lucide-react';
 
 export type Tool = {
