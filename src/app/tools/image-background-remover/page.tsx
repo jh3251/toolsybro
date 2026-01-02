@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { ImageBackgroundRemover } from '@/components/tools/ImageBackgroundRemover';
 
 export const metadata: Metadata = {
-  title: 'AI Image Background Remover',
-  description: 'Automatically remove the background from any image with a single click using our free AI-powered tool. Get a transparent PNG instantly.',
+  title: 'Image Background Remover',
+  description: 'Remove a color from an image to create a transparent background. Click a color and adjust the tolerance to erase the background.',
 };
 
 export default function ImageBackgroundRemoverPage() {
@@ -21,9 +21,9 @@ export default function ImageBackgroundRemoverPage() {
             </Button>
         </Link>
         <div>
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">AI Image Background Remover</h1>
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Image Background Remover</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            Erase backgrounds with one click.
+            Click a color to make it transparent.
             </p>
         </div>
       </header>
