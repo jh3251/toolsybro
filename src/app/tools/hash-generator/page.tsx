@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { HashGenerator } from '@/components/tools/HashGenerator';
 
 export const metadata: Metadata = {
-  title: 'Hash Generator (MD5, SHA)',
-  description: 'A placeholder for the Hash Generator tool.',
+  title: 'Hash Generator (SHA-256, SHA-512)',
+  description: 'Generate SHA-256, SHA-384, and SHA-512 hashes from any text input securely in your browser.',
 };
 
-export default function PlaceholderPage() {
+export default function HashGeneratorPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -21,20 +21,13 @@ export default function PlaceholderPage() {
             </Button>
         </Link>
         <div>
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Hash Generator (MD5, SHA)</h1>
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Hash Generator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Generate secure hashes from your text.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <HashGenerator />
     </div>
   );
 }
