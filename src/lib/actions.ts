@@ -1,3 +1,4 @@
+
 "use server";
 
 import { z } from "zod";
@@ -27,10 +28,6 @@ export async function submitContactForm(prevState: any, formData: FormData) {
   try {
     const { name, email, message } = validatedFields.data;
 
-    // Here you would typically save to Firestore
-    // For example: await db.collection("contact_messages").add({ name, email, message, createdAt: new Date() });
-    console.log("Simulating save to Firestore:", { name, email, message });
-    
     // Call the GenAI flow to summarize the message
     const { summary } = await summarizeContactFormSubmission({
         name,
