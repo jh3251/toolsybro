@@ -120,7 +120,7 @@ function HomeComponent() {
       <section className="text-center">
         <h2 className="text-3xl font-semibold text-primary mb-2 animate-fade-in-down" style={{ animationDelay: '0.2s' }}>100% Free</h2>
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent animate-fade-in-down">
-          All Your Online Tools, One Platform
+          The Ultimate Suite of Free Online Tools
         </h1>
       </section>
 
@@ -168,7 +168,7 @@ function HomeComponent() {
             </div>
         </CardHeader>
         <CardContent>
-             <Link href="https://www.paypal.com/donate/?business=YOUR_PAYPAL_ID" target="_blank" rel="noopener noreferrer">
+             <Link href="https://www.paypal.com/donate/?business=jhshifat21@gmail.com" target="_blank" rel="noopener noreferrer">
               <Button className="w-full bg-white text-pink-600 hover:bg-white/90 font-bold text-lg py-6 rounded-full shadow-lg transition-transform transform hover:scale-105">
                 Donate Now
               </Button>
