@@ -1,16 +1,16 @@
 
 import type { Metadata } from 'next';
+import { ImageCropper } from '@/components/tools/ImageCropper';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Image Cropper',
-  description: 'A placeholder for the Image Cropper tool.',
+  description: 'Easily crop and cut your images online. Select an area and download your perfectly cropped image.',
 };
 
-export default function PlaceholderPage() {
+export default function ImageCropperPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Image Cropper</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Upload an image to crop it to your desired dimensions.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <ImageCropper />
     </div>
   );
 }
