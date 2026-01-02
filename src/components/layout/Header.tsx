@@ -3,9 +3,17 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { Menu, Wrench } from 'lucide-react';
+import { Menu, Wrench, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { toolCategories } from '@/lib/data';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -38,6 +46,25 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="text-sm font-medium text-white/70 hover:text-white/80 hover:bg-white/10 focus-visible:ring-0">
+                  Tools <ChevronDown className="ml-1 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuGroup>
+                  {toolCategories.map((category) => (
+                    <Link href={`/?category=${encodeURIComponent(category.name)}`} key={category.name}>
+                       <DropdownMenuItem>
+                         <category.icon className="mr-2 h-4 w-4" />
+                         <span>{category.name}</span>
+                       </DropdownMenuItem>
+                    </Link>
+                  ))}
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
           <div className="md:hidden">
             <Sheet>
@@ -70,6 +97,17 @@ export function Header() {
                       {link.label}
                     </Link>
                   ))}
+                   <p className='font-bold text-lg text-foreground pt-4'>Tools</p>
+                    {toolCategories.map((category) => (
+                      <Link
+                        key={category.name}
+                        href={`/?category=${encodeURIComponent(category.name)}`}
+                        className='flex w-full items-center py-2 text-md font-medium text-muted-foreground hover:text-primary'
+                      >
+                        <category.icon className="mr-2 h-4 w-4" />
+                        {category.name}
+                      </Link>
+                    ))}
                 </div>
               </SheetContent>
             </Sheet>

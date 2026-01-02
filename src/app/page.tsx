@@ -1,7 +1,9 @@
+
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { toolCategories } from '@/lib/data';
 import type { ToolCategory } from '@/lib/data';
 import { cn } from '@/lib/utils';
@@ -42,14 +44,27 @@ const iconTextColors = [
   'text-teal-500',
 ];
 
-export default function Home() {
+function HomeComponent() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get('category');
   const [selectedCategory, setSelectedCategory] = useState<ToolCategory | null>(null);
+
+  useEffect(() => {
+    if (categoryParam) {
+      const category = toolCategories.find(c => c.name === decodeURIComponent(categoryParam));
+      if (category) {
+        setSelectedCategory(category);
+      }
+    } else {
+        setSelectedCategory(null);
+    }
+  }, [categoryParam]);
 
   if (selectedCategory) {
     return (
       <div className="flex flex-col space-y-8 animate-in fade-in duration-500">
         <header className="flex items-center gap-4">
-           <Button variant="outline" size="icon" onClick={() => setSelectedCategory(null)}>
+           <Button variant="outline" size="icon" onClick={() => window.history.pushState(null, '', '/')}>
              <ArrowLeft className="h-4 w-4" />
              <span className="sr-only">Back to Categories</span>
            </Button>
@@ -137,4 +152,12 @@ export default function Home() {
       </div>
     </div>
   );
+}
+
+export default function Home() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <HomeComponent />
+        </Suspense>
+    )
 }
