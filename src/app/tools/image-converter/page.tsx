@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { ImageConverter } from '@/components/tools/ImageConverter';
 
 export const metadata: Metadata = {
   title: 'Image Converter',
-  description: 'A placeholder for the Image Converter tool.',
+  description: 'Convert images between JPG, PNG, and WEBP formats online for free. Fast, easy, and secure.',
 };
 
-export default function PlaceholderPage() {
+export default function ImageConverterPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Image Converter</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Easily convert your images to JPG, PNG, or WEBP.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <ImageConverter />
     </div>
   );
 }
