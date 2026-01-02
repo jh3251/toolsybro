@@ -153,7 +153,7 @@ export function ImageBackgroundRemover() {
                 <Download className="mr-2" /> Download Result
               </Button>
               <Button variant="outline" onClick={handleReset}>
-                <Trash2 className="mr-2" /> Start Over
+                <Trash2 className="mr-2" /> New Image
               </Button>
             </div>
           </div>
