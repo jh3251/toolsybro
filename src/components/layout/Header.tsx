@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { Menu, Wrench, ChevronDown, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toolCategories } from '@/lib/data';
+import { ThemeToggle } from './ThemeToggle';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -26,21 +27,21 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-          <Wrench className="h-7 w-7" />
-          <span className="font-headline hidden sm:inline-block">MultiToolSuite</span>
+          <Wrench className="h-7 w-7 text-primary" />
+          <span className="font-headline hidden sm:inline-block text-foreground">MultiToolSuite</span>
         </Link>
-        <div className="flex flex-1 items-center justify-end gap-2 sm:gap-6">
-          <nav className="hidden items-center gap-6 md:flex">
+        <div className="flex flex-1 items-center justify-end gap-2 sm:gap-4">
+          <nav className="hidden items-center gap-4 md:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  'text-sm font-medium transition-colors hover:text-white/80',
-                  pathname === link.href ? 'text-white font-semibold' : 'text-white/70'
+                  'text-sm font-medium transition-colors hover:text-primary',
+                  pathname === link.href ? 'text-primary' : 'text-muted-foreground'
                 )}
               >
                 {link.label}
@@ -48,7 +49,7 @@ export function Header() {
             ))}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="text-sm font-medium text-white/70 hover:text-white/80 hover:bg-white/10 focus-visible:ring-0">
+                <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:text-primary focus-visible:ring-0">
                   Tools <ChevronDown className="ml-1 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -67,15 +68,16 @@ export function Header() {
             </DropdownMenu>
           </nav>
             <Link href="https://www.paypal.com/donate/?business=introcarditaly@gmail.com" target="_blank" rel="noopener noreferrer">
-              <Button className="bg-pink-500 hover:bg-pink-600 text-white rounded-full shadow-lg transition-transform transform hover:scale-105">
+              <Button className="bg-pink-500 hover:bg-pink-600 text-white rounded-full shadow-lg transition-transform transform hover:scale-105 hidden sm:inline-flex">
                 <Heart className="mr-2 h-4 w-4" />
                 Donate
               </Button>
             </Link>
+            <ThemeToggle />
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="hover:bg-white/10 text-white">
+                <Button variant="ghost" size="icon" className="hover:bg-accent text-foreground">
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Toggle Menu</span>
                 </Button>

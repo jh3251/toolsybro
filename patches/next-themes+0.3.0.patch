@@ -1,0 +1,28 @@
+diff --git a/node_modules/next-themes/dist/index.js b/node_modules/next-themes/dist/index.js
+index 7208ff9..d511993 100644
+--- a/node_modules/next-themes/dist/index.js
++++ b/node_modules/next-themes/dist/index.js
+@@ -10,7 +10,7 @@ const useTheme = () => {
+   const context = React.useContext(ThemeContext);
+   if (context === void 0) {
+     throw new Error("useTheme must be used within a ThemeProvider");
+-  }
++  };
+   return context;
+ };
+ const ThemeProvider = (props) => {
+diff --git a/node_modules/next-themes/package.json b/node_modules/next-themes/package.json
+index 321f66d..108a70c 100644
+--- a/node_modules/next-themes/package.json
++++ b/node_modules/next-themes/package.json
+@@ -34,7 +34,7 @@
+     "access": "public"
+   },
+   "peerDependencies": {
+-    "react": "^16.8 || ^17 || ^18",
+-    "react-dom": "^16.8 || ^17 || ^18"
++    "react": "^16.8 || ^17 || ^18 || ^19",
++    "react-dom": "^16.8 || ^17 || ^18 || ^19"
+   }
+ }
+\ No newline at end of file
