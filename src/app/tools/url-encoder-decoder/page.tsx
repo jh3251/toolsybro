@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { EncoderDecoder } from '@/components/tools/EncoderDecoder';
 
 export const metadata: Metadata = {
   title: 'URL Encoder / Decoder',
-  description: 'A placeholder for the URL Encoder / Decoder tool.',
+  description: 'Easily encode text for use in URLs or decode a URL-encoded string back to text.',
 };
 
-export default function PlaceholderPage() {
+export default function UrlEncoderDecoderPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">URL Encoder / Decoder</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Convert text to and from URL-safe format.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <EncoderDecoder type="url" />
     </div>
   );
 }

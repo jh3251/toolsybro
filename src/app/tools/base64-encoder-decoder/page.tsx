@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { EncoderDecoder } from '@/components/tools/EncoderDecoder';
 
 export const metadata: Metadata = {
   title: 'Base64 Encoder / Decoder',
-  description: 'A placeholder for the Base64 Encoder / Decoder tool.',
+  description: 'Easily encode text to Base64 or decode a Base64 string back to text.',
 };
 
-export default function PlaceholderPage() {
+export default function Base64EncoderDecoderPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Base64 Encoder / Decoder</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Convert text to and from Base64 encoding.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <EncoderDecoder type="base64" />
     </div>
   );
 }

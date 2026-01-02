@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { CodeMinifier } from '@/components/tools/CodeMinifier';
 
 export const metadata: Metadata = {
   title: 'HTML Minifier',
-  description: 'A placeholder for the HTML Minifier tool.',
+  description: 'Paste your HTML code to minify it, reducing file size and improving performance.',
 };
 
-export default function PlaceholderPage() {
+export default function HtmlMinifierPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">HTML Minifier</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Reduce the size of your HTML files for faster web performance.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <CodeMinifier language='html' />
     </div>
   );
 }
