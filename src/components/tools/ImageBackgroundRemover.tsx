@@ -51,9 +51,16 @@ export function ImageBackgroundRemover() {
         description: 'The AI has successfully removed the background.',
       });
     } catch (error: any) {
+      let description = 'The background removal failed. Please try again.';
+      if (typeof error.message === 'string' && (error.message.includes('429') || error.message.toLowerCase().includes('quota'))) {
+        description = 'You have exceeded your request limit for the AI model. Please check your plan and billing details or try again later.';
+      } else if (error.message) {
+        description = error.message;
+      }
+      
       toast({
         title: 'AI Error',
-        description: error.message || 'The background removal failed. Please try again.',
+        description: description,
         variant: 'destructive',
       });
     } finally {
