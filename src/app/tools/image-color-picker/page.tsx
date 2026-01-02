@@ -1,28 +1,21 @@
 import type { Metadata } from 'next';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ImageColorPicker } from '@/components/tools/ImageColorPicker';
 
 export const metadata: Metadata = {
   title: 'Image Color Picker',
-  description: 'A placeholder for the Image Color Picker tool.',
+  description: 'Upload an image to pick colors, get HEX and RGB values, and generate a color palette.',
 };
 
-export default function PlaceholderPage() {
+export default function ImageColorPickerPage() {
   return (
     <div className="space-y-8">
       <header>
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Image Color Picker</h1>
         <p className="mt-4 text-xl text-muted-foreground">
-          This tool is coming soon!
+          Extract colors and palettes from any image.
         </p>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <ImageColorPicker />
     </div>
   );
 }
