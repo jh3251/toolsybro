@@ -1,28 +1,21 @@
 import type { Metadata } from 'next';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { TextToSpeech } from '@/components/tools/TextToSpeech';
 
 export const metadata: Metadata = {
-  title: 'Text to Speech',
-  description: 'A placeholder for the Text to Speech tool.',
+  title: 'Text to Speech Converter',
+  description: 'Convert written text into natural-sounding speech online for free. Choose from various voices and adjust speed and pitch.',
 };
 
-export default function PlaceholderPage() {
+export default function TextToSpeechPage() {
   return (
     <div className="space-y-8">
       <header>
-        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Text to Speech</h1>
+        <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl font-headline">Text to Speech</h1>
         <p className="mt-4 text-xl text-muted-foreground">
-          This tool is coming soon!
+          Listen to your text. Convert any writing into high-quality audio.
         </p>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <TextToSpeech />
     </div>
   );
 }

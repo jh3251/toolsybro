@@ -1,28 +1,21 @@
 import type { Metadata } from 'next';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ParagraphCounter } from '@/components/tools/ParagraphCounter';
 
 export const metadata: Metadata = {
   title: 'Paragraph Counter',
-  description: 'A placeholder for the Paragraph Counter tool.',
+  description: 'Count paragraphs in your text with our free online tool.',
 };
 
-export default function PlaceholderPage() {
+export default function ParagraphCounterPage() {
   return (
     <div className="space-y-8">
       <header>
-        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Paragraph Counter</h1>
+        <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl font-headline">Paragraph Counter</h1>
         <p className="mt-4 text-xl text-muted-foreground">
-          This tool is coming soon!
+          Quickly count the number of paragraphs in any block of text.
         </p>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <ParagraphCounter />
     </div>
   );
 }

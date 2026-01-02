@@ -1,28 +1,21 @@
 import type { Metadata } from 'next';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { SentenceCounter } from '@/components/tools/SentenceCounter';
 
 export const metadata: Metadata = {
   title: 'Sentence Counter',
-  description: 'A placeholder for the Sentence Counter tool.',
+  description: 'Count sentences in your text with our free online tool.',
 };
 
-export default function PlaceholderPage() {
+export default function SentenceCounterPage() {
   return (
     <div className="space-y-8">
       <header>
-        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Sentence Counter</h1>
+        <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl font-headline">Sentence Counter</h1>
         <p className="mt-4 text-xl text-muted-foreground">
-          This tool is coming soon!
+          Easily count the number of sentences in your text.
         </p>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <SentenceCounter />
     </div>
   );
 }
