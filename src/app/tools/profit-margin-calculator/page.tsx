@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { ProfitMarginCalculator } from '@/components/tools/ProfitMarginCalculator';
 
 export const metadata: Metadata = {
   title: 'Profit Margin Calculator',
-  description: 'A placeholder for the Profit Margin Calculator tool.',
+  description: 'Calculate your profit margin, gross profit, and markup percentage based on cost and revenue. An essential tool for businesses to measure profitability.',
 };
 
-export default function PlaceholderPage() {
+export default function ProfitMarginCalculatorPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Profit Margin Calculator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Easily calculate your business's profitability.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <ProfitMarginCalculator />
     </div>
   );
 }
