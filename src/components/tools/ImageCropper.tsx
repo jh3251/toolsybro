@@ -155,7 +155,7 @@ export function ImageCropper() {
                 <div className="flex justify-center bg-muted/50 p-4 rounded-lg">
                     <ReactCrop
                         crop={crop}
-                        onChange={c => setCrop(c)}
+                        onChange={(c, percentCrop) => setCrop(c)}
                         onComplete={(c) => setCompletedCrop(c)}
                         aspect={aspect}
                         className="max-h-[60vh]"
@@ -170,7 +170,7 @@ export function ImageCropper() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                     <Button onClick={handleDownload} disabled={!completedCrop}>
-                        <Download className="mr-2 h-4 w-4" /> Download Cropped Image
+                        <CropIcon className="mr-2 h-4 w-4" /> Download Cropped Image
                     </Button>
                     <Button variant="outline" onClick={handleReset}>
                         <Trash2 className="mr-2 h-4 w-4" /> Clear Image
@@ -198,7 +198,7 @@ export function ImageCropper() {
                         </select>
                     </div>
                      <Button onClick={handleApplyCustomSize} disabled={!customWidth || !customHeight} className="w-full">
-                        <CropIcon className="mr-2 h-4 w-4" /> Apply Custom Size
+                        Apply Custom Size
                     </Button>
                     <p className="text-xs text-muted-foreground">Note: 'cm' is based on a standard 96 DPI screen resolution.</p>
                 </div>
