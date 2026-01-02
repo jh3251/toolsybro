@@ -63,7 +63,7 @@ export function WordCounter() {
         <Textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Start typing or paste your text here..."
+          placeholder="Start typing or paste your text here to access our free tools..."
           className="min-h-[400px] text-base"
         />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -97,7 +97,7 @@ export function WordCounter() {
               </div>
             ) : (
               <div className="flex items-center justify-center h-full text-center text-muted-foreground">
-                <p>Type more than 20 characters to get AI insights about your text.</p>
+                <p>Type more than 20 characters to get AI insights about your text from our free tools.</p>
               </div>
             )}
           </CardContent>

@@ -2,8 +2,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
-  description: 'Our Privacy Policy for MultiToolSuite.',
+  title: 'Privacy Policy | ToolsyBro',
+  description: 'Our Privacy Policy for ToolsyBro and our collection of free tools.',
 };
 
 export default function PrivacyPolicyPage() {

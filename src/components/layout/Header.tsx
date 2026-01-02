@@ -31,7 +31,7 @@ export function Header() {
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2 font-bold text-xl">
           <Wrench className="h-7 w-7 text-primary" />
-          <span className="font-headline hidden sm:inline-block text-foreground">MultiToolSuite</span>
+          <span className="font-headline hidden sm:inline-block text-foreground">ToolsyBro</span>
         </Link>
         <div className="flex flex-1 items-center justify-end gap-2 sm:gap-4">
           <nav className="hidden items-center gap-4 md:flex">
@@ -50,7 +50,7 @@ export function Header() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:text-primary focus-visible:ring-0">
-                  Tools <ChevronDown className="ml-1 h-4 w-4" />
+                  Free Tools <ChevronDown className="ml-1 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
@@ -89,7 +89,7 @@ export function Header() {
                     className="flex items-center gap-2 font-bold text-lg text-foreground"
                   >
                     <Wrench className="h-6 w-6 text-primary" />
-                    <span className="font-headline">MultiToolSuite</span>
+                    <span className="font-headline">ToolsyBro</span>
                   </Link>
                   {navLinks.map((link) => (
                     <Link
@@ -105,7 +105,7 @@ export function Header() {
                       {link.label}
                     </Link>
                   ))}
-                   <p className='font-bold text-lg text-foreground pt-4'>Tools</p>
+                   <p className='font-bold text-lg text-foreground pt-4'>Free Tools</p>
                     {toolCategories.map((category) => (
                       <Link
                         key={category.name}

@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { ContactForm } from '@/components/ContactForm';
 
 export const metadata: Metadata = {
-  title: 'Contact Us',
-  description: 'Get in touch with the MultiToolSuite team. We welcome your feedback, suggestions, and inquiries.',
+  title: 'Contact ToolsyBro',
+  description: 'Get in touch with the ToolsyBro team. We welcome your feedback, suggestions, and inquiries about our free tools.',
 };
 
 export default function ContactPage() {

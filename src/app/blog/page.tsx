@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 import { ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Blog',
+  title: 'ToolsyBro Blog | Tips & Tricks for Free Tools',
   description: 'Articles, tips, and tutorials on productivity and using our free online tools to their full potential.',
 };
 
@@ -20,10 +20,10 @@ export default function BlogPage() {
     <div className="space-y-12">
       <header className="text-center">
         <h1 className="text-4xl font-extrabold tracking-tighter sm:text-6xl font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-          The MultiToolSuite Blog
+          The ToolsyBro Blog
         </h1>
         <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
-          Tips, tutorials, and insights on productivity and web tools to help you work smarter.
+          Tips, tutorials, and insights on productivity and using our free tools to work smarter.
         </p>
       </header>
 

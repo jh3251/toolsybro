@@ -2,8 +2,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms & Conditions',
-  description: 'Our Terms & Conditions for MultiToolSuite.',
+  title: 'Terms & Conditions | ToolsyBro',
+  description: 'Our Terms & Conditions for using ToolsyBro and its free tools.',
 };
 
 export default function TermsAndConditionsPage() {
@@ -25,7 +25,7 @@ export default function TermsAndConditionsPage() {
         </p>
         <h2 className="text-3xl font-bold font-headline text-foreground">Intellectual Property</h2>
         <p>
-          The Site and its original content, features, and functionality are owned by MultiToolSuite and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.
+          The Site and its original content, features, and functionality are owned by ToolsyBro and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.
         </p>
         <h2 className="text-3xl font-bold font-headline text-foreground">Termination</h2>
         <p>

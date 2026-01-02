@@ -17,7 +17,7 @@ export function Footer() {
         </div>
         <div className="flex flex-col items-center justify-between gap-4 border-t py-6 sm:flex-row">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} MultiToolSuite. All rights reserved.
+            © {new Date().getFullYear()} ToolsyBro. All rights reserved.
           </p>
           <nav className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             {footerLinks.map(link => (

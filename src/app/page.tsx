@@ -126,7 +126,7 @@ function HomeComponent() {
   return (
     <div className="flex flex-col space-y-8 animate-in fade-in duration-500">
       <section className="text-center">
-        <h2 className="text-3xl font-semibold text-primary mb-2 animate-fade-in-down" style={{ animationDelay: '0.2s' }}>100% Free</h2>
+        <h2 className="text-3xl font-semibold text-primary mb-2 animate-fade-in-down" style={{ animationDelay: '0.2s' }}>100% Free Tools</h2>
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent animate-fade-in-down">
           The Ultimate Suite of Free Online Tools
         </h1>
@@ -159,7 +159,7 @@ function HomeComponent() {
                 {category.name}
               </h3>
               <p className="text-sm text-muted-foreground mt-1 transition-all group-hover:scale-105 group-hover:text-primary">
-                Contains {category.tools.length} tools
+                Contains {category.tools.length} free tools
               </p>
             </div>
           </button>
@@ -172,7 +172,7 @@ function HomeComponent() {
             </div>
             <div>
                 <CardTitle>Support Our Mission</CardTitle>
-                <CardDescription className="text-white/80">Enjoying the free tools? Consider supporting the site!</CardDescription>
+                <CardDescription className="text-white/80">Enjoying our free tools? Consider supporting the site!</CardDescription>
             </div>
         </CardHeader>
         <CardContent>
