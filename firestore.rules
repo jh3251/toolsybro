@@ -1,0 +1,192 @@
+/**
+ * @fileoverview Firestore Security Rules for the MultiToolSuite application.
+ *
+ * @description
+ * This ruleset establishes a robust security model for the application,
+ * balancing user privacy with public content accessibility. It is designed
+ * for rapid prototyping, strictly enforcing authorization while remaining
+ * flexible on data schemas.
+ *
+ * @philosophy
+ * Core Philosophy: A strict user-ownership model is enforced for all personal
+ * data (e.g., user profiles, notes), ensuring users can only access their
+ * own information. Publicly shared content (e.g., tools, blog posts) is
+ * readable by anyone, but write access is restricted to the content creators
+ * or will require future administrative roles.
+ *
+ * @structure
+ * Data Structure: Private user data is hierarchically organized under the
+ * /users/{userId} path. This structural segregation provides a clear and
+ * secure boundary for access control. Public data, such as /tools and
+ * /blog_posts, resides in top-level collections for efficient public querying.
+ *
+ * @decisions
+ * Key Security Decisions:
+ * 1. User Enumeration Blocked: Listing the top-level /users collection is
+ *    explicitly forbidden to protect user privacy.
+ * 2. Path-Based Ownership: The /users/{userId}/... structure is the primary
+ *    mechanism for authorization, making rules simple, performant, and secure.
+ * 3. Segregated Collections: Public and private data are stored in separate
+ *    collections (e.g., /blog_posts vs. /users/{userId}/notes) to prevent
+ *    insecure list queries and simplify rules.
+ * 4. Secure Defaults: For features requiring administrative privileges not
+ *    yet defined (e.g., editing tools), writes are disabled with a TODO note,
+ *    defaulting to the most secure posture.
+ * 5. Write-Only Collection: The /contact_messages collection is designed to be
+ *    write-only for the public, protecting submitted messages from being read
+ *    by other users.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // -------------------------------------------------------------------------
+    // Helper Functions
+    // -------------------------------------------------------------------------
+
+    /**
+     * Checks if the user is authenticated.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * Checks if the authenticated user's UID matches the provided userId.
+     * This is the foundation of the user-ownership model.
+     * @param userId The user ID to check against the authenticated user.
+     */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    /**
+     * Checks if the document being accessed already exists.
+     * Crucial for secure update and delete operations.
+     */
+    function isExistingDoc() {
+      return resource != null;
+    }
+
+    /**
+     * A secure convenience function that combines an ownership check with an
+     * existence check. Prevents changing or deleting non-existent documents.
+     * @param userId The user ID to check for ownership.
+     */
+    function isExistingOwner(userId) {
+      return isOwner(userId) && isExistingDoc();
+    }
+
+    // -------------------------------------------------------------------------
+    // User Data Rules (/users)
+    // -------------------------------------------------------------------------
+
+    /**
+     * @description Controls access to user profile documents. A user can create
+     *   their own profile and can only read, update, or delete their own data.
+     * @path /users/{userId}
+     * @allow A signed-in user (auth.uid: 'user123') can (create) their own
+     *   profile at /users/user123.
+     * @deny An anonymous user cannot read any user profile.
+     * @deny User 'user123' cannot (get) or (list) any profiles, including
+     *   their own, to prevent user enumeration. The rule requires a direct get
+     *   of a specific user ID. Listing the collection is explicitly denied.
+     * @principle Restricts access to a user's own data tree and prevents
+     *   user enumeration.
+     */
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow list: if false;
+      allow create: if isOwner(userId) && request.resource.data.id == userId;
+      allow update: if isExistingOwner(userId) && request.resource.data.id == resource.data.id;
+      allow delete: if isExistingOwner(userId);
+    }
+
+    /**
+     * @description Secures the notes subcollection for each user. Only the
+     *   user who owns the data tree can perform any action on their notes.
+     * @path /users/{userId}/notes/{noteId}
+     * @allow A signed-in user (auth.uid: 'user123') can (create), (list),
+     *   and (delete) notes under their own path /users/user123/notes.
+     * @deny User 'user456' cannot read, write, or list notes under
+     *   /users/user123/notes.
+     * @principle Enforces strict data ownership within a user-specific
+     *   subcollection using path-based security.
+     */
+    match /users/{userId}/notes/{noteId} {
+      allow get: if isOwner(userId);
+      allow list: if isOwner(userId);
+      allow create: if isOwner(userId) && request.resource.data.userId == userId;
+      allow update: if isExistingOwner(userId) && request.resource.data.userId == resource.data.userId;
+      allow delete: if isExistingOwner(userId);
+    }
+
+    // -------------------------------------------------------------------------
+    // Public Content Rules (/tools, /blog_posts)
+    // -------------------------------------------------------------------------
+
+    /**
+     * @description Manages access to the global list of tools. This data is
+     *   intended to be public for all users to read.
+     * @path /tools/{toolId}
+     * @allow Any user, including anonymous ones, can (get) or (list) all
+     *   documents in the /tools collection.
+     * @deny No user can (create), (update), or (delete) a tool.
+     * @principle Provides public read-only access. Write operations are disabled
+     *   pending the implementation of a secure admin role system.
+     */
+    match /tools/{toolId} {
+      allow get: if true;
+      allow list: if true;
+      // CRITICAL: Cannot implement admin-only writes without an admin role definition.
+      // The 'Tool' entity is missing an 'ownerId' or similar field for authorization.
+      allow create: if false; // TODO: Add admin validation once an admin role is defined in the User schema.
+      allow update: if false; // TODO: Add admin validation once an admin role is defined in the User schema.
+      allow delete: if false; // TODO: Add admin validation once an admin role is defined in the User schema.
+    }
+
+    /**
+     * @description Manages access to public blog posts. Anyone can read them,
+     *   but only the authenticated author can create, update, or delete their
+     *   own posts.
+     * @path /blog_posts/{blogPostId}
+     * @allow Any user, signed-in or not, can (get) or (list) blog posts.
+     * @allow An authenticated user (auth.uid: 'author123') can (create) a post
+     *   if the post data includes `authorId: 'author123'`.
+     * @deny A user cannot (update) or (delete) a post they did not author.
+     * @principle Implements a "Public Read with Owner-Only Writes" pattern,
+     *   enforcing content ownership for all write operations.
+     */
+    match /blog_posts/{blogPostId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isSignedIn() && request.resource.data.authorId == request.auth.uid;
+      allow update: if isExistingOwner(resource.data.authorId) && request.resource.data.authorId == resource.data.authorId;
+      allow delete: if isExistingOwner(resource.data.authorId);
+    }
+
+    // -------------------------------------------------------------------------
+    // Write-Only Rules (/contact_messages)
+    // -------------------------------------------------------------------------
+
+    /**
+     * @description A write-only collection for contact form submissions. Anyone
+     *   can submit a message, but no one can read, update, or delete them via
+     *   the client.
+     * @path /contact_messages/{messageId}
+     * @allow Any user, including anonymous ones, can (create) a new contact
+     *   message.
+     * @deny No user, not even the creator, can (get), (list), (update), or
+     *   (delete) any message.
+     * @principle Creates a secure "dropbox" where data can be submitted but not
+     *   viewed or modified, protecting privacy.
+     */
+    match /contact_messages/{messageId} {
+      allow create: if true;
+      allow get: if false; // TODO: Add admin role check to allow admins to read messages.
+      allow list: if false; // TODO: Add admin role check to allow admins to list messages.
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+}

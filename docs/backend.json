@@ -1,0 +1,301 @@
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the MultiToolSuite application.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "email": {
+          "type": "string",
+          "description": "User's email address.",
+          "format": "email"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User's display name."
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "URL of the user's profile photo.",
+          "format": "uri"
+        },
+        "creationTime": {
+          "type": "string",
+          "description": "Timestamp of when the user account was created.",
+          "format": "date-time"
+        },
+        "lastSignInTime": {
+          "type": "string",
+          "description": "Timestamp of the user's last sign-in.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "email"
+      ]
+    },
+    "Tool": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Tool",
+      "type": "object",
+      "description": "Represents a tool available on the MultiToolSuite application.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the tool."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the tool."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the tool."
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the tool.",
+          "format": "uri"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the tool."
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "Timestamp of when the tool was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "url",
+        "category"
+      ]
+    },
+    "BlogPost": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "BlogPost",
+      "type": "object",
+      "description": "Represents a blog post on the MultiToolSuite application.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the blog post."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the blog post."
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the blog post."
+        },
+        "authorId": {
+          "type": "string",
+          "description": "Reference to User. (Relationship: User 1:N BlogPost)"
+        },
+        "publicationDate": {
+          "type": "string",
+          "description": "Date when the blog post was published.",
+          "format": "date-time"
+        },
+        "tags": {
+          "type": "array",
+          "description": "tags for the blog post",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "content",
+        "authorId",
+        "publicationDate"
+      ]
+    },
+    "ContactMessage": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ContactMessage",
+      "type": "object",
+      "description": "Represents a contact message submitted through the contact form.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the contact message."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the person submitting the message."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the person submitting the message.",
+          "format": "email"
+        },
+        "message": {
+          "type": "string",
+          "description": "Content of the contact message."
+        },
+        "submissionDate": {
+          "type": "string",
+          "description": "Timestamp of when the message was submitted.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "message",
+        "submissionDate"
+      ]
+    },
+    "Note": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Note",
+      "type": "object",
+      "description": "Represents a single note created by a user.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the note."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to User. (Relationship: User 1:N Note) The ID of the user who created this note."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the note."
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the note."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp of when the note was created.",
+          "format": "date-time"
+        },
+        "lastModified": {
+          "type": "string",
+          "description": "Timestamp of when the note was last modified.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "title",
+        "content",
+        "createdAt",
+        "lastModified"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Collection of user profiles.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/notes/{noteId}",
+        "definition": {
+          "entityName": "Note",
+          "schema": {
+            "$ref": "#/backend/entities/Note"
+          },
+          "description": "Collection of notes for each user. Authorization is based on the userId matching the request.auth.uid.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user."
+            },
+            {
+              "name": "noteId",
+              "description": "The unique identifier of the note."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/tools/{toolId}",
+        "definition": {
+          "entityName": "Tool",
+          "schema": {
+            "$ref": "#/backend/entities/Tool"
+          },
+          "description": "Collection of tools available on the platform. Public read access, admin-only write access.",
+          "params": [
+            {
+              "name": "toolId",
+              "description": "The unique identifier of the tool."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/blog_posts/{blogPostId}",
+        "definition": {
+          "entityName": "BlogPost",
+          "schema": {
+            "$ref": "#/backend/entities/BlogPost"
+          },
+          "description": "Collection of blog posts. Public read access, admin-only write access.",
+          "params": [
+            {
+              "name": "blogPostId",
+              "description": "The unique identifier of the blog post."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/contact_messages/{messageId}",
+        "definition": {
+          "entityName": "ContactMessage",
+          "schema": {
+            "$ref": "#/backend/entities/ContactMessage"
+          },
+          "description": "Collection of contact messages. Public creation, admin-only read access.",
+          "params": [
+            {
+              "name": "messageId",
+              "description": "The unique identifier of the contact message."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore data structure is designed to support the MultiToolSuite application, emphasizing security, scalability, and ease of debugging.  The structure adheres to the core design principles of Authorization Independence, Clarity of Intent, DBAC (Database-Based Access Control), QAPs (Rules are not Filters), and Invariants.\n\n**Authorization Independence:**  Path-based ownership (`/users/{userId}/notes/{noteId}`) inherently provides Authorization Independence, as access control rules can be based solely on the path and the `request.auth.uid` without requiring `get()` calls to parent documents.  There is no need to denormalize any data for ownership because the ownership is built into the structure of the data paths.\n\n**QAPs (Rules are not Filters):**  The segregation of user-specific data into `/users/{userId}/notes/{noteId}` ensures secure `list` operations.  A user can only list notes under their own user ID, preventing unauthorized access to other users' notes. Public data (tools, blog posts) will use separate collections to avoid mixing access requirements and enabling QAPs.\n\n**Structure and Rationale:**\n*   `/users/{userId}/notes/{noteId}`:  Each user has their own collection of notes. This structure provides clear ownership and avoids the need for complex queries or security rules to determine access.  Authorization is based solely on the `userId` path parameter matching the `request.auth.uid`.\n\n*   `/tools/{toolId}`:  A collection of tools available on the platform.  These are global and accessible, so no user-specific data is mixed in.  Authorization is separate, likely public read access with admin-only write access.\n\n*   `/blog_posts/{blogPostId}`:  A collection of blog posts. Like tools, these are global and publicly accessible with restricted write access.\n\n*   `/contact_messages/{messageId}`: A collection of contact messages.  Creation will be public, but reading should be restricted to administrators. \n\nThe design prioritizes path-based ownership for user-generated content (notes) and segregates public data (tools, blog posts) into separate collections.  This segregation simplifies security rules and ensures QAPs. The structure promotes clear authorization intent, debuggability, and adherence to the core design principles."
+  }
+}
