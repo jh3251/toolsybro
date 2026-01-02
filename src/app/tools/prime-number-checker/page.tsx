@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { PrimeNumberChecker } from '@/components/tools/PrimeNumberChecker';
 
 export const metadata: Metadata = {
   title: 'Prime Number Checker',
-  description: 'A placeholder for the Prime Number Checker tool.',
+  description: 'Check if a number is a prime number with this free online tool.',
 };
 
-export default function PlaceholderPage() {
+export default function PrimeNumberCheckerPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Prime Number Checker</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Instantly determine if a number is prime.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <PrimeNumberChecker />
     </div>
   );
 }
