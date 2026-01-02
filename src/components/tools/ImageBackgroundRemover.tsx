@@ -38,13 +38,13 @@ export function ImageBackgroundRemover() {
   };
 
   const handleRemoveBackground = async () => {
-    if (!originalImageUrl) return;
+    if (!originalImageUrl || !originalImage) return;
 
     setIsLoading(true);
     setResultImageUrl(''); // Clear previous result
 
     try {
-      const result = await removeImageBackground({ imageDataUri: originalImageUrl });
+      const result = await removeImageBackground({ imageDataUri: originalImageUrl, contentType: originalImage.type });
       setResultImageUrl(result.resultDataUri);
       toast({
         title: 'Background Removed!',
