@@ -57,10 +57,20 @@ export function ImageCompressor() {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
+  
+  const handleDownload = () => {
+    if (!image) return;
+    const link = document.createElement('a');
+    link.href = image.url;
+    link.download = `compressed-${image.name}`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 
   return (
     <Card>
-      <CardContent className="pt-6">
+      <CardContent className="pt-6 relative">
         {!image ? (
           <div
             className="flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-lg cursor-pointer hover:border-primary transition-colors"
@@ -79,35 +89,37 @@ export function ImageCompressor() {
           </div>
         ) : (
           <div className="space-y-6">
-            <div className="flex flex-col md:flex-row gap-6 items-center">
-                <div className="w-full md:w-1/2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                <div className="w-full">
                     <p className="font-semibold mb-2 text-center">Original</p>
-                    <Image
-                        src={image.url}
-                        alt="Original"
-                        width={400}
-                        height={400}
-                        className="rounded-lg object-contain w-full h-auto"
-                    />
+                    <div className="relative aspect-square w-full">
+                      <Image
+                          src={image.url}
+                          alt="Original"
+                          fill
+                          className="rounded-lg object-contain"
+                      />
+                    </div>
                 </div>
-                <div className="w-full md:w-1/2">
+                <div className="w-full">
                      <p className="font-semibold mb-2 text-center">Compressed (Preview)</p>
-                     <Image
-                        src={image.url}
-                        alt="Compressed"
-                        width={400}
-                        height={400}
-                        className="rounded-lg object-contain w-full h-auto"
-                    />
+                     <div className="relative aspect-square w-full">
+                      <Image
+                          src={image.url}
+                          alt="Compressed"
+                          fill
+                          className="rounded-lg object-contain"
+                      />
+                    </div>
                 </div>
             </div>
 
             <Card className="bg-muted/50">
                 <CardContent className="p-4">
-                    <div className="flex justify-between items-center text-sm">
-                        <div className="flex items-center gap-2">
-                           <FileImage className="w-5 h-5" />
-                           <span className="font-medium">{image.name}</span>
+                    <div className="flex flex-wrap justify-between items-center text-sm gap-4">
+                        <div className="flex items-center gap-2 truncate">
+                           <FileImage className="w-5 h-5 flex-shrink-0" />
+                           <span className="font-medium truncate">{image.name}</span>
                         </div>
                         <div className="flex items-center gap-4">
                             <div className="text-right">
@@ -118,9 +130,9 @@ export function ImageCompressor() {
                                 <p>Compressed Size</p>
                                 <p className="font-semibold">{formatFileSize(image.compressedSize)}</p>
                             </div>
-                            <div className="text-right text-accent-foreground">
+                            <div className="text-right text-green-600 dark:text-green-500">
                                 <p>Reduction</p>
-                                <p className="font-semibold text-green-600">
+                                <p className="font-semibold">
                                     -{((1 - image.compressedSize / image.originalSize) * 100).toFixed(1)}%
                                 </p>
                             </div>
@@ -130,7 +142,7 @@ export function ImageCompressor() {
             </Card>
 
             <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 flex-1">
+                <Button onClick={handleDownload} className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 flex-1">
                     <Download className="mr-2 h-4 w-4" />
                     Download Compressed Image
                 </Button>

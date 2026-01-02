@@ -1,28 +1,21 @@
 import type { Metadata } from 'next';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Base64ToImage } from '@/components/tools/Base64ToImage';
 
 export const metadata: Metadata = {
-  title: 'Base64 to Image',
-  description: 'A placeholder for the Base64 to Image tool.',
+  title: 'Base64 to Image Converter',
+  description: 'Easily decode a Base64 string into an image. Paste your Base64 data URI and instantly view and download the image.',
 };
 
-export default function PlaceholderPage() {
+export default function Base64ToImagePage() {
   return (
     <div className="space-y-8">
       <header>
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Base64 to Image</h1>
         <p className="mt-4 text-xl text-muted-foreground">
-          This tool is coming soon!
+          Paste a Base64 string to decode it into an image.
         </p>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <Base64ToImage />
     </div>
   );
 }
