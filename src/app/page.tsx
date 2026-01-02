@@ -81,9 +81,6 @@ function HomeComponent() {
              <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
                {selectedCategory.name}
              </h1>
-             <p className="mt-2 text-xl text-muted-foreground">
-                Browse all {selectedCategory.tools.length} tools in this category.
-             </p>
            </div>
         </header>
 
