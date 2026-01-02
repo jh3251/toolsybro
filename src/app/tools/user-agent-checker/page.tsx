@@ -3,14 +3,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+import { UserAgentChecker } from '@/components/tools/UserAgentChecker';
 
 export const metadata: Metadata = {
   title: 'User Agent Checker',
-  description: 'A placeholder for the User Agent Checker tool.',
+  description: 'View your browser\'s user agent string. A simple tool for developers to check client information.',
 };
 
-export default function PlaceholderPage() {
+export default function UserAgentCheckerPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,11 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">User Agent Checker</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Instantly see your browser's user agent string.
             </p>
         </div>
       </header>
-      <AdvancedFeaturePlaceholder title="User Agent Checker" />
+      <UserAgentChecker />
     </div>
   );
 }
