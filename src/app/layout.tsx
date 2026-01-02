@@ -1,3 +1,4 @@
+
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
@@ -53,7 +54,7 @@ export default function RootLayout({
       >
         <div className="relative flex min-h-dvh flex-col bg-background">
           <Header />
-          <div className="container mx-auto flex-1 px-4 py-12 md:px-6">
+          <div className="flex-1 px-4 py-12 md:px-6">
             <main className="flex-1">{children}</main>
           </div>
           <Footer />
