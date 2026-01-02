@@ -6,7 +6,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
@@ -17,10 +16,8 @@ import {
   Wifi,
   Palette,
   Brush,
-  Square,
   Image as ImageIcon,
   UploadCloud,
-  X,
   LucideIcon,
   Globe,
   Phone,
@@ -42,10 +39,11 @@ import {
   Slack,
   Figma,
 } from 'lucide-react';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { cn } from '@/lib/utils';
 import { Slider } from '../ui/slider';
 import { Switch } from '../ui/switch';
+import QRCodeStyling, { type Options as QRCodeStylingOptions, type DotType, type CornerSquareType, type CornerDotType } from 'qr-code-styling';
+import { QrCodeBodyStyle, QrCodeEyeFrameStyle, QrCodeEyeBallStyle } from './QrCodeStyles';
 
 type QrType = 'link' | 'text' | 'email' | 'wifi';
 
@@ -83,55 +81,80 @@ export function QrCodeGenerator() {
   // Design State
   const [fgColor, setFgColor] = useState('#000000');
   const [bgColor, setBgColor] = useState('#ffffff');
-  const [eyeColor, setEyeColor] = useState('#000000');
+  const [eyeFrameColor, setEyeFrameColor] = useState('');
+  const [eyeBallColor, setEyeBallColor] = useState('');
+  const [useMarkerColors, setUseMarkerColors] = useState(false);
+  
   const [logo, setLogo] = useState<string | null>(null);
-  const [logoSize, setLogoSize] = useState(0.3); // 30% of QR code size
+  const [logoSize, setLogoSize] = useState(0.3);
   const [removeLogoBg, setRemoveLogoBg] = useState(true);
-  const [dotStyle, setDotStyle] = useState('square');
+  
+  const [dotStyle, setDotStyle] = useState<DotType>('square');
+  const [eyeFrameStyle, setEyeFrameStyle] = useState<CornerSquareType>('square');
+  const [eyeBallStyle, setEyeBallStyle] = useState<CornerDotType>('square');
+  
   const logoInputRef = useRef<HTMLInputElement>(null);
+  const qrRef = useRef<HTMLDivElement>(null);
+  const qrCodeInstanceRef = useRef<QRCodeStyling | null>(null);
+
 
   const qrCodeData = useMemo(() => {
     switch (activeTab) {
-      case 'link':
-        return link;
-      case 'text':
-        return text;
-      case 'email':
-        return `mailto:${emailTo}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-      case 'wifi':
-        return `WIFI:T:${wifiEncryption};S:${wifiSsid};P:${wifiPassword};;`;
-      default:
-        return '';
+      case 'link': return link;
+      case 'text': return text;
+      case 'email': return `mailto:${emailTo}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+      case 'wifi': return `WIFI:T:${wifiEncryption};S:${wifiSsid};P:${wifiPassword};;`;
+      default: return '';
     }
   }, [activeTab, link, text, emailTo, emailSubject, emailBody, wifiSsid, wifiPassword, wifiEncryption]);
-  
-   const qrCodeUrl = useMemo(() => {
-    if (!qrCodeData) return '';
-    
-    // Using goqr.me API which is simple and doesn't require keys for basic use
-    const params = new URLSearchParams({
-        data: qrCodeData,
-        size: '300x300',
-        color: fgColor.substring(1),
-        bgcolor: bgColor.substring(1),
-        qzone: '1',
-        format: 'png',
-    });
 
-    return `https://api.qrserver.com/v1/create-qr-code/?${params.toString()}`;
-  }, [qrCodeData, fgColor, bgColor]);
+  useEffect(() => {
+    if (qrRef.current) {
+      qrCodeInstanceRef.current = new QRCodeStyling({
+        width: 300,
+        height: 300,
+        type: 'svg',
+        data: qrCodeData || 'https://firebasetoolbox.io',
+        margin: 5,
+      });
+      qrCodeInstanceRef.current.append(qrRef.current);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (qrCodeInstanceRef.current) {
+        const options: QRCodeStylingOptions = {
+            data: qrCodeData,
+            dotsOptions: {
+                color: fgColor,
+                type: dotStyle,
+            },
+            backgroundOptions: {
+                color: bgColor,
+            },
+            cornersSquareOptions: {
+                type: eyeFrameStyle,
+                color: useMarkerColors ? eyeFrameColor || fgColor : fgColor,
+            },
+            cornersDotOptions: {
+                type: eyeBallStyle,
+                color: useMarkerColors ? eyeBallColor || fgColor : fgColor,
+            },
+            imageOptions: {
+                hideBackgroundDots: removeLogoBg,
+                imageSize: logoSize,
+                margin: 4,
+            },
+        };
+        if(logo) options.image = logo;
+
+      qrCodeInstanceRef.current.update(options);
+    }
+  }, [qrCodeData, fgColor, bgColor, dotStyle, eyeFrameStyle, eyeBallStyle, logo, logoSize, removeLogoBg, useMarkerColors, eyeFrameColor, eyeBallColor]);
 
 
   const handleDownload = () => {
-    if (!qrCodeUrl) return;
-    // Since we are using an external service that directly provides an image,
-    // we can create a link and simulate a click to download it.
-    const link = document.createElement('a');
-    link.href = qrCodeUrl;
-    link.download = 'qrcode.png';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    qrCodeInstanceRef.current?.download({ name: "qrcode", extension: "png"});
   };
 
   const handleLogoUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -145,11 +168,13 @@ export function QrCodeGenerator() {
     }
   };
 
-  const handlePredefinedLogoSelect = (Icon: LucideIcon) => {
-    const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${(new Icon()).props.children}</svg>`;
-    const dataUrl = `data:image/svg+xml;base64,${btoa(svgString)}`;
-    setLogo(dataUrl);
-  }
+    const handlePredefinedLogoSelect = (Icon: LucideIcon) => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${(Icon as any)().props.children.map((child: any) => child.props.d ? `<path d="${child.props.d}" />` : '').join('')}</svg>`;
+        const svgString = tempDiv.innerHTML;
+        const dataUrl = `data:image/svg+xml;base64,${btoa(svgString)}`;
+        setLogo(dataUrl);
+    }
 
   return (
     <Card>
@@ -227,15 +252,35 @@ export function QrCodeGenerator() {
               <AccordionItem value="design">
                 <AccordionTrigger className='font-semibold'><Brush className="mr-2" />Design</AccordionTrigger>
                 <AccordionContent>
-                  <div className="space-y-4 pt-2">
+                   <div className="pt-2 space-y-4">
                     <div>
-                      <Label>Dot Style (API Dependent)</Label>
-                      <p className="text-xs text-muted-foreground">Note: This is a visual placeholder. The free API may not support custom dot styles.</p>
-                      <div className="flex gap-2 mt-1">
-                        <Button variant={dotStyle === 'square' ? 'secondary' : 'outline'} onClick={() => setDotStyle('square')}>Square</Button>
-                        <Button variant={dotStyle === 'dots' ? 'secondary' : 'outline'} onClick={() => setDotStyle('dots')}>Dots</Button>
-                      </div>
+                        <Label>Body (Modello)</Label>
+                        <QrCodeBodyStyle selected={dotStyle} onSelect={setDotStyle} />
                     </div>
+                     <div>
+                        <Label>Eye Frame (Bordo)</Label>
+                        <QrCodeEyeFrameStyle selected={eyeFrameStyle} onSelect={setEyeFrameStyle} />
+                    </div>
+                     <div>
+                        <Label>Eye Ball (Centro)</Label>
+                         <QrCodeEyeBallStyle selected={eyeBallStyle} onSelect={setEyeBallStyle} />
+                    </div>
+                    <div className="flex items-center justify-between">
+                         <Label htmlFor="marker-colors">Marker Colors (Colori)</Label>
+                        <Switch id="marker-colors" checked={useMarkerColors} onCheckedChange={setUseMarkerColors} />
+                    </div>
+                    {useMarkerColors && (
+                        <div className="grid grid-cols-2 gap-4">
+                            <div>
+                                <Label htmlFor="eyef-color">Eye Frame</Label>
+                                <Input id="eyef-color" type="color" value={eyeFrameColor} onChange={(e) => setEyeFrameColor(e.target.value)} className="mt-1 h-10 p-1" />
+                            </div>
+                            <div>
+                                <Label htmlFor="eyeb-color">Eye Ball</Label>
+                                <Input id="eyeb-color" type="color" value={eyeBallColor} onChange={(e) => setEyeBallColor(e.target.value)} className="mt-1 h-10 p-1" />
+                            </div>
+                        </div>
+                    )}
                   </div>
                 </AccordionContent>
               </AccordionItem>
@@ -283,40 +328,11 @@ export function QrCodeGenerator() {
             </Accordion>
           </div>
           <div className="flex flex-col items-center justify-center space-y-4 bg-muted/50 p-4 rounded-lg sticky top-24">
-            {qrCodeData ? (
-              <div className="relative">
-                <Image
-                  src={qrCodeUrl}
-                  alt="Generated QR Code"
-                  width={300}
-                  height={300}
-                  className="rounded-md shadow-md"
-                  unoptimized // Needed for external dynamic images
-                />
-                {logo && (
-                  <div
-                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                    style={{
-                      width: `${logoSize * 100}%`,
-                      height: `${logoSize * 100}%`,
-                      margin: 'auto',
-                    }}
-                  >
-                    <div className={cn('relative w-full h-full', removeLogoBg && 'bg-white p-1 rounded-sm flex items-center justify-center')}>
-                        <Image src={logo} alt="logo" layout="fill" objectFit="contain" />
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="w-[300px] h-[300px] flex items-center justify-center text-muted-foreground text-center border-2 border-dashed rounded-lg">
-                Enter content to generate a QR code.
-              </div>
-            )}
-            <Button onClick={handleDownload} disabled={!qrCodeData} className="w-full">
-              <Download className="mr-2 h-4 w-4" />
-              Download QR Code
-            </Button>
+              <div ref={qrRef} />
+              <Button onClick={handleDownload} disabled={!qrCodeData} className="w-full">
+                <Download className="mr-2 h-4 w-4" />
+                Download QR Code
+              </Button>
           </div>
         </div>
       </CardContent>
