@@ -7,9 +7,10 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Mic, MicOff, Copy, Trash2 } from 'lucide-react';
 
-// Shim for webkitSpeechRecognition
-const SpeechRecognition =
-  (typeof window !== 'undefined' && (window.SpeechRecognition || window.webkitSpeechRecognition));
+let SpeechRecognition: any = null;
+if (typeof window !== 'undefined') {
+  SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+}
 
 
 export function SpeechToText() {
@@ -17,14 +18,21 @@ export function SpeechToText() {
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const { toast } = useToast();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (!SpeechRecognition) {
-      toast({
-        title: 'Browser Not Supported',
-        description: 'Speech recognition is not supported by your browser. Try Chrome or Edge.',
-        variant: 'destructive',
-      });
+      if (isClient) {
+        toast({
+          title: 'Browser Not Supported',
+          description: 'Speech recognition is not supported by your browser. Try Chrome or Edge.',
+          variant: 'destructive',
+        });
+      }
       return;
     }
 
@@ -33,20 +41,17 @@ export function SpeechToText() {
     recognition.interimResults = true;
     recognition.lang = 'en-US';
 
-    recognition.onresult = (event) => {
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
       let finalTranscript = '';
-      let interimTranscript = '';
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
           finalTranscript += event.results[i][0].transcript;
-        } else {
-          interimTranscript += event.results[i][0].transcript;
         }
       }
       setTranscript(prev => prev + finalTranscript);
     };
 
-    recognition.onerror = (event) => {
+    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
       toast({ title: 'Recognition Error', description: `Error: ${event.error}`, variant: 'destructive' });
       setIsListening(false);
     };
@@ -58,9 +63,11 @@ export function SpeechToText() {
     recognitionRef.current = recognition;
 
     return () => {
-      recognition.stop();
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
     };
-  }, [toast]);
+  }, [toast, isClient]);
 
   const toggleListening = () => {
     if (!recognitionRef.current) return;
@@ -83,9 +90,16 @@ export function SpeechToText() {
   const handleClear = () => {
     setTranscript('');
     if (isListening) {
-        toggleListening();
+        if (recognitionRef.current) {
+          recognitionRef.current.stop();
+        }
+        setIsListening(false);
     }
   };
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <Card>
