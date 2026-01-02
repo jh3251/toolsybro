@@ -1,4 +1,5 @@
 
+'use client';
 
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
@@ -23,10 +24,16 @@ const ImageColorPicker = dynamic(
   }
 );
 
+// Metadata is not directly used in client components in the same way,
+// but we can keep it for reference or for parent layouts to potentially use.
+// For app router, you'd typically export this from a server component page.
+// Since we must use 'use client', this won't be picked up for static metadata generation.
+/*
 export const metadata: Metadata = {
   title: 'Image Color Picker',
   description: 'Upload an image to pick colors, get HEX and RGB values, and generate a color palette.',
 };
+*/
 
 export default function ImageColorPickerPage() {
   return (
