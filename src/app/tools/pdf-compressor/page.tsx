@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+import { PdfCompressor } from '@/components/tools/PdfCompressor';
 
 export const metadata: Metadata = {
   title: 'PDF Compressor',
-  description: 'An advanced tool to reduce the file size of your PDF files. Coming soon!',
+  description: 'Reduce the file size of your PDF files online for free. Optimize your PDFs for sharing and storage without sacrificing quality.',
 };
 
 export default function PdfCompressorPage() {
@@ -23,11 +23,11 @@ export default function PdfCompressorPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">PDF Compressor</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            Reduce the file size of your PDFs.
+            Reduce the file size of your PDFs for easy sharing.
             </p>
         </div>
       </header>
-      <AdvancedFeaturePlaceholder title="PDF Compressor" />
+      <PdfCompressor />
     </div>
   );
 }
