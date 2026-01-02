@@ -31,7 +31,7 @@ export function ImageCropper() {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
-      setCrop(undefined) // Reset crop when new image is selected
+      setCrop(undefined); // Reset crop when new image is selected
       const reader = new FileReader();
       reader.addEventListener('load', () => {
         setImgSrc(reader.result?.toString() || '');
