@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+import { WordToPdf } from '@/components/tools/WordToPdf';
 
 export const metadata: Metadata = {
   title: 'Word to PDF',
-  description: 'An advanced tool to convert Word documents into PDF files. Coming soon!',
+  description: 'Convert the text content of a Word document into a simple PDF file.',
 };
 
 export default function WordToPdfPage() {
@@ -23,11 +23,11 @@ export default function WordToPdfPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Word to PDF</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            Convert Word documents to PDF.
+            Extract text from a .docx file and save it as a PDF.
             </p>
         </div>
       </header>
-      <AdvancedFeaturePlaceholder title="Word to PDF" />
+      <WordToPdf />
     </div>
   );
 }
