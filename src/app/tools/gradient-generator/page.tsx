@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { GradientGenerator } from '@/components/tools/GradientGenerator';
 
 export const metadata: Metadata = {
-  title: 'Gradient Generator',
-  description: 'A placeholder for the Gradient Generator tool.',
+  title: 'CSS Gradient Generator',
+  description: 'Visually create stunning linear and radial CSS gradients. Add and remove color stops, change angles, and copy the generated code.',
 };
 
-export default function PlaceholderPage() {
+export default function GradientGeneratorPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -21,20 +21,13 @@ export default function PlaceholderPage() {
             </Button>
         </Link>
         <div>
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Gradient Generator</h1>
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">CSS Gradient Generator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Create beautiful gradients and get the CSS code.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <GradientGenerator />
     </div>
   );
 }

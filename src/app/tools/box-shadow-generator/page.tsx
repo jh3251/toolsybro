@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { BoxShadowGenerator } from '@/components/tools/BoxShadowGenerator';
 
 export const metadata: Metadata = {
-  title: 'Box Shadow Generator',
-  description: 'A placeholder for the Box Shadow Generator tool.',
+  title: 'CSS Box Shadow Generator',
+  description: 'Create beautiful, layered CSS box shadows with an intuitive visual editor. Customize offsets, blur, spread, and color.',
 };
 
-export default function PlaceholderPage() {
+export default function BoxShadowGeneratorPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Box Shadow Generator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Design and generate custom CSS box shadows.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <BoxShadowGenerator />
     </div>
   );
 }
