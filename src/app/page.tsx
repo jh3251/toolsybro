@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 import { AdPlaceholder } from '@/components/layout/AdPlaceholder';
 import { ArrowLeft, Heart, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
 const toolColors = [
   'border-blue-500',
