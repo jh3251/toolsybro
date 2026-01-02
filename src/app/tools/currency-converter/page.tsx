@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { CurrencyConverter } from '@/components/tools/CurrencyConverter';
 
 export const metadata: Metadata = {
   title: 'Currency Converter',
-  description: 'A placeholder for the Currency Converter tool.',
+  description: 'Convert between different currencies with real-time exchange rates.',
 };
 
-export default function PlaceholderPage() {
+export default function CurrencyConverterPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Currency Converter</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Get the latest exchange rates for currencies worldwide.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <CurrencyConverter />
     </div>
   );
 }
