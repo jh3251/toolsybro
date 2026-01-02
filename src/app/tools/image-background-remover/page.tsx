@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { ImageBackgroundRemover } from '@/components/tools/ImageBackgroundRemover';
 
 export const metadata: Metadata = {
-  title: 'Image Background Remover',
-  description: 'A placeholder for the Image Background Remover tool.',
+  title: 'AI Image Background Remover',
+  description: 'Automatically remove the background from any image with a single click using our free AI-powered tool. Get a transparent PNG instantly.',
 };
 
-export default function PlaceholderPage() {
+export default function ImageBackgroundRemoverPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -21,20 +21,13 @@ export default function PlaceholderPage() {
             </Button>
         </Link>
         <div>
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Image Background Remover</h1>
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">AI Image Background Remover</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Erase backgrounds with one click.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <ImageBackgroundRemover />
     </div>
   );
 }
