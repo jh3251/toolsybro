@@ -13,6 +13,7 @@ import { ArrowLeft, Heart, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { FeatureHighlights } from '@/components/FeatureHighlights';
+import { Stats } from '@/components/Stats';
 
 const toolColors = [
   'border-blue-500',
@@ -125,13 +126,17 @@ function HomeComponent() {
   }
 
   return (
-    <div className="flex flex-col space-y-8 animate-in fade-in duration-500">
+    <div className="flex flex-col space-y-12">
       <section className="text-center">
-        <h2 className="text-3xl font-semibold text-primary mb-2 animate-fade-in-down" style={{ animationDelay: '0.2s' }}>100% Free Tools For a Lifetime</h2>
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent animate-fade-in-down">
-          The Ultimate Suite of Free Online Tools
+          Our Tools Collection
         </h1>
+        <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
+          Powerful, privacy-focused tools that process your files locally in the browser. No uploads, no server processing - complete data privacy.
+        </p>
       </section>
+      
+      <Stats />
 
       <div className="grid w-full gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {toolCategories.map((category, categoryIndex) => (
