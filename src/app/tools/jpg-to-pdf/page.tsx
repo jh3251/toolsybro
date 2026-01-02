@@ -2,15 +2,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { JpgToPdf } from '@/components/tools/JpgToPdf';
 
 export const metadata: Metadata = {
-  title: 'JPG to PDF',
-  description: 'A placeholder for the JPG to PDF tool.',
+  title: 'JPG to PDF Converter',
+  description: 'Combine one or more JPG images into a single, easy-to-share PDF file. Free, fast, and entirely client-side.',
 };
 
-export default function PlaceholderPage() {
+export default function JpgToPdfPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,18 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">JPG to PDF</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Combine multiple JPG images into a single PDF.
             </p>
         </div>
       </header>
-      <Card>
-        <CardHeader>
-          <CardTitle>Under Construction</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>This tool is currently under construction. Please check back later!</p>
-        </CardContent>
-      </Card>
+      <JpgToPdf />
     </div>
   );
 }
