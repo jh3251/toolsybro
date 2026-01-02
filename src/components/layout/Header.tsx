@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { Menu, Wrench, ChevronDown } from 'lucide-react';
+import { Menu, Wrench, ChevronDown, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toolCategories } from '@/lib/data';
 
@@ -32,7 +32,7 @@ export function Header() {
           <Wrench className="h-7 w-7" />
           <span className="font-headline hidden sm:inline-block">MultiToolSuite</span>
         </Link>
-        <div className="flex flex-1 items-center justify-end gap-6">
+        <div className="flex flex-1 items-center justify-end gap-2 sm:gap-6">
           <nav className="hidden items-center gap-6 md:flex">
             {navLinks.map((link) => (
               <Link
@@ -66,6 +66,12 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           </nav>
+            <Link href="https://ko-fi.com" target="_blank" rel="noopener noreferrer">
+              <Button className="bg-pink-500 hover:bg-pink-600 text-white rounded-full shadow-lg transition-transform transform hover:scale-105">
+                <Heart className="mr-2 h-4 w-4" />
+                Donate
+              </Button>
+            </Link>
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
