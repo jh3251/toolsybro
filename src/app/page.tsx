@@ -80,7 +80,7 @@ function HomeComponent() {
              <span className="sr-only">Back to Categories</span>
            </Button>
            <div>
-             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent py-2">
                {selectedCategory.name}
              </h1>
            </div>
