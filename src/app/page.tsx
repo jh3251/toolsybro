@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -127,6 +126,7 @@ function HomeComponent() {
   return (
     <div className="flex flex-col space-y-12">
       <section className="text-center">
+        <p className="text-lg font-semibold text-primary mb-2">Fast, Simple & 100% Free Tools.</p>
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent animate-fade-in-down">
           Our Tools Collection
         </h1>
