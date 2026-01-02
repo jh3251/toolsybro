@@ -5,17 +5,21 @@ import Head from 'next/head';
 
 export default function PrivacyPolicyPage() {
   const [lastUpdated, setLastUpdated] = useState('');
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     setLastUpdated(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }));
   }, []);
 
   return (
     <>
-      <Head>
-        <title>Privacy Policy | MultiToolSuite</title>
-        <meta name="description" content="Our Privacy Policy for MultiToolSuite." />
-      </Head>
+      {isClient && (
+        <Head>
+          <title>Privacy Policy | MultiToolSuite</title>
+          <meta name="description" content="Our Privacy Policy for MultiToolSuite." />
+        </Head>
+      )}
       <div className="space-y-8">
         <header>
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Privacy Policy</h1>
