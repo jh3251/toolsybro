@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useRef, ChangeEvent, MouseEvent } from 'react';
@@ -5,9 +6,16 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { UploadCloud, Trash2, Copy, Palette, EyeDropper } from 'lucide-react';
+import { UploadCloud, Trash2, Copy, Palette, Eye } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useColor } from 'color-thief-react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
 
 export function ImageColorPicker() {
   const [imageUrl, setImageUrl] = useState<string>('');
@@ -118,7 +126,7 @@ export function ImageColorPicker() {
 
               <div className="space-y-6">
                 <div className="space-y-2">
-                    <h3 className="text-lg font-semibold flex items-center gap-2"><EyeDropper /> Pick a Color</h3>
+                    <h3 className="text-lg font-semibold flex items-center gap-2"><Eye /> Pick a Color</h3>
                     <p className="text-sm text-muted-foreground">Hover over the image to pick a color.</p>
                 </div>
                  {hoveredColor ? (
@@ -184,11 +192,3 @@ export function ImageColorPicker() {
     </Card>
   );
 }
-
-// Add these to make the tooltip work
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
