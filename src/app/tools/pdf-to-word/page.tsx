@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+import { PdfToText } from '@/components/tools/PdfToText';
 
 export const metadata: Metadata = {
-  title: 'PDF to Word',
-  description: 'An advanced tool to convert PDF files into editable Word documents. Coming soon!',
+  title: 'PDF to Word (Text Extractor)',
+  description: 'Extract text content from a PDF file to easily copy and paste into a Word document or other text editor.',
 };
 
 export default function PdfToWordPage() {
@@ -21,13 +21,13 @@ export default function PdfToWordPage() {
             </Button>
         </Link>
         <div>
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">PDF to Word</h1>
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">PDF to Word (Text Extractor)</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            Convert PDFs to editable Word documents.
+            Extract text from your PDF to edit in Word.
             </p>
         </div>
       </header>
-      <AdvancedFeaturePlaceholder title="PDF to Word" />
+      <PdfToText />
     </div>
   );
 }

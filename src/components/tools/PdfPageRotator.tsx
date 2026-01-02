@@ -9,7 +9,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { UploadCloud, Download, Trash2, Loader2, RotateCcw, RotateCw } from 'lucide-react';
-import Image from 'next/image';
+import NextImage from 'next/image';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
 
@@ -164,7 +164,7 @@ export function PdfPageRotator() {
               {pagePreviews.map((preview) => (
                 <div key={preview.pageNumber} className="space-y-2">
                   <div className="relative aspect-[2/3] border rounded-md overflow-hidden">
-                    <Image 
+                    <NextImage 
                       src={preview.url} 
                       alt={`Page ${preview.pageNumber}`} 
                       fill 
