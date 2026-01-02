@@ -21,10 +21,6 @@ export default function Home() {
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-headline">
           All Your Online Tools, One Platform
         </h1>
-        <p className="mx-auto mt-6 max-w-[700px] text-muted-foreground md:text-xl">
-          A comprehensive collection of utilities to boost your productivity.
-          Simple, powerful, and always free.
-        </p>
       </section>
 
       <Accordion type="multiple" className="w-full space-y-4">
