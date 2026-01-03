@@ -25,33 +25,67 @@ const CalculatorButton = ({
 );
 
 export function ScientificCalculator() {
-  const [display, setDisplay] = useState('0');
-  const [expression, setExpression] = useState('');
+  const [currentValue, setCurrentValue] = useState('0');
+  const [previousValue, setPreviousValue] = useState<string | null>(null);
+  const [operator, setOperator] = useState<string | null>(null);
+  const [isWaitingForOperand, setIsWaitingForOperand] = useState(false);
 
-  const handleInput = (value: string) => {
-    if (display === '0' && value !== '.') {
-      setDisplay(value);
-      setExpression(value);
+  const handleInput = (digit: string) => {
+    if (isWaitingForOperand) {
+      setCurrentValue(digit);
+      setIsWaitingForOperand(false);
     } else {
-      setDisplay(display + value);
-      setExpression(expression + value);
+      setCurrentValue(currentValue === '0' ? digit : currentValue + digit);
+    }
+  };
+
+  const handleDecimal = () => {
+    if (!currentValue.includes('.')) {
+      setCurrentValue(currentValue + '.');
+    }
+     if (isWaitingForOperand) {
+      setCurrentValue('0.');
+      setIsWaitingForOperand(false);
     }
   };
   
-  const handleOperator = (operator: string) => {
-    // Avoid adding multiple operators in a row
-    const lastChar = expression.slice(-1);
-    if (['+', '-', '*', '/'].includes(lastChar)) {
-        setExpression(expression.slice(0,-1) + operator);
-    } else {
-        setExpression(expression + operator);
+  const performCalculation = () => {
+    const prev = parseFloat(previousValue!);
+    const current = parseFloat(currentValue);
+
+    if (isNaN(prev) || isNaN(current)) return;
+    
+    let result = 0;
+    switch (operator) {
+      case '+': result = prev + current; break;
+      case '−': result = prev - current; break;
+      case '×': result = prev * current; break;
+      case '÷': result = prev / current; break;
+      default: return;
     }
-    setDisplay('0');
+    
+    const resultString = String(result);
+    setCurrentValue(resultString);
+    setPreviousValue(null);
+    setOperator(null);
+  };
+
+  const handleOperator = (nextOperator: string) => {
+    if (previousValue !== null && operator && !isWaitingForOperand) {
+      performCalculation();
+      // After calculation, the new result is in currentValue, set it up for the next operation
+      setPreviousValue(currentValue);
+    } else {
+      setPreviousValue(currentValue);
+    }
+    
+    setIsWaitingForOperand(true);
+    setOperator(nextOperator);
   };
 
   const handleFunction = (func: string) => {
      try {
-        const currentVal = parseFloat(display);
+        const currentVal = parseFloat(currentValue);
         if (isNaN(currentVal)) return;
 
         let result;
@@ -68,43 +102,31 @@ export function ScientificCalculator() {
             default: return;
         }
         
-        const resultString = String(result);
-        setDisplay(resultString);
-        
-        // This part is tricky: we want to replace the last number with the result
-        const lastNumRegex = /[\d.]+$/;
-        setExpression(expression.replace(lastNumRegex, resultString));
-
+        setCurrentValue(String(result));
      } catch (e) {
-         setDisplay('Error');
-         setExpression('');
+         setCurrentValue('Error');
+         setPreviousValue(null);
+         setOperator(null);
      }
   }
 
   const handleEquals = () => {
-    try {
-      // Using Function constructor for safe evaluation of math expressions
-      const result = new Function('return ' + expression)();
-      setDisplay(String(result));
-      setExpression(String(result));
-    } catch (e) {
-      setDisplay('Error');
-      setExpression('');
-    }
+    if (!operator || previousValue === null) return;
+    performCalculation();
   };
 
   const handleClear = () => {
-    setDisplay('0');
-    setExpression('');
+    setCurrentValue('0');
+    setPreviousValue(null);
+    setOperator(null);
+    setIsWaitingForOperand(false);
   };
   
   const handleBackspace = () => {
-    if (display.length > 1) {
-        setDisplay(display.slice(0, -1));
-        setExpression(expression.slice(0, -1));
+    if (currentValue.length > 1) {
+        setCurrentValue(currentValue.slice(0, -1));
     } else {
-        setDisplay('0');
-        setExpression('');
+        setCurrentValue('0');
     }
   }
 
@@ -119,19 +141,19 @@ export function ScientificCalculator() {
     { label: '⌫', action: handleBackspace, className: 'bg-muted hover:bg-muted/80' },
     { label: 'log', action: () => handleFunction('log'), className: 'bg-muted hover:bg-muted/80' },
     { label: 'ln', action: () => handleFunction('ln'), className: 'bg-muted hover:bg-muted/80' },
-    { label: '÷', action: () => handleOperator('/'), className: 'bg-primary/80 text-primary-foreground hover:bg-primary' },
+    { label: '÷', action: () => handleOperator('÷'), className: 'bg-primary/80 text-primary-foreground hover:bg-primary' },
 
     { label: '7', action: () => handleInput('7') },
     { label: '8', action: () => handleInput('8') },
     { label: '9', action: () => handleInput('9') },
     { label: '1/x', action: () => handleFunction('1/x'), className: 'bg-muted hover:bg-muted/80' },
-    { label: '×', action: () => handleOperator('*'), className: 'bg-primary/80 text-primary-foreground hover:bg-primary' },
+    { label: '×', action: () => handleOperator('×'), className: 'bg-primary/80 text-primary-foreground hover:bg-primary' },
 
     { label: '4', action: () => handleInput('4') },
     { label: '5', action: () => handleInput('5') },
     { label: '6', action: () => handleInput('6') },
     { label: '( )', action: () => {}, className: 'bg-muted hover:bg-muted/80' }, // Placeholder
-    { label: '−', action: () => handleOperator('-'), className: 'bg-primary/80 text-primary-foreground hover:bg-primary' },
+    { label: '−', action: () => handleOperator('−'), className: 'bg-primary/80 text-primary-foreground hover:bg-primary' },
     
     { label: '1', action: () => handleInput('1') },
     { label: '2', action: () => handleInput('2') },
@@ -140,7 +162,7 @@ export function ScientificCalculator() {
     { label: '+', action: () => handleOperator('+'), className: 'bg-primary/80 text-primary-foreground hover:bg-primary' },
 
     { label: '0', action: () => handleInput('0'), className: 'col-span-2' },
-    { label: '.', action: () => handleInput('.') },
+    { label: '.', action: handleDecimal },
     { label: '=', action: handleEquals, className: 'col-span-2 bg-accent text-accent-foreground hover:bg-accent/90' },
   ];
 
@@ -148,10 +170,10 @@ export function ScientificCalculator() {
     <Card className="max-w-2xl mx-auto">
       <CardContent className="p-4 space-y-4">
         <div className="bg-muted rounded-lg p-4 text-right space-y-1">
-            <p className="text-sm text-muted-foreground truncate h-6">{expression || ' '}</p>
+            <p className="text-sm text-muted-foreground truncate h-6">{previousValue ? `${previousValue} ${operator || ''}` : ' '}</p>
             <Input
                 readOnly
-                value={display}
+                value={currentValue}
                 className="h-16 text-5xl font-bold text-right border-none bg-transparent p-0 shadow-none focus-visible:ring-0"
             />
         </div>
@@ -169,4 +191,3 @@ export function ScientificCalculator() {
     </Card>
   );
 }
-
