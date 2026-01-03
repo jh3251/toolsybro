@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -170,7 +171,7 @@ export function HomeClient() {
                         onClick={() => setIsSearchOpen(true)}
                     >
                          <Search className="mr-2 h-5 w-5 shrink-0" />
-                        Search for a tool (e.g., 'image compressor', 'json', 'qr code generator')...
+                        Search for a tool (e.g., 'qr code generetor')
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
@@ -228,7 +229,7 @@ export function HomeClient() {
                 {category.name}
               </h3>
               <p className="text-sm text-muted-foreground mt-1 transition-all group-hover:scale-105 group-hover:text-primary">
-                Contains {category.tools.length} free tools
+                Contains {category.tools.length} 100% free tools
               </p>
             </div>
           </button>
@@ -242,7 +243,7 @@ export function HomeClient() {
             </div>
             <div>
                 <CardTitle>Support Our Mission</CardTitle>
-                <CardDescription className="text-white/80">Enjoying our free tools? Consider supporting the site!</CardDescription>
+                <CardDescription className="text-white/80">Enjoying our 100% free tools? Consider supporting the site!</CardDescription>
             </div>
         </CardHeader>
         <CardContent>
