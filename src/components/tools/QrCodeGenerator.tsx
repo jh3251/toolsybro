@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useMemo, ChangeEvent, useRef, useEffect } from 'react';
@@ -63,7 +64,7 @@ export function QrCodeGenerator() {
   const [activeTab, setActiveTab] = useState<QrType>('link');
 
   // Link State
-  const [link, setLink] = useState('www.yoursite.com');
+  const [link, setLink] = useState('www.toolsybro.com');
 
   // Text State
   const [text, setText] = useState('Hello world!');
@@ -108,7 +109,7 @@ export function QrCodeGenerator() {
     }
   }, [activeTab, link, text, emailTo, emailSubject, emailBody, wifiSsid, wifiPassword, wifiEncryption]);
 
-  const qrOptions = useMemo((): QRCodeStylingOptions => {
+  const qrOptions: QRCodeStylingOptions = useMemo(() => {
     const options: QRCodeStylingOptions = {
         width: 300,
         height: 300,
@@ -134,6 +135,7 @@ export function QrCodeGenerator() {
             hideBackgroundDots: removeLogoBg,
             imageSize: logoSize,
             margin: 4,
+            crossOrigin: 'anonymous',
         },
     };
     if(logo) {
@@ -173,9 +175,32 @@ export function QrCodeGenerator() {
   };
 
   const handlePredefinedLogoSelect = (Icon: LucideIcon) => {
-    const svgString = renderToString(<Icon color="black" size={256} />);
-    const dataUrl = `data:image/svg+xml;base64,${btoa(svgString)}`;
-    setLogo(dataUrl);
+    const canvas = document.createElement('canvas');
+    canvas.width = 256;
+    canvas.height = 256;
+    const ctx = canvas.getContext('2d');
+    
+    if (ctx) {
+        // Create an SVG string from the icon component
+        // This is a simplified example. A robust solution might need a library
+        // to render React components to string on the client if not using this canvas method.
+        const iconElement = React.createElement(Icon, { size: 200, color: 'black' });
+        const svgString = renderToString(iconElement);
+
+        const img = new Image();
+        img.onload = () => {
+            // Draw a white background (or any color) if needed
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // Center the image
+            const x = (canvas.width - img.width) / 2;
+            const y = (canvas.height - img.height) / 2;
+            ctx.drawImage(img, x, y);
+            setLogo(canvas.toDataURL('image/png'));
+        };
+
+        img.src = 'data:image/svg+xml;base64,' + btoa(svgString);
+    }
   };
     
     const handleRemoveLogo = () => {
