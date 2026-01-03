@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useMemo, useRef } from 'react';
@@ -232,13 +233,13 @@ export function NotesOrganizer() {
             return timeB - timeA;
           }).map((note) => (
             <Card key={note.id} ref={(el) => (noteCardRefs.current[note.id] = el)}>
-              <CardHeader>
+              <CardHeader className="p-4">
                 <CardTitle>{note.title}</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-4 pt-0">
                 <p className="text-muted-foreground line-clamp-4">{note.content}</p>
               </CardContent>
-              <CardFooter className="flex justify-between p-2">
+              <CardFooter className="flex justify-between p-4 pt-0">
                 <div className='flex'>
                   <DialogTrigger asChild>
                       <Button variant="ghost" size="icon" onClick={() => openForm(note)}>
