@@ -3,7 +3,7 @@
 
 import { useEffect, useRef } from "react";
 import { useInView, useMotionValue, useSpring } from "framer-motion";
-import { Users, FolderGit2, Files, ShieldCheck } from "lucide-react";
+import { Users, FolderGit2, ShieldCheck } from "lucide-react";
 import { Card } from "./ui/card";
 import { toolCategories } from "@/lib/data";
 
@@ -56,12 +56,6 @@ export function Stats() {
             icon: Users,
         },
         {
-            value: 50,
-            suffix: 'K+',
-            label: "Files Processed",
-            icon: Files,
-        },
-        {
             value: 100,
             suffix: '%',
             label: "Privacy Focused",
@@ -70,7 +64,7 @@ export function Stats() {
     ];
 
     return (
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {stats.map((stat, index) => (
                 <Card key={index} className="text-center p-6">
                     <h3 className="text-4xl font-bold text-primary">
