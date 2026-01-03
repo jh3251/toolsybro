@@ -173,7 +173,8 @@ export function HomeClient() {
                       <div className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-75 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200"></div>
                        <div className="relative flex h-full w-full items-center justify-start rounded-full bg-background px-4">
                          <Search className="mr-4 h-5 w-5 shrink-0" />
-                          Search for a tool (e.g., 'qr code generetor')
+                          <span className="sm:hidden">Search for a tool...</span>
+                          <span className="hidden sm:inline">Search for a tool (e.g., 'qr code generetor')</span>
                        </div>
                     </button>
                 </PopoverTrigger>
