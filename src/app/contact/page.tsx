@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { ContactForm } from '@/components/ContactForm';
 
 export const metadata: Metadata = {
-  title: 'Contact ToolsyBro | Feedback on Our Free Tools',
+  title: 'Contact ToolsyBro | Feedback on Our 100% Free Tools',
   description: 'Get in touch with the ToolsyBro team. We welcome your feedback and suggestions about our 100% free tools.',
 };
 

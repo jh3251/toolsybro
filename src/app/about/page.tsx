@@ -20,7 +20,7 @@ export default function AboutPage() {
           ToolsyBro was born from a simple idea: the best things in life should be free, and that includes high-quality digital tools. In a world cluttered with expensive software and ad-intrusive websites, we wanted to create a clean, user-friendly space where anyone can access the free tools they need to be more productive, without any barriers.
         </p>
         <p>
-          Whether you're a student, a professional writer, a developer, or just someone looking to get a quick task done, our suite of free tools is designed for you. From counting words in an essay to formatting complex JSON data, we've focused on creating tools that are both powerful and incredibly easy to use.
+          Whether you're a student, a professional writer, a developer, or just someone looking to get a quick task done, our suite of 100% free tools is designed for you. From counting words in an essay to formatting complex JSON data, we've focused on creating tools that are both powerful and incredibly easy to use.
         </p>
         <h2 className="text-3xl font-bold font-headline text-foreground">Our Philosophy</h2>
         <p>

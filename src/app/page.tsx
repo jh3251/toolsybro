@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import { HomeClient } from '@/components/HomeClient';
 
 export const metadata: Metadata = {
-  title: 'ToolsyBro | 90+ Free Online Tools, No Sign-Up Required',
+  title: 'ToolsyBro | 100% Free Online Tools, No Sign-Up Required',
   description: 'Your one-stop destination for over 90+ 100% free tools. From image and text utilities to developer and finance calculators. No limits, no sign-up, and 100% privacy-focused.',
 };
 

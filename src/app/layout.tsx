@@ -25,7 +25,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 // The actual metadata for static pages should be in the respective page.tsx files.
 const metadata: Metadata = {
   title: 'ToolsyBro | 100% Free Online Tools for Everyone',
-  description: 'A comprehensive collection of 90+ free online tools. No sign-up required, no limits. All tools are privacy-focused and process data locally in your browser.',
+  description: 'A comprehensive collection of 90+ 100% free online tools. No sign-up required, no limits. All tools are privacy-focused and process data locally in your browser.',
 };
 
 
@@ -49,8 +49,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
        <head>
         <title>ToolsyBro | 100% Free Online Tools for Everyone</title>
-        <meta name="description" content="A comprehensive collection of 90+ free online tools. No sign-up required, no limits. All tools are privacy-focused and process data locally in your browser." />
+        <meta name="description" content="A comprehensive collection of 90+ 100% free online tools. No sign-up required, no limits. All tools are privacy-focused and process data locally in your browser." />
         <link rel="manifest" href="/manifest.webmanifest" />
+        {/* IMPORTANT: Replace ca-pub-XXXXXXXXXXXXXXXX with your real Google AdSense publisher ID */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
