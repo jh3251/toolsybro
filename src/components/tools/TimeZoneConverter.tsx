@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { format, parse } from 'date-fns';
-import { zonedTimeToUtc, utcToZonedTime, formatInTimeZone } from 'date-fns-tz';
+import { toZonedTime, fromZonedTime, formatInTimeZone } from 'date-fns-tz';
 import { Calendar as CalendarIcon, Clock, ChevronsUpDown, Check, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '../ui/scroll-area';
@@ -78,8 +78,8 @@ export function TimeZoneConverter() {
             if (isNaN(hours) || isNaN(minutes)) return { convertedTime: '', convertedDate: 'Invalid Time', fromOffset: '', toOffset: '' };
 
             const fromDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hours, minutes);
-            const utcDate = zonedTimeToUtc(fromDate, fromTimezone);
-            const toDate = utcToZonedTime(utcDate, toTimezone);
+            const utcDate = fromZonedTime(fromDate, fromTimezone);
+            const toDate = toZonedTime(utcDate, toTimezone);
             
             const fromOffsetString = formatInTimeZone(fromDate, fromTimezone, 'xxx');
             const toOffsetString = formatInTimeZone(toDate, toTimezone, 'xxx');
@@ -153,4 +153,3 @@ export function TimeZoneConverter() {
         </Card>
     );
 }
-
