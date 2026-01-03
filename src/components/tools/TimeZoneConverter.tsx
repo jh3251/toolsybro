@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
@@ -62,11 +61,18 @@ const TimezoneSelector = ({ value, onChange }: { value: string; onChange: (value
 
 
 export function TimeZoneConverter() {
-    const [fromTimezone, setFromTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone);
+    const [fromTimezone, setFromTimezone] = useState('America/New_York');
     const [toTimezone, setToTimezone] = useState('Europe/London');
     const [date, setDate] = useState<Date | undefined>(new Date());
     const [time, setTime] = useState(format(new Date(), 'HH:mm'));
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+        // Set the timezone from the browser only on the client
+        setFromTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+    }, []);
 
     const { convertedTime, convertedDate, fromOffset, toOffset } = useMemo(() => {
         if (!date) return { convertedTime: '', convertedDate: 'Invalid Date', fromOffset: '', toOffset: '' };
@@ -98,6 +104,10 @@ export function TimeZoneConverter() {
         }
     }, [date, time, fromTimezone, toTimezone]);
     
+    if (!isClient) {
+        return null;
+    }
+
     return (
         <Card>
             <CardContent className="pt-6 space-y-6">
@@ -122,16 +132,15 @@ export function TimeZoneConverter() {
                                 </Button>
                                 </PopoverTrigger>
                                 <PopoverContent className="w-auto p-0">
-                                <Calendar 
-                                    mode="single" 
-                                    selected={date} 
-                                    onSelect={setDate} 
-                                    initialFocus 
-                                />
-                                <div className="p-2 border-t flex justify-between">
-                                    <Button variant="ghost" onClick={() => { setDate(new Date()); setIsCalendarOpen(false); }}>Today</Button>
-                                    <Button variant="ghost" onClick={() => { setDate(undefined); setIsCalendarOpen(false); }}>Clear</Button>
-                                </div>
+                                <Calendar
+                                    mode="single"
+                                    selected={date}
+                                    onSelect={(newDate) => {
+                                        setDate(newDate);
+                                        setIsCalendarOpen(false);
+                                    }}
+                                    initialFocus
+                                    />
                                 </PopoverContent>
                             </Popover>
                         </div>

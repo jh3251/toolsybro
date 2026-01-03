@@ -92,13 +92,12 @@ export function AgeCalculator() {
                         <Calendar
                             mode="single"
                             selected={dateOfBirth}
-                            onSelect={setDateOfBirth}
+                            onSelect={(newDate) => {
+                                setDateOfBirth(newDate);
+                                setIsCalendarOpen(false);
+                            }}
                             initialFocus
                         />
-                         <div className="p-2 border-t flex justify-between">
-                            <Button variant="ghost" onClick={() => { setDateOfBirth(new Date()); setIsCalendarOpen(false); }}>Today</Button>
-                            <Button variant="ghost" onClick={() => { setDateOfBirth(undefined); setIsCalendarOpen(false); }}>Clear</Button>
-                        </div>
                         </PopoverContent>
                     </Popover>
                 </div>
