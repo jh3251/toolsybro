@@ -3,7 +3,7 @@
 
 import { useState, useMemo, useRef } from 'react';
 import { useUser, useFirestore, useCollection, useMemoFirebase } from '@/firebase';
-import { collection, doc, serverTimestamp } from 'firebase/firestore';
+import { collection, doc, serverTimestamp, Timestamp } from 'firebase/firestore';
 import { initiateAnonymousSignIn, useAuth } from '@/firebase';
 import html2canvas from 'html2canvas';
 import {
@@ -210,7 +210,11 @@ export function NotesOrganizer() {
         )}
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {notes?.sort((a, b) => b.lastModified.toMillis() - a.lastModified.toMillis()).map((note) => (
+          {notes?.sort((a, b) => {
+            const timeA = a.lastModified?.toMillis() ?? 0;
+            const timeB = b.lastModified?.toMillis() ?? 0;
+            return timeB - timeA;
+          }).map((note) => (
             <Card key={note.id} ref={(el) => (noteCardRefs.current[note.id] = el)}>
               <CardHeader>
                 <CardTitle>{note.title}</CardTitle>
