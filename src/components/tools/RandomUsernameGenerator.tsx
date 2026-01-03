@@ -11,6 +11,7 @@ import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { countries } from '@/lib/countries';
 import { generateUserProfile } from '@/ai/flows/generate-user-profile';
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 
 interface UserProfile {
     username: string;
@@ -42,13 +43,14 @@ const InfoField = ({ label, value, onCopy }: { label: string, value: string, onC
 export function RandomUsernameGenerator() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [country, setCountry] = useState('United States');
+  const [gender, setGender] = useState<'Any' | 'Male' | 'Female'>('Any');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const generateNewProfile = async () => {
     setIsLoading(true);
     try {
-        const newProfile = await generateUserProfile({ country });
+        const newProfile = await generateUserProfile({ country, gender });
         setProfile(newProfile);
     } catch (e) {
         console.error(e);
@@ -92,11 +94,28 @@ export function RandomUsernameGenerator() {
                     </SelectContent>
                 </Select>
             </div>
-             <Button onClick={generateNewProfile} disabled={isLoading} className='self-end'>
-                {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}
-                 {isLoading ? 'Generating...' : 'Generate New Profile'}
-            </Button>
+             <div className='space-y-2'>
+                <Label>Gender</Label>
+                <RadioGroup value={gender} onValueChange={(v: any) => setGender(v)} className="flex items-center gap-4 pt-2">
+                    <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="Any" id="any" />
+                        <Label htmlFor="any">Any</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="Male" id="male" />
+                        <Label htmlFor="male">Male</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="Female" id="female" />
+                        <Label htmlFor="female">Female</Label>
+                    </div>
+                </RadioGroup>
+            </div>
         </div>
+         <Button onClick={generateNewProfile} disabled={isLoading} className='w-full'>
+            {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}
+             {isLoading ? 'Generating...' : 'Generate New Profile'}
+        </Button>
 
         {profile ? (
             <div className='space-y-4 pt-4 border-t'>
