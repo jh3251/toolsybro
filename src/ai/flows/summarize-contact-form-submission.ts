@@ -26,6 +26,29 @@ export async function summarizeContactFormSubmission(input: SummarizeContactForm
   return summarizeContactFormSubmissionFlow(input);
 }
 
+const sendEmailTool = ai.defineTool(
+    {
+      name: 'sendEmail',
+      description: 'Sends an email to a specified recipient.',
+      inputSchema: z.object({
+        to: z.string().email(),
+        subject: z.string(),
+        body: z.string(),
+      }),
+      outputSchema: z.object({
+        status: z.string(),
+      })
+    },
+    async ({ to, subject, body }) => {
+      // In a real application, this would integrate with an email sending service (e.g., SendGrid, Mailgun).
+      // For this simulation, we'll just log the action and return success.
+      console.log(`Simulating sending email to: ${to}`);
+      console.log(`Subject: ${subject}`);
+      console.log(`Body:\n${body}`);
+      return { status: 'Email sent successfully' };
+    }
+  );
+
 const prompt = ai.definePrompt({
   name: 'summarizeContactFormSubmissionPrompt',
   input: {schema: SummarizeContactFormSubmissionInputSchema},
@@ -41,28 +64,7 @@ Message: {message}
 
 You must construct and send this email. After sending, confirm the operation's success.
 `,
-  tools: [ai.tool(
-    {
-      name: 'sendEmail',
-      description: 'Sends an email to a specified recipient.',
-      input: z.object({
-        to: z.string().email(),
-        subject: z.string(),
-        body: z.string(),
-      }),
-      output: z.object({
-        status: z.string(),
-      })
-    },
-    async ({ to, subject, body }) => {
-      // In a real application, this would integrate with an email sending service (e.g., SendGrid, Mailgun).
-      // For this simulation, we'll just log the action and return success.
-      console.log(`Simulating sending email to: ${to}`);
-      console.log(`Subject: ${subject}`);
-      console.log(`Body:\n${body}`);
-      return { status: 'Email sent successfully' };
-    }
-  )],
+  tools: [sendEmailTool],
 });
 
 const summarizeContactFormSubmissionFlow = ai.defineFlow(
