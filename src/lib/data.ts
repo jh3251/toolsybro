@@ -246,7 +246,7 @@ export const toolCategories: ToolCategory[] = [
     tools: [
       { name: 'Hash Generator (MD5, SHA)', description: 'Generate hashes from text with our 100% free tools.', href: '/tools/hash-generator', icon: Hash },
       { name: 'Hash Checker', description: 'Compare hashes to check integrity with our free tools for a lifetime.', href: '/tools/hash-checker', icon: BadgeCheck },
-      { name: 'Random Username Generator', description: 'Generate random usernames with our 100% free tools.', href: '/tools/random-username-generator', icon: User },
+      { name: 'Random Profile Generator', description: 'Generate random usernames, names, and addresses with our 100% free tools.', href: '/tools/random-username-generator', icon: User },
       { name: 'User Agent Checker', description: 'Check your browser\'s user agent with our free tools for a lifetime.', href: '/tools/user-agent-checker', icon: Binary },
     ],
   },

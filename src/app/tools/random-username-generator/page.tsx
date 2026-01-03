@@ -6,8 +6,8 @@ import { ArrowLeft } from 'lucide-react';
 import { RandomUsernameGenerator } from '@/components/tools/RandomUsernameGenerator';
 
 export const metadata: Metadata = {
-  title: 'Random Username Generator | Free & Instant | ToolsyBro',
-  description: 'Instantly generate unique and creative usernames for your online accounts, games, and social media with our 100% free online tool.',
+  title: 'Random Profile Generator | Free & Instant | ToolsyBro',
+  description: 'Instantly generate unique usernames, full names, and addresses for your online accounts, games, and social media with our 100% free online tool.',
 };
 
 export default function RandomUsernameGeneratorPage() {
@@ -21,9 +21,9 @@ export default function RandomUsernameGeneratorPage() {
             </Button>
         </Link>
         <div>
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Random Username Generator</h1>
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Random Profile Generator</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            Find your next great username.
+            Generate a complete, fictional identity including a username, name, and address.
             </p>
         </div>
       </header>
