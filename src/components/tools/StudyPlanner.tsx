@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useMemo, useRef } from 'react';
@@ -130,7 +129,7 @@ function TaskForm({
   );
 }
 
-function TaskCard({ task, onEdit, onDelete, onScreenshot }: { task: StudyTask, onEdit: () => void, onDelete: () => void, onScreenshot: () => void }) {
+function TaskCard({ task, onEdit, onDelete }: { task: StudyTask, onEdit: () => void, onDelete: () => void }) {
     const dueDate = task.dueDate ? task.dueDate.toDate() : null;
     const isOverdue = dueDate && !task.status.includes('Done') ? dueDate < new Date() : false;
 
@@ -149,7 +148,6 @@ function TaskCard({ task, onEdit, onDelete, onScreenshot }: { task: StudyTask, o
                 )}
             </CardContent>
             <CardFooter className='flex justify-end gap-1 p-2'>
-                <Button variant="ghost" size="icon" onClick={onScreenshot}><Camera className="h-4 w-4" /></Button>
                 <Button variant="ghost" size="icon" onClick={onEdit}><Edit className="h-4 w-4" /></Button>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
@@ -181,7 +179,7 @@ export function StudyPlanner() {
   const [selectedTask, setSelectedTask] = useState<StudyTask | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
-  const taskCardRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const columnRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const tasksCollectionRef = useMemoFirebase(() => {
     if (firestore && user) {
@@ -235,12 +233,12 @@ export function StudyPlanner() {
     setPasswordInput('');
   };
 
-  const handleScreenshot = (taskId: string) => {
-    const taskElement = taskCardRefs.current[taskId];
-    if (taskElement) {
-      html2canvas(taskElement, { useCORS: true, backgroundColor: null }).then((canvas) => {
+  const handleScreenshot = (status: TaskStatus) => {
+    const columnElement = columnRefs.current[status];
+    if (columnElement) {
+      html2canvas(columnElement, { useCORS: true, backgroundColor: null }).then((canvas) => {
         const link = document.createElement('a');
-        link.download = `task-${taskId}.png`;
+        link.download = `tasks-${status.toLowerCase().replace(' ', '-')}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
       });
@@ -329,18 +327,21 @@ export function StudyPlanner() {
         ) : (
              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
                 {statusColumns.map(status => (
-                    <div key={status} className='bg-muted/50 rounded-lg p-4'>
-                        <h3 className='font-semibold text-lg mb-4 text-center'>{status}</h3>
+                    <div key={status} ref={el => columnRefs.current[status] = el} className='bg-muted/50 rounded-lg p-4'>
+                        <div className='flex justify-between items-center mb-4'>
+                           <h3 className='font-semibold text-lg text-center'>{status}</h3>
+                           <Button variant="ghost" size="icon" onClick={() => handleScreenshot(status)}>
+                              <Camera className="h-4 w-4" />
+                            </Button>
+                        </div>
                         <div className='space-y-4 min-h-[100px]'>
                             {tasksByStatus[status].map(task => (
-                                <div ref={(el) => (taskCardRefs.current[task.id] = el)} key={task.id}>
                                   <TaskCard 
+                                      key={task.id}
                                       task={task}
                                       onEdit={() => openForm(task)}
                                       onDelete={() => handleDeleteTask(task.id)}
-                                      onScreenshot={() => handleScreenshot(task.id)}
                                   />
-                                </div>
                             ))}
                              {tasksByStatus[status].length === 0 && (
                                 <div className='text-center text-sm text-muted-foreground pt-4'>
