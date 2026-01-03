@@ -78,10 +78,18 @@ function TaskForm({
     onSave({ 
         title, 
         subject, 
-        dueDate: dueDate ? Timestamp.fromDate(dueDate) : undefined, 
+        dueDate: dueDate, 
         status 
     });
   };
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value) {
+      setDueDate(new Date(e.target.value));
+    } else {
+      setDueDate(undefined);
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -96,20 +104,11 @@ function TaskForm({
       <div className='grid grid-cols-2 gap-4'>
         <div>
             <Label>Due Date</Label>
-            <Popover>
-                <PopoverTrigger asChild>
-                <Button
-                    variant={"outline"}
-                    className={cn("w-full justify-start text-left font-normal", !dueDate && "text-muted-foreground")}
-                >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {dueDate ? format(dueDate, "PPP") : <span>Pick a date</span>}
-                </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                <Calendar mode="single" selected={dueDate} onSelect={setDueDate} initialFocus />
-                </PopoverContent>
-            </Popover>
+            <Input 
+              type="date"
+              value={dueDate ? format(dueDate, 'yyyy-MM-dd') : ''}
+              onChange={handleDateChange}
+            />
         </div>
         <div>
             <Label>Status</Label>
