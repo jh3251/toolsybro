@@ -170,16 +170,17 @@ export function QrCodeGenerator() {
   };
 
     const handlePredefinedLogoSelect = (Icon: LucideIcon) => {
-        // Correctly render the React component to an SVG string.
-        const svgString = renderToString(
-            <Icon color="currentColor" size={24} strokeWidth={2} />
-        );
+        const tempDiv = document.createElement('div');
+        // This is a simplified approach to get the inner paths of the SVG
+        // A more robust solution might be needed for complex icons
+        // For lucide-react, this works for simple icons.
+        // We create a dummy element to render the icon into and extract its innerHTML.
+        const iconElement = React.createElement(Icon, { size: 256 });
+        const iconHtml = renderToString(iconElement);
+        tempDiv.innerHTML = iconHtml;
+        const innerSvg = tempDiv.querySelector('svg')?.innerHTML || '';
 
-        // Clean up the string and encode it for the data URL.
-        const finalSvg = svgString
-            .replace('xmlns="http://www.w3.org/2000/svg"', `xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"`)
-            .replace(/<svg[^>]*>/, (match) => match.replace(/class="[^"]*"/, ''));
-
+        const finalSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${innerSvg}</svg>`;
         const dataUrl = `data:image/svg+xml;base64,${btoa(finalSvg)}`;
         setLogo(dataUrl);
     }
