@@ -170,7 +170,7 @@ export function HomeClient() {
                         onClick={() => setIsSearchOpen(true)}
                     >
                          <Search className="mr-2 h-5 w-5 shrink-0" />
-                        Search for a tool (e.g., 'image compressor', 'json')...
+                        Search for a tool (e.g., 'image compressor', 'json', 'qr code generator')...
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
