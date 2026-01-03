@@ -13,9 +13,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { FeatureHighlights } from '@/components/FeatureHighlights';
 import { Stats } from '@/components/Stats';
-import { Input } from '@/components/ui/input';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Input } from '@/components/ui/input';
+
 
 const toolColors = [
   'border-blue-500',
@@ -29,25 +30,25 @@ const toolColors = [
 ];
 
 const iconBgColors = [
-  'bg-blue-100 dark:bg-blue-900/30',
-  'bg-red-100 dark:bg-red-900/30',
-  'bg-purple-100 dark:bg-purple-900/30',
-  'bg-green-100 dark:bg-green-900/30',
-  'bg-yellow-100 dark:bg-yellow-900/30',
-  'bg-pink-100 dark:bg-pink-900/30',
-  'bg-indigo-100 dark:bg-indigo-900/30',
-  'bg-teal-100 dark:bg-teal-900/30',
+  'bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30',
+  'bg-gradient-to-br from-red-100 to-red-200 dark:from-red-900/30 dark:to-red-800/30',
+  'bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/30',
+  'bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/30',
+  'bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/30',
+  'bg-gradient-to-br from-pink-100 to-pink-200 dark:from-pink-900/30 dark:to-pink-800/30',
+  'bg-gradient-to-br from-indigo-100 to-indigo-200 dark:from-indigo-900/30 dark:to-indigo-800/30',
+  'bg-gradient-to-br from-teal-100 to-teal-200 dark:from-teal-900/30 dark:to-teal-800/30',
 ];
 
 const iconTextColors = [
-  'text-blue-500',
-  'text-red-500',
-  'text-purple-500',
-  'text-green-500',
-  'text-yellow-500',
-  'text-pink-500',
-  'text-indigo-500',
-  'text-teal-500',
+  'text-blue-600 dark:text-blue-300',
+  'text-red-600 dark:text-red-300',
+  'text-purple-600 dark:text-purple-300',
+  'text-green-600 dark:text-green-300',
+  'text-yellow-600 dark:text-yellow-300',
+  'text-pink-600 dark:text-pink-300',
+  'text-indigo-600 dark:text-indigo-300',
+  'text-teal-600 dark:text-teal-300',
 ];
 
 export function HomeClient() {
@@ -163,16 +164,18 @@ export function HomeClient() {
          <div className="mt-6 max-w-lg mx-auto">
             <Popover open={isSearchOpen} onOpenChange={setIsSearchOpen}>
                 <PopoverTrigger asChild>
-                     <Button
-                        variant="outline"
+                    <button
                         role="combobox"
                         aria-expanded={isSearchOpen}
-                        className="w-full justify-start rounded-full h-12 text-base text-muted-foreground"
+                        className="w-full justify-start rounded-full h-12 text-base text-muted-foreground relative group inline-flex items-center px-4 py-2 text-lg font-medium transition-colors"
                         onClick={() => setIsSearchOpen(true)}
                     >
-                         <Search className="mr-2 h-5 w-5 shrink-0" />
-                        Search for a tool (e.g., 'qr code generetor')
-                    </Button>
+                      <div className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-75 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200"></div>
+                       <div className="relative flex h-full w-full items-center justify-start rounded-full bg-background px-4">
+                         <Search className="mr-4 h-5 w-5 shrink-0" />
+                          Search for a tool (e.g., 'qr code generetor')
+                       </div>
+                    </button>
                 </PopoverTrigger>
                 <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
                     <Command>
@@ -213,13 +216,13 @@ export function HomeClient() {
           >
             <div
               className={cn(
-                'flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full transition-colors duration-300 group-hover:bg-primary',
+                'flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110',
                 iconBgColors[categoryIndex % iconBgColors.length]
               )}
             >
               <category.icon
                 className={cn(
-                  'h-8 w-8 transition-colors duration-300 group-hover:text-primary-foreground',
+                  'h-8 w-8 transition-transform duration-300 group-hover:rotate-[-12deg]',
                   iconTextColors[categoryIndex % iconTextColors.length]
                 )}
               />
