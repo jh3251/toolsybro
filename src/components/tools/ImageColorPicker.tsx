@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useRef, ChangeEvent, MouseEvent } from 'react';
@@ -6,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { UploadCloud, Trash2, Copy, Palette, Eye } from 'lucide-react';
+import { UploadCloud, Trash2, Copy, Palette, Eye, Star, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useColor } from 'color-thief-react';
 import {
@@ -20,6 +19,7 @@ import {
 export function ImageColorPicker() {
   const [imageUrl, setImageUrl] = useState<string>('');
   const [hoveredColor, setHoveredColor] = useState<{ hex: string; rgb: string } | null>(null);
+  const [savedColors, setSavedColors] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { toast } = useToast();
@@ -57,6 +57,7 @@ export function ImageColorPicker() {
   const handleReset = () => {
     setImageUrl('');
     setHoveredColor(null);
+    setSavedColors([]);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -93,6 +94,17 @@ export function ImageColorPicker() {
     const rgb = `rgb(${r}, ${g}, ${b})`;
     setHoveredColor({ hex, rgb });
   };
+  
+  const handleSaveColor = (color: string) => {
+    if (!savedColors.includes(color)) {
+        setSavedColors([...savedColors, color]);
+        toast({ title: 'Color Saved!', description: `${color} added to your draft palette.`});
+    }
+  }
+
+  const handleRemoveSavedColor = (color: string) => {
+    setSavedColors(savedColors.filter(c => c !== color));
+  }
 
   return (
     <Card>
@@ -120,6 +132,7 @@ export function ImageColorPicker() {
                     ref={canvasRef}
                     onMouseMove={handleMouseMove}
                     onMouseLeave={() => setHoveredColor(null)}
+                    onClick={() => hoveredColor && handleSaveColor(hoveredColor.hex)}
                     className="max-w-full h-auto rounded-lg shadow-md"
                 />
               </div>
@@ -127,7 +140,7 @@ export function ImageColorPicker() {
               <div className="space-y-6">
                 <div className="space-y-2">
                     <h3 className="text-lg font-semibold flex items-center gap-2"><Eye /> Pick a Color</h3>
-                    <p className="text-sm text-muted-foreground">Hover over the image to pick a color.</p>
+                    <p className="text-sm text-muted-foreground">Hover over the image to pick a color and click to save it.</p>
                 </div>
                  {hoveredColor ? (
                     <div className="flex items-center gap-4 p-4 rounded-lg bg-muted/50">
@@ -154,8 +167,8 @@ export function ImageColorPicker() {
                 )}
 
                  <div className="space-y-2">
-                    <h3 className="text-lg font-semibold flex items-center gap-2"><Palette /> Color Palette</h3>
-                     <p className="text-sm text-muted-foreground">Main colors detected in the image.</p>
+                    <h3 className="text-lg font-semibold flex items-center gap-2"><Palette /> Generated Palette</h3>
+                     <p className="text-sm text-muted-foreground">Click a color to add it to your saved palette.</p>
                 </div>
                 {colorPalette ? (
                   <div className="grid grid-cols-4 lg:grid-cols-8 gap-2">
@@ -166,7 +179,7 @@ export function ImageColorPicker() {
                             <div
                               className="h-12 w-12 rounded-md border cursor-pointer transition-transform hover:scale-110"
                               style={{ backgroundColor: color }}
-                              onClick={() => handleCopy(color, 'HEX')}
+                              onClick={() => handleSaveColor(color)}
                             />
                           </TooltipTrigger>
                           <TooltipContent>
@@ -186,6 +199,37 @@ export function ImageColorPicker() {
                 </Button>
               </div>
             </div>
+             {savedColors.length > 0 && (
+                <div className="space-y-4 pt-6 border-t">
+                    <h3 className="text-xl font-semibold flex items-center gap-2"><Star /> Saved Colors</h3>
+                     <div className="flex flex-wrap gap-4">
+                        {savedColors.map(color => (
+                             <div key={color} className="group relative">
+                                <TooltipProvider>
+                                    <Tooltip>
+                                    <TooltipTrigger asChild>
+                                         <div
+                                            className="h-16 w-16 rounded-lg border cursor-pointer"
+                                            style={{ backgroundColor: color }}
+                                            onClick={() => handleCopy(color, 'HEX')}
+                                        />
+                                    </TooltipTrigger>
+                                     <TooltipContent><p>{color}</p></TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>
+                                <Button
+                                    variant="destructive"
+                                    size="icon"
+                                    className="absolute -top-2 -right-2 h-6 w-6 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                    onClick={() => handleRemoveSavedColor(color)}
+                                >
+                                    <X className="h-4 w-4" />
+                                </Button>
+                             </div>
+                        ))}
+                    </div>
+                </div>
+            )}
           </div>
         )}
       </CardContent>
