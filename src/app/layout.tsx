@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { FirebaseClientProvider } from '@/firebase';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import type { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -19,6 +20,14 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ['700', '800'],
   variable: '--font-headline',
 });
+
+// Metadata can be defined in server components, but we can keep a placeholder here for client-side rendering.
+// The actual metadata for static pages should be in the respective page.tsx files.
+const metadata: Metadata = {
+  title: 'ToolsyBro | 100% Free Online Tools for Everyone',
+  description: 'A comprehensive collection of 90+ free online tools. No sign-up required, no limits. All tools are privacy-focused and process data locally in your browser.',
+};
+
 
 export default function RootLayout({
   children,
@@ -34,6 +43,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
        <head>
+        <title>ToolsyBro | 100% Free Online Tools for Everyone</title>
+        <meta name="description" content="A comprehensive collection of 90+ free online tools. No sign-up required, no limits. All tools are privacy-focused and process data locally in your browser." />
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
