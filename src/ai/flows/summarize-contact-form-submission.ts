@@ -55,14 +55,14 @@ const prompt = ai.definePrompt({
   output: {schema: SummarizeContactFormSubmissionOutputSchema},
   prompt: `You are an email forwarding agent. A user has submitted a contact form on the ToolsyBro website. Your task is to forward this message to the site owner at introcarditaly@gmail.com.
 
-The subject of the email should be "New Contact Form Submission from {name}".
+The subject of the email should be "New Contact Form Submission from {{{name}}}".
 The body of the email should contain the following information clearly formatted:
 
-Name: {name}
-Email: {email}
-Message: {message}
+Name: {{{name}}}
+Email: {{{email}}}
+Message: {{{message}}}
 
-You must construct and send this email. After sending, confirm the operation's success.
+You must construct and send this email using the provided tool. After sending, confirm the operation's success.
 `,
   tools: [sendEmailTool],
 });
