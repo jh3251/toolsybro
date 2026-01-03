@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useMemo, useRef } from 'react';
@@ -40,6 +41,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Label } from '../ui/label';
 
 interface Note {
   id: string;
@@ -100,6 +102,7 @@ export function NotesOrganizer() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const noteCardRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const allNotesContainerRef = useRef<HTMLDivElement | null>(null);
+  const [passwordInput, setPasswordInput] = useState('');
 
   const notesCollectionRef = useMemoFirebase(() => {
     if (firestore && user) {
@@ -145,6 +148,20 @@ export function NotesOrganizer() {
     const docRef = doc(firestore, 'users', user.uid, 'notes', noteId);
     deleteDocumentNonBlocking(docRef);
   };
+
+  const handleClearAll = () => {
+    if (passwordInput !== '123') {
+        alert('Incorrect password.');
+        return;
+    }
+    if (!firestore || !user || !notes) return;
+    notes.forEach(note => {
+        const docRef = doc(firestore, 'users', user.uid, 'notes', note.id);
+        deleteDocumentNonBlocking(docRef);
+    });
+    setPasswordInput('');
+  };
+
 
   const handleScreenshot = (noteId: string) => {
     const noteElement = noteCardRefs.current[noteId];
@@ -207,6 +224,34 @@ export function NotesOrganizer() {
                 <Camera className="mr-2 h-4 w-4" />
                 Screenshot All
             </Button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="destructive" disabled={!notes || notes.length === 0}>
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  Clear All
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will permanently delete all your notes. This action cannot be undone. To confirm, please type '123' below.
+                  </AlertDialogDescription>
+                  <Input
+                    type="password"
+                    placeholder="Enter password to confirm"
+                    value={passwordInput}
+                    onChange={(e) => setPasswordInput(e.target.value)}
+                    />
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel onClick={() => setPasswordInput('')}>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleClearAll} disabled={passwordInput !== '123'}>
+                    Delete All Notes
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
            <DialogTrigger asChild>
                 <Button onClick={() => openForm(null)}>
                     <PlusCircle className="mr-2 h-4 w-4" />
@@ -236,7 +281,7 @@ export function NotesOrganizer() {
                 <CardTitle>{note.title}</CardTitle>
               </CardHeader>
               <CardContent className="p-4 pt-0">
-                <p className="text-muted-foreground">{note.content}</p>
+                <p className="text-muted-foreground whitespace-pre-wrap">{note.content}</p>
               </CardContent>
               <CardFooter className="flex justify-between p-4 pt-0">
                 <div className='flex'>
