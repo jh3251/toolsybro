@@ -1,10 +1,11 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { useUser, useFirestore, useCollection, useMemoFirebase } from '@/firebase';
 import { collection, doc, serverTimestamp } from 'firebase/firestore';
 import { initiateAnonymousSignIn, useAuth } from '@/firebase';
+import html2canvas from 'html2canvas';
 import {
   setDocumentNonBlocking,
   deleteDocumentNonBlocking,
@@ -20,7 +21,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Loader2, PlusCircle, Trash2, Edit } from 'lucide-react';
+import { Loader2, PlusCircle, Trash2, Edit, Camera } from 'lucide-react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -98,13 +99,13 @@ export function NotesOrganizer() {
 
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const noteCardRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  // Memoize the collection reference
   const notesCollectionRef = useMemoFirebase(() => {
     if (firestore && user) {
       return collection(firestore, 'users', user.uid, 'notes');
     }
-    return null; // Return null if firestore or user is not available
+    return null;
   }, [firestore, user]);
 
   const {
@@ -128,11 +129,9 @@ export function NotesOrganizer() {
     };
 
     if (selectedNote) {
-        // Update existing note
         const docRef = doc(firestore, 'users', user.uid, 'notes', selectedNote.id);
         setDocumentNonBlocking(docRef, noteData, { merge: true });
     } else {
-        // Create new note
         const docRef = doc(collection(firestore, 'users', user.uid, 'notes'));
         setDocumentNonBlocking(docRef, { ...noteData, createdAt: serverTimestamp(), id: docRef.id }, { merge: true });
     }
@@ -145,6 +144,18 @@ export function NotesOrganizer() {
     if (!firestore || !user) return;
     const docRef = doc(firestore, 'users', user.uid, 'notes', noteId);
     deleteDocumentNonBlocking(docRef);
+  };
+
+  const handleScreenshot = (noteId: string) => {
+    const noteElement = noteCardRefs.current[noteId];
+    if (noteElement) {
+      html2canvas(noteElement, { useCORS: true, backgroundColor: null }).then((canvas) => {
+        const link = document.createElement('a');
+        link.download = `note-${noteId}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
   };
 
   const openForm = (note?: Note | null) => {
@@ -200,7 +211,7 @@ export function NotesOrganizer() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {notes?.sort((a, b) => b.lastModified.toMillis() - a.lastModified.toMillis()).map((note) => (
-            <Card key={note.id}>
+            <Card key={note.id} ref={(el) => (noteCardRefs.current[note.id] = el)}>
               <CardHeader>
                 <CardTitle>{note.title}</CardTitle>
               </CardHeader>
@@ -208,12 +219,16 @@ export function NotesOrganizer() {
                 <p className="text-muted-foreground line-clamp-4">{note.content}</p>
               </CardContent>
               <CardFooter className="flex justify-between">
-                <DialogTrigger asChild>
-                    <Button variant="ghost" size="icon" onClick={() => openForm(note)}>
-                        <Edit className="h-4 w-4" />
-                    </Button>
-                </DialogTrigger>
-
+                <div className='flex'>
+                  <DialogTrigger asChild>
+                      <Button variant="ghost" size="icon" onClick={() => openForm(note)}>
+                          <Edit className="h-4 w-4" />
+                      </Button>
+                  </DialogTrigger>
+                  <Button variant="ghost" size="icon" onClick={() => handleScreenshot(note.id)}>
+                    <Camera className="h-4 w-4" />
+                  </Button>
+                </div>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <Button variant="ghost" size="icon" className='text-destructive'>
