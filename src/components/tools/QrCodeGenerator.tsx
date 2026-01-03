@@ -1,4 +1,3 @@
-
 'use client';
 
 import * as React from 'react';
@@ -39,21 +38,26 @@ import {
   Twitch,
   Slack,
   Figma,
+  User,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Slider } from '../ui/slider';
 import { Switch } from '../ui/switch';
 import QRCodeStyling, { type Options as QRCodeStylingOptions, type DotType, type CornerSquareType, type CornerDotType } from 'qr-code-styling';
 import { QrCodeBodyStyle, QrCodeEyeFrameStyle, QrCodeEyeBallStyle } from './QrCodeStyles';
-import { renderToString } from 'react-dom/server';
+import { Textarea } from '../ui/textarea';
 
-type QrType = 'link' | 'text' | 'email' | 'wifi';
+type QrType = 'link' | 'text' | 'email' | 'wifi' | 'phone' | 'sms' | 'location' | 'vcard';
 
-const qrTypes = [
+const qrTypes: {id: QrType, name: string, icon: LucideIcon}[] = [
   { id: 'link', name: 'Link', icon: Link },
   { id: 'text', name: 'Text', icon: Type },
   { id: 'email', name: 'E-mail', icon: Mail },
   { id: 'wifi', name: 'Wi-Fi', icon: Wifi },
+  { id: 'phone', name: 'Phone', icon: Phone },
+  { id: 'sms', name: 'SMS', icon: MessageSquare },
+  { id: 'location', name: 'Location', icon: MapPin },
+  { id: 'vcard', name: 'V-Card', icon: User },
 ];
 
 const predefinedLogos = [
@@ -79,6 +83,28 @@ export function QrCodeGenerator() {
   const [wifiSsid, setWifiSsid] = useState('');
   const [wifiPassword, setWifiPassword] = useState('');
   const [wifiEncryption, setWifiEncryption] = useState('WPA');
+
+  // Phone State
+  const [phoneNumber, setPhoneNumber] = useState('');
+
+  // SMS State
+  const [smsTo, setSmsTo] = useState('');
+  const [smsBody, setSmsBody] = useState('');
+
+  // Location State
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+
+  // V-Card State
+  const [vcardFirstName, setVcardFirstName] = useState('');
+  const [vcardLastName, setVcardLastName] = useState('');
+  const [vcardOrg, setVcardOrg] = useState('');
+  const [vcardTitle, setVcardTitle] = useState('');
+  const [vcardTel, setVcardTel] = useState('');
+  const [vcardEmail, setVcardEmail] = useState('');
+  const [vcardWebsite, setVcardWebsite] = useState('');
+  const [vcardAddress, setVcardAddress] = useState('');
+
 
   // Design State
   const [fgColor, setFgColor] = useState('#000000');
@@ -106,16 +132,21 @@ export function QrCodeGenerator() {
       case 'text': return text;
       case 'email': return `mailto:${emailTo}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
       case 'wifi': return `WIFI:T:${wifiEncryption};S:${wifiSsid};P:${wifiPassword};;`;
+      case 'phone': return `tel:${phoneNumber}`;
+      case 'sms': return `smsto:${smsTo}:${smsBody}`;
+      case 'location': return `geo:${latitude},${longitude}`;
+      case 'vcard': 
+        return `BEGIN:VCARD\nVERSION:3.0\nN:${vcardLastName};${vcardFirstName}\nFN:${vcardFirstName} ${vcardLastName}\nORG:${vcardOrg}\nTITLE:${vcardTitle}\nTEL;TYPE=WORK,VOICE:${vcardTel}\nEMAIL:${vcardEmail}\nURL:${vcardWebsite}\nADR;TYPE=WORK:;;${vcardAddress}\nEND:VCARD`;
       default: return '';
     }
-  }, [activeTab, link, text, emailTo, emailSubject, emailBody, wifiSsid, wifiPassword, wifiEncryption]);
+  }, [activeTab, link, text, emailTo, emailSubject, emailBody, wifiSsid, wifiPassword, wifiEncryption, phoneNumber, smsTo, smsBody, latitude, longitude, vcardFirstName, vcardLastName, vcardOrg, vcardTitle, vcardTel, vcardEmail, vcardWebsite, vcardAddress]);
 
   const qrOptions: QRCodeStylingOptions = useMemo(() => {
     const options: QRCodeStylingOptions = {
         width: 300,
         height: 300,
         type: 'svg',
-        data: qrCodeData || 'https://firebasetoolbox.io',
+        data: qrCodeData || 'https://www.toolsybro.com',
         margin: 5,
         dotsOptions: {
             color: fgColor,
@@ -159,7 +190,6 @@ export function QrCodeGenerator() {
     }
   }, [qrOptions]);
 
-
   const handleDownload = () => {
     qrCodeInstanceRef.current?.download({ name: "qrcode", extension: "png"});
   };
@@ -177,31 +207,42 @@ export function QrCodeGenerator() {
 
   const handlePredefinedLogoSelect = (Icon: LucideIcon) => {
     const canvas = document.createElement('canvas');
-    canvas.width = 256;
-    canvas.height = 256;
+    const size = 256;
+    canvas.width = size;
+    canvas.height = size;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Create a temporary element to render the SVG and get its path data
+    const tempDiv = document.createElement('div');
+    const iconElement = React.createElement(Icon, { size: 200 }); // Render slightly smaller
     
-    if (ctx) {
-        // Create an SVG string from the icon component
-        // This is a simplified example. A robust solution might need a library
-        // to render React components to string on the client if not using this canvas method.
-        const iconElement = React.createElement(Icon, { size: 200, color: 'black' });
-        const svgString = renderToString(iconElement);
+    // This is a simplified way to get SVG path. It might not work for complex icons.
+    // For production, a library like `render-to-string` on server or a more robust client method is needed.
+    // A simplified client-side approach:
+    const tempIconContainer = document.createElement('div');
+    tempIconContainer.innerHTML = new XMLSerializer().serializeToString(
+      document.createRange().createContextualFragment(
+        `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${(Icon as any)().props.children.map((child: any) => child.props.d ? `<path d="${child.props.d}" />` : '').join('')}</svg>`
+      ).firstChild!
+    );
+    const svgElement = tempIconContainer.firstChild as SVGElement;
+    
+    const svgString = new XMLSerializer().serializeToString(svgElement);
+    const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(svgBlob);
 
-        const img = new Image();
-        img.onload = () => {
-            // Draw a white background (or any color) if needed
-            ctx.fillStyle = "white";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Center the image
-            const x = (canvas.width - img.width) / 2;
-            const y = (canvas.height - img.height) / 2;
-            ctx.drawImage(img, x, y);
-            setLogo(canvas.toDataURL('image/png'));
-        };
-
-        img.src = 'data:image/svg+xml;base64,' + btoa(svgString);
-    }
+    const img = new Image();
+    img.onload = () => {
+      ctx.fillStyle = 'white'; // White background for the logo area
+      ctx.fillRect(0, 0, size, size);
+      const x = (size - img.width) / 2;
+      const y = (size - img.height) / 2;
+      ctx.drawImage(img, x, y);
+      setLogo(canvas.toDataURL('image/png'));
+      URL.revokeObjectURL(url);
+    };
+    img.src = url;
   };
     
     const handleRemoveLogo = () => {
@@ -218,7 +259,7 @@ export function QrCodeGenerator() {
           <div className="space-y-6">
             <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as QrType)} className="w-full">
               <TabsList className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-transparent p-0">
-                {qrTypes.slice(0, 4).map(type => (
+                {qrTypes.map(type => (
                   <TabsTrigger
                     key={type.id}
                     value={type.id}
@@ -233,7 +274,7 @@ export function QrCodeGenerator() {
               <TabsContent value="link" className="pt-4">
                 <div className="space-y-2">
                   <Label htmlFor="qr-link" className="text-base">Your URL</Label>
-                  <Input id="qr-link" value={link} onChange={(e) => setLink(e.target.value)} placeholder="https://example.com" />
+                  <Input id="qr-link" value={link} onChange={(e) => setLink(e.target.value)} placeholder="https://www.toolsybro.com" />
                 </div>
               </TabsContent>
               <TabsContent value="text" className="pt-4">
@@ -266,9 +307,50 @@ export function QrCodeGenerator() {
                   <Input id="qr-wifi-password" value={wifiPassword} onChange={(e) => setWifiPassword(e.target.value)} placeholder="Your Wi-Fi Password" />
                 </div>
               </TabsContent>
-            </Tabs>
+              <TabsContent value="phone" className="pt-4">
+                <div className="space-y-2">
+                  <Label htmlFor="qr-phone" className="text-base">Phone Number</Label>
+                  <Input id="qr-phone" type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} placeholder="+1234567890" />
+                </div>
+              </TabsContent>
+              <TabsContent value="sms" className="pt-4 space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="qr-sms-to" className="text-base">To Phone Number</Label>
+                  <Input id="qr-sms-to" type="tel" value={smsTo} onChange={(e) => setSmsTo(e.target.value)} placeholder="+1234567890" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="qr-sms-body" className="text-base">Message</Label>
+                  <Input id="qr-sms-body" value={smsBody} onChange={(e) => setSmsBody(e.target.value)} placeholder="Your message here" />
+                </div>
+              </TabsContent>
+              <TabsContent value="location" className="pt-4 space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="qr-latitude" className="text-base">Latitude</Label>
+                  <Input id="qr-latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)} placeholder="e.g., 40.7128" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="qr-longitude" className="text-base">Longitude</Label>
+                  <Input id="qr-longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)} placeholder="e.g., -74.0060" />
+                </div>
+              </TabsContent>
+              <TabsContent value="vcard" className="pt-4 space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2"><Label>First Name</Label><Input value={vcardFirstName} onChange={e => setVcardFirstName(e.target.value)} /></div>
+                    <div className="space-y-2"><Label>Last Name</Label><Input value={vcardLastName} onChange={e => setVcardLastName(e.target.value)} /></div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2"><Label>Organization</Label><Input value={vcardOrg} onChange={e => setVcardOrg(e.target.value)} /></div>
+                    <div className="space-y-2"><Label>Job Title</Label><Input value={vcardTitle} onChange={e => setVcardTitle(e.target.value)} /></div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2"><Label>Phone</Label><Input type="tel" value={vcardTel} onChange={e => setVcardTel(e.target.value)} /></div>
+                    <div className="space-y-2"><Label>Email</Label><Input type="email" value={vcardEmail} onChange={e => setVcardEmail(e.target.value)} /></div>
+                </div>
+                 <div className="space-y-2"><Label>Website</Label><Input type="url" value={vcardWebsite} onChange={e => setVcardWebsite(e.target.value)} /></div>
+                 <div className="space-y-2"><Label>Address</Label><Textarea value={vcardAddress} onChange={e => setVcardAddress(e.target.value)} /></div>
+              </TabsContent>
 
-            
+            </Tabs>
           </div>
           <div className="flex flex-col items-center justify-start space-y-4">
               <div className='p-4 bg-muted/50 rounded-lg'>
