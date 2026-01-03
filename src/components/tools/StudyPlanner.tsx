@@ -180,6 +180,7 @@ export function StudyPlanner() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
   const columnRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const kanbanBoardRef = useRef<HTMLDivElement | null>(null);
 
   const tasksCollectionRef = useMemoFirebase(() => {
     if (firestore && user) {
@@ -245,6 +246,18 @@ export function StudyPlanner() {
     }
   };
 
+  const handleScreenshotAll = () => {
+    const boardElement = kanbanBoardRef.current;
+    if (boardElement) {
+      html2canvas(boardElement, { useCORS: true, backgroundColor: null, windowWidth: boardElement.scrollWidth, windowHeight: boardElement.scrollHeight }).then((canvas) => {
+        const link = document.createElement('a');
+        link.download = `study-plan.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+  };
+
 
   const openForm = (task?: StudyTask | null) => {
     setSelectedTask(task || null);
@@ -287,6 +300,10 @@ export function StudyPlanner() {
     <Dialog open={isFormOpen} onOpenChange={(open) => { if (!open) setSelectedTask(null); setIsFormOpen(open);}}>
       <div className="space-y-6">
         <div className="flex justify-end gap-2">
+           <Button variant="outline" onClick={handleScreenshotAll} disabled={!tasks || tasks.length === 0}>
+                <Camera className="mr-2 h-4 w-4" />
+                Screenshot All
+            </Button>
            <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button variant="destructive" disabled={!tasks || tasks.length === 0}>
@@ -325,7 +342,7 @@ export function StudyPlanner() {
         {isTasksLoading ? (
              <div className="flex justify-center items-center h-64"><Loader2 className="w-8 h-8 animate-spin" /></div>
         ) : (
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+             <div ref={kanbanBoardRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
                 {statusColumns.map(status => (
                     <div key={status} ref={el => columnRefs.current[status] = el} className='bg-muted/50 rounded-lg p-4'>
                         <div className='flex justify-between items-center mb-4'>
