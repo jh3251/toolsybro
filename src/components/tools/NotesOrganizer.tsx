@@ -161,7 +161,7 @@ export function NotesOrganizer() {
   const handleScreenshotAll = () => {
     const allNotesElement = allNotesContainerRef.current;
     if (allNotesElement) {
-      html2canvas(allNotesElement, { useCORS: true, backgroundColor: null }).then((canvas) => {
+      html2canvas(allNotesElement, { useCORS: true, backgroundColor: null, windowWidth: allNotesElement.scrollWidth, windowHeight: allNotesElement.scrollHeight }).then((canvas) => {
         const link = document.createElement('a');
         link.download = `all-notes.png`;
         link.href = canvas.toDataURL('image/png');
@@ -238,7 +238,7 @@ export function NotesOrganizer() {
               <CardContent>
                 <p className="text-muted-foreground line-clamp-4">{note.content}</p>
               </CardContent>
-              <CardFooter className="flex justify-between">
+              <CardFooter className="flex justify-between p-2">
                 <div className='flex'>
                   <DialogTrigger asChild>
                       <Button variant="ghost" size="icon" onClick={() => openForm(note)}>
