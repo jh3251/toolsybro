@@ -43,6 +43,7 @@ import { Slider } from '../ui/slider';
 import { Switch } from '../ui/switch';
 import QRCodeStyling, { type Options as QRCodeStylingOptions, type DotType, type CornerSquareType, type CornerDotType } from 'qr-code-styling';
 import { QrCodeBodyStyle, QrCodeEyeFrameStyle, QrCodeEyeBallStyle } from './QrCodeStyles';
+import { renderToString } from 'react-dom/server';
 
 type QrType = 'link' | 'text' | 'email' | 'wifi';
 
@@ -169,10 +170,17 @@ export function QrCodeGenerator() {
   };
 
     const handlePredefinedLogoSelect = (Icon: LucideIcon) => {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${(Icon as any)().props.children.map((child: any) => child.props.d ? `<path d="${child.props.d}" />` : '').join('')}</svg>`;
-        const svgString = tempDiv.innerHTML;
-        const dataUrl = `data:image/svg+xml;base64,${btoa(svgString)}`;
+        // Correctly render the React component to an SVG string.
+        const svgString = renderToString(
+            <Icon color="currentColor" size={24} strokeWidth={2} />
+        );
+
+        // Clean up the string and encode it for the data URL.
+        const finalSvg = svgString
+            .replace('xmlns="http://www.w3.org/2000/svg"', `xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"`)
+            .replace(/<svg[^>]*>/, (match) => match.replace(/class="[^"]*"/, ''));
+
+        const dataUrl = `data:image/svg+xml;base64,${btoa(finalSvg)}`;
         setLogo(dataUrl);
     }
 
