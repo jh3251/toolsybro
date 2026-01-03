@@ -1,11 +1,10 @@
-
 'use client';
 
 import Link from 'next/link';
 import { useState, useEffect, useMemo } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { toolCategories } from '@/lib/data';
-import type { ToolCategory } from '@/lib/data';
+import type { Tool, ToolCategory } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { AdPlaceholder } from '@/components/layout/AdPlaceholder';
 import { ArrowLeft, Heart, ArrowRight, Search } from 'lucide-react';
@@ -14,6 +13,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { FeatureHighlights } from '@/components/FeatureHighlights';
 import { Stats } from '@/components/Stats';
 import { Input } from '@/components/ui/input';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 const toolColors = [
   'border-blue-500',
@@ -50,9 +51,11 @@ const iconTextColors = [
 
 export function HomeClient() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const categoryParam = searchParams.get('category');
   const [selectedCategory, setSelectedCategory] = useState<ToolCategory | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
     const categoryName = searchParams.get('category');
@@ -64,31 +67,35 @@ export function HomeClient() {
     }
   }, [searchParams]);
 
-  const filteredCategories = useMemo(() => {
+  const allTools = useMemo(() => {
+    return toolCategories.flatMap(category => category.tools.map(tool => ({ ...tool, categoryName: category.name })));
+  }, []);
+
+  const filteredTools = useMemo(() => {
     if (!searchQuery) {
-      return toolCategories;
+      return [];
     }
     const lowerCaseQuery = searchQuery.toLowerCase();
-
-    return toolCategories.map(category => {
-        const filteredTools = category.tools.filter(tool => 
-            tool.name.toLowerCase().includes(lowerCaseQuery) || 
-            tool.description.toLowerCase().includes(lowerCaseQuery)
-        );
-        return { ...category, tools: filteredTools };
-    }).filter(category => category.tools.length > 0);
-
-  }, [searchQuery]);
+    return allTools.filter(tool =>
+      tool.name.toLowerCase().includes(lowerCaseQuery) ||
+      tool.description.toLowerCase().includes(lowerCaseQuery)
+    );
+  }, [searchQuery, allTools]);
 
   const handleCategoryClick = (category: ToolCategory) => {
     setSelectedCategory(category);
-    window.history.pushState(null, '', `/?category=${encodeURIComponent(category.name)}`);
+    router.push(`/?category=${encodeURIComponent(category.name)}`);
   };
 
   const handleBackClick = () => {
     setSelectedCategory(null);
-    window.history.pushState(null, '', '/');
+    router.push('/');
   };
+  
+  const handleToolSelect = (href: string) => {
+      router.push(href);
+      setIsSearchOpen(false);
+  }
 
   if (selectedCategory) {
     return (
@@ -153,21 +160,49 @@ export function HomeClient() {
           Free Tools - No Signup - No Limits.
         </p>
          <div className="mt-6 max-w-lg mx-auto">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search for a tool (e.g., 'image compressor', 'json')..."
-                className="w-full rounded-full pl-10 h-12 text-base"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
+            <Popover open={isSearchOpen} onOpenChange={setIsSearchOpen}>
+                <PopoverTrigger asChild>
+                     <Button
+                        variant="outline"
+                        role="combobox"
+                        aria-expanded={isSearchOpen}
+                        className="w-full justify-start rounded-full h-12 text-base text-muted-foreground"
+                        onClick={() => setIsSearchOpen(true)}
+                    >
+                         <Search className="mr-2 h-5 w-5 shrink-0" />
+                        Search for a tool (e.g., 'image compressor', 'json')...
+                    </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
+                    <Command>
+                        <CommandInput
+                            placeholder="Search for a tool..."
+                            value={searchQuery}
+                            onValueChange={setSearchQuery}
+                            />
+                        <CommandList>
+                            <CommandEmpty>No tools found.</CommandEmpty>
+                            <CommandGroup>
+                                {filteredTools.map((tool) => (
+                                    <CommandItem
+                                        key={tool.href}
+                                        value={tool.name}
+                                        onSelect={() => handleToolSelect(tool.href)}
+                                    >
+                                        <tool.icon className="mr-2 h-4 w-4" />
+                                        <span>{tool.name}</span>
+                                    </CommandItem>
+                                ))}
+                            </CommandGroup>
+                        </CommandList>
+                    </Command>
+                </PopoverContent>
+            </Popover>
           </div>
       </section>
       
       <div className="grid w-full gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {filteredCategories.map((category, categoryIndex) => (
+        {toolCategories.map((category, categoryIndex) => (
           <button
             key={category.name}
             onClick={() => handleCategoryClick(category)}
