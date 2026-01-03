@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -131,7 +132,7 @@ function HomeComponent() {
           Our Tools Collection
         </h1>
         <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
-          Powerful, privacy-focused tools that process your files locally in the browser. No uploads, no server processing - complete data privacy.
+          Free Tools, No Sign-Up. No Limits.
         </p>
       </section>
       
