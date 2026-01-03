@@ -127,9 +127,6 @@ export function TimeZoneConverter() {
                                     selected={date} 
                                     onSelect={setDate} 
                                     initialFocus 
-                                    captionLayout="dropdown-buttons"
-                                    fromYear={new Date().getFullYear() - 100}
-                                    toYear={new Date().getFullYear() + 10}
                                 />
                                 <div className="p-2 border-t flex justify-between">
                                     <Button variant="ghost" onClick={() => { setDate(new Date()); setIsCalendarOpen(false); }}>Today</Button>

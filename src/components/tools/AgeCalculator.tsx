@@ -94,9 +94,6 @@ export function AgeCalculator() {
                             selected={dateOfBirth}
                             onSelect={setDateOfBirth}
                             initialFocus
-                            captionLayout="dropdown-buttons"
-                            fromYear={1900}
-                            toYear={new Date().getFullYear()}
                         />
                          <div className="p-2 border-t flex justify-between">
                             <Button variant="ghost" onClick={() => { setDateOfBirth(new Date()); setIsCalendarOpen(false); }}>Today</Button>
