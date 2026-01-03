@@ -99,8 +99,8 @@ export function AgeCalculator() {
                             toYear={new Date().getFullYear()}
                         />
                          <div className="p-2 border-t flex justify-between">
-                            <Button variant="ghost" onClick={() => { setDateOfBirth(new Date()); }}>Today</Button>
-                            <Button variant="ghost" onClick={() => { setDateOfBirth(undefined); }}>Clear</Button>
+                            <Button variant="ghost" onClick={() => { setDateOfBirth(new Date()); setIsCalendarOpen(false); }}>Today</Button>
+                            <Button variant="ghost" onClick={() => { setDateOfBirth(undefined); setIsCalendarOpen(false); }}>Clear</Button>
                         </div>
                         </PopoverContent>
                     </Popover>
@@ -137,7 +137,7 @@ export function AgeCalculator() {
                     </div>
                 ) : (
                     <div className="text-center text-muted-foreground py-10">
-                        {isFuture(dateOfBirth) ? "Please select a date in the past." : "Select your date of birth to calculate your age."}
+                        {dateOfBirth && isFuture(dateOfBirth) ? "Please select a date in the past." : "Select your date of birth to calculate your age."}
                     </div>
                 )}
             </CardContent>

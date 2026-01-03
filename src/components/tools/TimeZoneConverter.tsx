@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
@@ -131,8 +132,8 @@ export function TimeZoneConverter() {
                                     toYear={new Date().getFullYear() + 10}
                                 />
                                 <div className="p-2 border-t flex justify-between">
-                                    <Button variant="ghost" onClick={() => { setDate(new Date()); }}>Today</Button>
-                                    <Button variant="ghost" onClick={() => { setDate(undefined); }}>Clear</Button>
+                                    <Button variant="ghost" onClick={() => { setDate(new Date()); setIsCalendarOpen(false); }}>Today</Button>
+                                    <Button variant="ghost" onClick={() => { setDate(undefined); setIsCalendarOpen(false); }}>Clear</Button>
                                 </div>
                                 </PopoverContent>
                             </Popover>
