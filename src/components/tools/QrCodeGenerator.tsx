@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useMemo, ChangeEvent, useRef, useEffect } from 'react';
@@ -43,7 +44,7 @@ import { Slider } from '../ui/slider';
 import { Switch } from '../ui/switch';
 import QRCodeStyling, { type Options as QRCodeStylingOptions, type DotType, type CornerSquareType, type CornerDotType } from 'qr-code-styling';
 import { QrCodeBodyStyle, QrCodeEyeFrameStyle, QrCodeEyeBallStyle } from './QrCodeStyles';
-import { renderToString } from 'react-dom/server';
+import ReactDOM from 'react-dom';
 
 type QrType = 'link' | 'text' | 'email' | 'wifi';
 
@@ -147,7 +148,12 @@ export function QrCodeGenerator() {
                 margin: 4,
             },
         };
-        if(logo) options.image = logo;
+        if(logo) {
+            options.image = logo;
+        } else {
+            // @ts-ignore
+            options.image = null;
+        }
 
       qrCodeInstanceRef.current.update(options);
     }
@@ -170,19 +176,40 @@ export function QrCodeGenerator() {
   };
 
     const handlePredefinedLogoSelect = (Icon: LucideIcon) => {
-        const tempDiv = document.createElement('div');
-        // This is a simplified approach to get the inner paths of the SVG
-        // A more robust solution might be needed for complex icons
-        // For lucide-react, this works for simple icons.
-        // We create a dummy element to render the icon into and extract its innerHTML.
-        const iconElement = React.createElement(Icon, { size: 256 });
-        const iconHtml = renderToString(iconElement);
-        tempDiv.innerHTML = iconHtml;
-        const innerSvg = tempDiv.querySelector('svg')?.innerHTML || '';
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
 
-        const finalSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${innerSvg}</svg>`;
-        const dataUrl = `data:image/svg+xml;base64,${btoa(finalSvg)}`;
+        canvas.width = 256;
+        canvas.height = 256;
+        
+        // This is a way to get the path data for Lucide icons on the client
+        const iconInstance = <Icon color="black" size={256} />;
+        // The children of Lucide icons are path elements
+        const paths = (iconInstance.props.children as React.ReactElement[]).map(child => child.props.d);
+        
+        ctx.fillStyle = "white"; // Or transparent if you want
+        ctx.fillRect(0, 0, 256, 256);
+        
+        ctx.fillStyle = "black";
+        ctx.translate(0, 0)
+        
+        const scale = 256 / 24; // Lucide icons are on a 24x24 viewbox
+        ctx.scale(scale, scale);
+
+        paths.forEach(d => {
+            ctx.fill(new Path2D(d));
+        });
+        
+        const dataUrl = canvas.toDataURL('image/png');
         setLogo(dataUrl);
+    }
+    
+    const handleRemoveLogo = () => {
+        setLogo(null);
+        if (logoInputRef.current) {
+            logoInputRef.current.value = '';
+        }
     }
 
   return (
@@ -340,7 +367,7 @@ export function QrCodeGenerator() {
                         <Slider value={[logoSize]} onValueChange={(v) => setLogoSize(v[0])} min={0.1} max={0.5} step={0.05} />
                     </div>
 
-                    {logo && <Button variant="link" size="sm" className="w-full text-destructive" onClick={() => setLogo(null)}>Remove Logo</Button>}
+                    {logo && <Button variant="link" size="sm" className="w-full text-destructive" onClick={handleRemoveLogo}>Remove Logo</Button>}
                   </div>
                 </AccordionContent>
               </AccordionItem>
