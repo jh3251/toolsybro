@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
@@ -121,7 +120,15 @@ export function TimeZoneConverter() {
                                 </Button>
                                 </PopoverTrigger>
                                 <PopoverContent className="w-auto p-0">
-                                <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
+                                <Calendar 
+                                    mode="single" 
+                                    selected={date} 
+                                    onSelect={setDate} 
+                                    initialFocus 
+                                    captionLayout="dropdown-buttons"
+                                    fromYear={new Date().getFullYear() - 100}
+                                    toYear={new Date().getFullYear() + 10}
+                                />
                                 </PopoverContent>
                             </Popover>
                         </div>
