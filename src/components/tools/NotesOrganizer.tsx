@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useMemo, useRef } from 'react';
@@ -100,6 +99,7 @@ export function NotesOrganizer() {
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const noteCardRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const allNotesContainerRef = useRef<HTMLDivElement | null>(null);
 
   const notesCollectionRef = useMemoFirebase(() => {
     if (firestore && user) {
@@ -158,6 +158,18 @@ export function NotesOrganizer() {
     }
   };
 
+  const handleScreenshotAll = () => {
+    const allNotesElement = allNotesContainerRef.current;
+    if (allNotesElement) {
+      html2canvas(allNotesElement, { useCORS: true, backgroundColor: null }).then((canvas) => {
+        const link = document.createElement('a');
+        link.download = `all-notes.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+  };
+
   const openForm = (note?: Note | null) => {
     setSelectedNote(note || null);
     setIsFormOpen(true);
@@ -190,7 +202,11 @@ export function NotesOrganizer() {
   return (
     <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
       <div className="space-y-6">
-        <div className="flex justify-end">
+        <div className="flex justify-end gap-2">
+           <Button variant="outline" onClick={handleScreenshotAll} disabled={!notes || notes.length === 0}>
+                <Camera className="mr-2 h-4 w-4" />
+                Screenshot All
+            </Button>
            <DialogTrigger asChild>
                 <Button onClick={() => openForm(null)}>
                     <PlusCircle className="mr-2 h-4 w-4" />
@@ -209,7 +225,7 @@ export function NotesOrganizer() {
             </div>
         )}
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div ref={allNotesContainerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {notes?.sort((a, b) => {
             const timeA = a.lastModified?.toMillis() ?? 0;
             const timeB = b.lastModified?.toMillis() ?? 0;
