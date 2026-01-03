@@ -68,9 +68,9 @@ export function Header() {
             </DropdownMenu>
           </nav>
             <Link href="https://www.paypal.com/donate/?business=introcarditaly@gmail.com" target="_blank" rel="noopener noreferrer">
-              <Button className="bg-pink-500 hover:bg-pink-600 text-white rounded-full shadow-lg transition-transform transform hover:scale-105 hidden sm:inline-flex">
-                <Heart className="mr-2 h-4 w-4" />
-                Donate
+               <Button className="bg-pink-500 hover:bg-pink-600 text-white rounded-full shadow-lg transition-transform transform hover:scale-105">
+                <Heart className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline">Donate</span>
               </Button>
             </Link>
             <ThemeToggle />
