@@ -36,18 +36,6 @@ export function Header() {
         </Link>
         <div className="flex flex-1 items-center justify-end gap-2 sm:gap-4">
           <nav className="hidden items-center gap-4 md:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  'text-sm font-medium transition-colors hover:text-primary',
-                  pathname === link.href ? 'text-primary' : 'text-muted-foreground'
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:text-primary focus-visible:ring-0">
@@ -67,6 +55,18 @@ export function Header() {
                 </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  'text-sm font-medium transition-colors hover:text-primary',
+                  pathname === link.href ? 'text-primary' : 'text-muted-foreground'
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
             <Link href="https://www.paypal.com/donate/?business=introcarditaly@gmail.com" target="_blank" rel="noopener noreferrer">
                <Button className="bg-pink-500 hover:bg-pink-600 text-white rounded-full shadow-lg transition-transform transform hover:scale-105">
@@ -93,20 +93,6 @@ export function Header() {
                       <Wrench className="h-6 w-6 text-primary" />
                       <span className="font-headline">ToolsyBro</span>
                     </Link>
-                    {navLinks.map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className={cn(
-                          'flex w-full items-center py-2 text-lg font-medium',
-                          pathname === link.href
-                            ? 'text-primary'
-                            : 'text-muted-foreground hover:text-primary'
-                        )}
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
                     <p className='font-bold text-lg text-foreground pt-4'>Free Tools</p>
                       {toolCategories.map((category) => (
                         <Link
@@ -118,6 +104,22 @@ export function Header() {
                           {category.name}
                         </Link>
                       ))}
+                    <div className="border-t pt-4 mt-4 grid gap-4">
+                        {navLinks.map((link) => (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            className={cn(
+                              'flex w-full items-center py-2 text-lg font-medium',
+                              pathname === link.href
+                                ? 'text-primary'
+                                : 'text-muted-foreground hover:text-primary'
+                            )}
+                          >
+                            {link.label}
+                          </Link>
+                        ))}
+                    </div>
                   </div>
                 </ScrollArea>
               </SheetContent>
