@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -168,8 +169,8 @@ export function InvoiceGenerator() {
                 <Download className="mr-2" /> Download PDF
             </Button>
         </div>
-        <div className="p-8 border rounded-lg">
-            <div className="grid grid-cols-2 gap-8 mb-8">
+        <div className="p-4 sm:p-8 border rounded-lg">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
                 <div className="space-y-2">
                     <Label>From</Label>
                     <Textarea value={from} onChange={e => setFrom(e.target.value)} rows={4} />
@@ -179,7 +180,7 @@ export function InvoiceGenerator() {
                     <Textarea value={to} onChange={e => setTo(e.target.value)} rows={4} />
                 </div>
             </div>
-             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
                 <div className="space-y-2">
                     <Label htmlFor="invoice-no">Invoice #</Label>
                     <Input id="invoice-no" value={invoiceNumber} onChange={e => setInvoiceNumber(e.target.value)} />
@@ -196,7 +197,7 @@ export function InvoiceGenerator() {
 
              {/* Line Items */}
              <div className='space-y-2'>
-                <div className='hidden md:grid md:grid-cols-[1fr_100px_100px_100px_40px] gap-4 font-semibold text-sm text-muted-foreground'>
+                <div className='hidden md:grid md:grid-cols-[1fr_80px_100px_100px_40px] gap-4 font-semibold text-sm text-muted-foreground px-2'>
                     <span>Description</span>
                     <span className='text-right'>Quantity</span>
                     <span className='text-right'>Rate</span>
@@ -204,11 +205,11 @@ export function InvoiceGenerator() {
                     <span></span>
                 </div>
                 {lineItems.map((item, index) => (
-                    <div key={item.id} className="grid grid-cols-1 md:grid-cols-[1fr_100px_100px_100px_40px] gap-4 items-center border-b pb-2">
+                    <div key={item.id} className="grid grid-cols-1 md:grid-cols-[1fr_80px_100px_100px_40px] gap-2 items-center border-b pb-2 md:border-none md:pb-0">
                         <Input placeholder="Item description" value={item.description} onChange={e => handleLineItemChange(item.id, 'description', e.target.value)} />
                         <Input type="number" className='text-right' placeholder="Qty" value={item.quantity} onChange={e => handleLineItemChange(item.id, 'quantity', e.target.value)} />
                         <Input type="number" className='text-right' placeholder="Rate" value={item.rate} onChange={e => handleLineItemChange(item.id, 'rate', e.target.value)} />
-                        <p className="text-right font-medium">{formatCurrency((parseFloat(item.quantity) || 0) * (parseFloat(item.rate) || 0))}</p>
+                        <p className="text-right font-medium hidden md:block">{formatCurrency((parseFloat(item.quantity) || 0) * (parseFloat(item.rate) || 0))}</p>
                         <Button variant="ghost" size="icon" onClick={() => handleRemoveLineItem(item.id)}>
                             <Trash2 className="h-4 w-4 text-destructive" />
                         </Button>
@@ -221,7 +222,7 @@ export function InvoiceGenerator() {
 
             {/* Total */}
              <div className="flex justify-end mt-8">
-                <div className="w-full max-w-sm space-y-2">
+                <div className="w-full max-w-xs space-y-2">
                     <div className="flex justify-between">
                         <span>Subtotal</span>
                         <span>{formatCurrency(subtotal)}</span>

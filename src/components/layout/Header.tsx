@@ -1,3 +1,4 @@
+
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -91,7 +92,7 @@ export function Header() {
                   <span className="sr-only">Toggle Menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="bg-background text-foreground p-0">
+              <SheetContent side="right" className="bg-background text-foreground p-0 w-full sm:max-w-xs">
                 <ScrollArea className="h-full">
                   <div className="grid gap-4 p-6">
                     <Link
@@ -106,17 +107,17 @@ export function Header() {
                         <Link
                           key={category.name}
                           href={`/?category=${encodeURIComponent(category.name)}`}
-                          className='flex w-full items-center py-2 text-md font-medium text-muted-foreground hover:text-primary'
+                          className='-m-2 flex items-center rounded-md p-2 text-md font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground'
                         >
                           <category.icon className="mr-2 h-4 w-4" />
                           {category.name}
                         </Link>
                       ))}
-                    <div className="border-t pt-4 mt-4 grid gap-4">
+                    <div className="border-t pt-4 mt-4 grid gap-2">
                       <Link
                           href="/"
                           className={cn(
-                            'flex w-full items-center py-2 text-lg font-medium',
+                            'flex w-full items-center rounded-md py-2 text-lg font-medium',
                             pathname === '/'
                               ? 'text-primary'
                               : 'text-muted-foreground hover:text-primary'
@@ -129,7 +130,7 @@ export function Header() {
                             key={link.href}
                             href={link.href}
                             className={cn(
-                              'flex w-full items-center py-2 text-lg font-medium',
+                              'flex w-full items-center rounded-md py-2 text-lg font-medium',
                               pathname === link.href
                                 ? 'text-primary'
                                 : 'text-muted-foreground hover:text-primary'

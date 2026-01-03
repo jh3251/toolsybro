@@ -23,11 +23,11 @@ export function Footer() {
                 <AdPlaceholder width={320} height={100} title="Footer Ad (320x100)" className="mb-4" />
             </div>
         </div>
-        <div className="flex flex-col items-center justify-between gap-4 border-t py-6 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 border-t py-6 text-center sm:flex-row sm:text-left">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} ToolsyBro. All rights reserved.
           </p>
-          <nav className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+          <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-6">
             {footerLinks.map(link => (
               <Link
                 key={link.href}
