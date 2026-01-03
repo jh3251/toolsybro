@@ -18,7 +18,7 @@ import {
   Brush,
   Image as ImageIcon,
   UploadCloud,
-  LucideIcon,
+  type LucideIcon,
   Globe,
   Phone,
   MessageSquare,
@@ -175,35 +175,24 @@ export function QrCodeGenerator() {
     }
   };
 
-    const handlePredefinedLogoSelect = (Icon: LucideIcon) => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        canvas.width = 256;
-        canvas.height = 256;
-        
-        // This is a way to get the path data for Lucide icons on the client
-        const iconInstance = <Icon color="black" size={256} />;
-        // The children of Lucide icons are path elements
-        const paths = (iconInstance.props.children as React.ReactElement[]).map(child => child.props.d);
-        
-        ctx.fillStyle = "white"; // Or transparent if you want
-        ctx.fillRect(0, 0, 256, 256);
-        
-        ctx.fillStyle = "black";
-        ctx.translate(0, 0)
-        
-        const scale = 256 / 24; // Lucide icons are on a 24x24 viewbox
-        ctx.scale(scale, scale);
-
-        paths.forEach(d => {
-            ctx.fill(new Path2D(d));
-        });
-        
-        const dataUrl = canvas.toDataURL('image/png');
-        setLogo(dataUrl);
-    }
+  const handlePredefinedLogoSelect = (Icon: LucideIcon) => {
+    const tempDiv = document.createElement('div');
+    const iconElement = <Icon color="black" size={256} />;
+    
+    // Use ReactDOM to render the icon into the temporary div
+    ReactDOM.render(iconElement, tempDiv, () => {
+        const svgElement = tempDiv.querySelector('svg');
+        if (svgElement) {
+            // Serialize the SVG element to a string
+            const svgString = new XMLSerializer().serializeToString(svgElement);
+            // Create a data URL from the SVG string
+            const dataUrl = `data:image/svg+xml;base64,${btoa(svgString)}`;
+            setLogo(dataUrl);
+        }
+        // Unmount the component and remove the div
+        ReactDOM.unmountComponentAtNode(tempDiv);
+    });
+  }
     
     const handleRemoveLogo = () => {
         setLogo(null);
