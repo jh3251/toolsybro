@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { renderToString } from 'react-dom/server';
 import { useState, useMemo, ChangeEvent, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -146,7 +147,7 @@ export function QrCodeGenerator() {
         width: 300,
         height: 300,
         type: 'svg',
-        data: qrCodeData || 'https://www.toolsybro.com',
+        data: qrCodeData || 'www.toolsybro.com',
         margin: 5,
         dotsOptions: {
             color: fgColor,
@@ -188,7 +189,13 @@ export function QrCodeGenerator() {
             qrCodeInstanceRef.current.update(qrOptions);
         }
     }
-  }, [qrOptions]);
+  }, []);
+
+  useEffect(() => {
+    if (qrCodeInstanceRef.current) {
+        qrCodeInstanceRef.current.update(qrOptions);
+    }
+  }, [qrOptions])
 
   const handleDownload = () => {
     qrCodeInstanceRef.current?.download({ name: "qrcode", extension: "png"});
@@ -206,51 +213,19 @@ export function QrCodeGenerator() {
   };
 
   const handlePredefinedLogoSelect = (Icon: LucideIcon) => {
-    const canvas = document.createElement('canvas');
-    const size = 256;
-    canvas.width = size;
-    canvas.height = size;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Create a temporary element to render the SVG and get its path data
-    const tempDiv = document.createElement('div');
-    const iconElement = React.createElement(Icon, { size: 200 }); // Render slightly smaller
-    
-    // This is a simplified way to get SVG path. It might not work for complex icons.
-    // For production, a library like `render-to-string` on server or a more robust client method is needed.
-    // A simplified client-side approach:
-    const tempIconContainer = document.createElement('div');
-    tempIconContainer.innerHTML = new XMLSerializer().serializeToString(
-      document.createRange().createContextualFragment(
-        `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${(Icon as any)().props.children.map((child: any) => child.props.d ? `<path d="${child.props.d}" />` : '').join('')}</svg>`
-      ).firstChild!
-    );
-    const svgElement = tempIconContainer.firstChild as SVGElement;
-    
-    const svgString = new XMLSerializer().serializeToString(svgElement);
-    const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-    const url = URL.createObjectURL(svgBlob);
-
-    const img = new Image();
-    img.onload = () => {
-      ctx.fillStyle = 'white'; // White background for the logo area
-      ctx.fillRect(0, 0, size, size);
-      const x = (size - img.width) / 2;
-      const y = (size - img.height) / 2;
-      ctx.drawImage(img, x, y);
-      setLogo(canvas.toDataURL('image/png'));
-      URL.revokeObjectURL(url);
-    };
-    img.src = url;
+    // Render the React component to an HTML string.
+    const iconElement = React.createElement(Icon, { size: 200, color: 'black' });
+    const svgString = renderToString(iconElement);
+    const dataUrl = `data:image/svg+xml;base64,${btoa(svgString)}`;
+    setLogo(dataUrl);
   };
     
-    const handleRemoveLogo = () => {
-        setLogo(null);
-        if (logoInputRef.current) {
-            logoInputRef.current.value = '';
-        }
-    }
+  const handleRemoveLogo = () => {
+      setLogo(null);
+      if (logoInputRef.current) {
+          logoInputRef.current.value = '';
+      }
+  }
 
   return (
     <Card>
