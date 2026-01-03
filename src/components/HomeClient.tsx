@@ -132,7 +132,7 @@ export function HomeClient() {
           Our Tools Collection
         </h1>
         <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
-          Free Tools - No Sign-Up - No Limits.
+          Free Tools - No Signup - No Limits.
         </p>
       </section>
       
