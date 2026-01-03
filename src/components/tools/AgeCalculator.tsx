@@ -3,12 +3,9 @@
 
 import { useState, useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Calendar } from '@/components/ui/calendar';
-import { Calendar as CalendarIcon, PartyPopper, Gift, Telescope, Users, Heart, Hourglass, Moon, Sun } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { format, differenceInYears, differenceInMonths, differenceInDays, differenceInWeeks, differenceInHours, differenceInMinutes, addYears, subDays, addMonths, addDays, isFuture } from 'date-fns';
+import { Input } from '@/components/ui/input';
+import { Gift, Moon, Sun, Hourglass } from 'lucide-react';
+import { format, differenceInYears, differenceInMonths, differenceInDays, differenceInWeeks, differenceInHours, differenceInMinutes, addYears, subDays, addMonths, isFuture } from 'date-fns';
 
 const StatCard = ({ icon: Icon, title, value, unit }: { icon: React.ElementType; title: string; value: string | number; unit: string }) => (
     <div className="flex flex-col items-center justify-center space-y-2 rounded-lg bg-muted/50 p-4 text-center h-full">
@@ -22,21 +19,25 @@ const StatCard = ({ icon: Icon, title, value, unit }: { icon: React.ElementType;
 
 
 export function AgeCalculator() {
-    const [dateOfBirth, setDateOfBirth] = useState<Date | undefined>(new Date(2000, 0, 1));
-    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+    const [dateOfBirth, setDateOfBirth] = useState<string>('2000-01-01');
 
     const ageDetails = useMemo(() => {
-        if (!dateOfBirth || isFuture(dateOfBirth)) return null;
+        if (!dateOfBirth) return null;
+
+        // Ensure the date string is interpreted correctly as local time, not UTC
+        const dob = new Date(dateOfBirth + 'T00:00:00');
+        
+        if (isNaN(dob.getTime()) || isFuture(dob)) return null;
 
         const now = new Date();
         
-        let years = differenceInYears(now, dateOfBirth);
-        let months = differenceInMonths(now, addYears(dateOfBirth, years));
-        let days = differenceInDays(now, addMonths(addYears(dateOfBirth, years), months));
+        let years = differenceInYears(now, dob);
+        let months = differenceInMonths(now, addYears(dob, years));
+        let days = differenceInDays(now, addMonths(addYears(dob, years), months));
 
         if (days < 0) {
-            const prevMonth = subDays(addMonths(addYears(dateOfBirth, years), months), 1);
-            days = differenceInDays(now, prevMonth);
+            const prevMonthDate = addMonths(addYears(dob, years), months - 1);
+            days = differenceInDays(now, prevMonthDate);
             months--;
             if (months < 0) {
                 months = 11;
@@ -44,18 +45,17 @@ export function AgeCalculator() {
             }
         }
         
-        const totalMonths = differenceInMonths(now, dateOfBirth);
-        const totalWeeks = differenceInWeeks(now, dateOfBirth);
-        const totalDays = differenceInDays(now, dateOfBirth);
-        const totalHours = differenceInHours(now, dateOfBirth);
-        const totalMinutes = differenceInMinutes(now, dateOfBirth);
+        const totalMonths = differenceInMonths(now, dob);
+        const totalWeeks = differenceInWeeks(now, dob);
+        const totalDays = differenceInDays(now, dob);
+        const totalHours = differenceInHours(now, dob);
+        const totalMinutes = differenceInMinutes(now, dob);
 
-        let nextBirthday = addYears(dateOfBirth, years);
-        if (isFuture(nextBirthday)) {
-            // Birthday hasn't happened this year
-        } else {
-            nextBirthday = addYears(nextBirthday, 1);
+        let nextBirthday = new Date(now.getFullYear(), dob.getMonth(), dob.getDate());
+        if (now > nextBirthday) {
+            nextBirthday.setFullYear(now.getFullYear() + 1);
         }
+        
         const daysToNextBirthday = differenceInDays(nextBirthday, now);
         
         return {
@@ -78,28 +78,12 @@ export function AgeCalculator() {
             <CardContent className="pt-6 space-y-8">
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                      <p className="text-lg font-medium">Your Date of Birth:</p>
-                     <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
-                        <PopoverTrigger asChild>
-                        <Button
-                            variant={"outline"}
-                            className={cn("w-[280px] justify-start text-left font-normal", !dateOfBirth && "text-muted-foreground")}
-                        >
-                            <CalendarIcon className="mr-2 h-4 w-4" />
-                            {dateOfBirth ? format(dateOfBirth, "PPP") : <span>Pick a date</span>}
-                        </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0">
-                        <Calendar
-                            mode="single"
-                            selected={dateOfBirth}
-                            onSelect={(newDate) => {
-                                setDateOfBirth(newDate);
-                                setIsCalendarOpen(false);
-                            }}
-                            initialFocus
-                        />
-                        </PopoverContent>
-                    </Popover>
+                     <Input
+                        type="date"
+                        value={dateOfBirth}
+                        onChange={(e) => setDateOfBirth(e.target.value)}
+                        className="w-[280px]"
+                     />
                 </div>
                 
                 {ageDetails ? (
@@ -133,7 +117,7 @@ export function AgeCalculator() {
                     </div>
                 ) : (
                     <div className="text-center text-muted-foreground py-10">
-                        {dateOfBirth && isFuture(dateOfBirth) ? "Please select a date in the past." : "Select your date of birth to calculate your age."}
+                        {dateOfBirth && new Date(dateOfBirth) > new Date() ? "Please select a date in the past." : "Select your date of birth to calculate your age."}
                     </div>
                 )}
             </CardContent>

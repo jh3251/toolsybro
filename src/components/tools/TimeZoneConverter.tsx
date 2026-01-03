@@ -1,16 +1,16 @@
+
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Calendar } from '@/components/ui/calendar';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
-import { format, parse } from 'date-fns';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { format } from 'date-fns';
 import { toZonedTime, fromZonedTime, formatInTimeZone } from 'date-fns-tz';
-import { Calendar as CalendarIcon, Clock, ChevronsUpDown, Check, ArrowRight } from 'lucide-react';
+import { Clock, ChevronsUpDown, Check, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '../ui/scroll-area';
 
@@ -63,9 +63,8 @@ const TimezoneSelector = ({ value, onChange }: { value: string; onChange: (value
 export function TimeZoneConverter() {
     const [fromTimezone, setFromTimezone] = useState('America/New_York');
     const [toTimezone, setToTimezone] = useState('Europe/London');
-    const [date, setDate] = useState<Date | undefined>(new Date());
+    const [date, setDate] = useState<string>(format(new Date(), 'yyyy-MM-dd'));
     const [time, setTime] = useState(format(new Date(), 'HH:mm'));
-    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
@@ -78,13 +77,11 @@ export function TimeZoneConverter() {
         if (!date) return { convertedTime: '', convertedDate: 'Invalid Date', fromOffset: '', toOffset: '' };
         
         try {
-            const timeParts = time.split(':');
-            const hours = parseInt(timeParts[0], 10);
-            const minutes = parseInt(timeParts[1], 10);
+            const combinedDateTimeString = `${date}T${time}:00`;
+            const fromDate = new Date(combinedDateTimeString);
 
-            if (isNaN(hours) || isNaN(minutes)) return { convertedTime: '', convertedDate: 'Invalid Time', fromOffset: '', toOffset: '' };
-
-            const fromDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hours, minutes);
+            if (isNaN(fromDate.getTime())) return { convertedTime: '', convertedDate: 'Invalid Time', fromOffset: '', toOffset: '' };
+            
             const utcDate = fromZonedTime(fromDate, fromTimezone);
             const toDate = toZonedTime(utcDate, toTimezone);
             
@@ -121,28 +118,11 @@ export function TimeZoneConverter() {
                         </div>
                         <div className="space-y-2">
                              <Label>Date</Label>
-                             <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
-                                <PopoverTrigger asChild>
-                                <Button
-                                    variant={"outline"}
-                                    className={cn("w-full justify-start text-left font-normal", !date && "text-muted-foreground")}
-                                >
-                                    <CalendarIcon className="mr-2 h-4 w-4" />
-                                    {date ? format(date, "PPP") : <span>Pick a date</span>}
-                                </Button>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-auto p-0">
-                                <Calendar
-                                    mode="single"
-                                    selected={date}
-                                    onSelect={(newDate) => {
-                                        setDate(newDate);
-                                        setIsCalendarOpen(false);
-                                    }}
-                                    initialFocus
-                                    />
-                                </PopoverContent>
-                            </Popover>
+                             <Input
+                                type="date"
+                                value={date}
+                                onChange={(e) => setDate(e.target.value)}
+                             />
                         </div>
                         <div className="space-y-2">
                             <Label>Time</Label>
