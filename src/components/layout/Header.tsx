@@ -11,11 +11,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { Menu, Wrench, ChevronDown, Heart } from 'lucide-react';
+import { Menu, ChevronDown, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toolCategories } from '@/lib/data';
 import { ThemeToggle } from './ThemeToggle';
 import { ScrollArea } from '../ui/scroll-area';
+import Image from 'next/image';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -31,7 +32,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-          <Wrench className="h-7 w-7 text-primary" />
+          <Image src="https://i.postimg.cc/JzP4jd7H/gghg.png" alt="ToolsyBro Logo" width={40} height={40} className="h-10 w-10" />
           <span className="font-headline hidden sm:inline-block text-foreground">ToolsyBro</span>
         </Link>
         <div className="flex flex-1 items-center justify-end gap-2 sm:gap-4">
@@ -90,7 +91,7 @@ export function Header() {
                       href="/"
                       className="flex items-center gap-2 font-bold text-lg text-foreground"
                     >
-                      <Wrench className="h-6 w-6 text-primary" />
+                      <Image src="https://i.postimg.cc/JzP4jd7H/gghg.png" alt="ToolsyBro Logo" width={32} height={32} className="h-8 w-8" />
                       <span className="font-headline">ToolsyBro</span>
                     </Link>
                     <p className='font-bold text-lg text-foreground pt-4'>Free Tools</p>
