@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useMemo, useRef } from 'react';
@@ -237,7 +236,7 @@ export function NotesOrganizer() {
                 <CardTitle>{note.title}</CardTitle>
               </CardHeader>
               <CardContent className="p-4 pt-0">
-                <p className="text-muted-foreground line-clamp-4">{note.content}</p>
+                <p className="text-muted-foreground">{note.content}</p>
               </CardContent>
               <CardFooter className="flex justify-between p-4 pt-0">
                 <div className='flex'>
