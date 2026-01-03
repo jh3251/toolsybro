@@ -15,6 +15,7 @@ import { Menu, Wrench, ChevronDown, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toolCategories } from '@/lib/data';
 import { ThemeToggle } from './ThemeToggle';
+import { ScrollArea } from '../ui/scroll-area';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -82,41 +83,43 @@ export function Header() {
                   <span className="sr-only">Toggle Menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="bg-background text-foreground">
-                <div className="grid gap-4 py-6">
-                  <Link
-                    href="/"
-                    className="flex items-center gap-2 font-bold text-lg text-foreground"
-                  >
-                    <Wrench className="h-6 w-6 text-primary" />
-                    <span className="font-headline">ToolsyBro</span>
-                  </Link>
-                  {navLinks.map((link) => (
+              <SheetContent side="right" className="bg-background text-foreground p-0">
+                <ScrollArea className="h-full">
+                  <div className="grid gap-4 p-6">
                     <Link
-                      key={link.href}
-                      href={link.href}
-                      className={cn(
-                        'flex w-full items-center py-2 text-lg font-medium',
-                        pathname === link.href
-                          ? 'text-primary'
-                          : 'text-muted-foreground hover:text-primary'
-                      )}
+                      href="/"
+                      className="flex items-center gap-2 font-bold text-lg text-foreground"
                     >
-                      {link.label}
+                      <Wrench className="h-6 w-6 text-primary" />
+                      <span className="font-headline">ToolsyBro</span>
                     </Link>
-                  ))}
-                   <p className='font-bold text-lg text-foreground pt-4'>Free Tools</p>
-                    {toolCategories.map((category) => (
+                    {navLinks.map((link) => (
                       <Link
-                        key={category.name}
-                        href={`/?category=${encodeURIComponent(category.name)}`}
-                        className='flex w-full items-center py-2 text-md font-medium text-muted-foreground hover:text-primary'
+                        key={link.href}
+                        href={link.href}
+                        className={cn(
+                          'flex w-full items-center py-2 text-lg font-medium',
+                          pathname === link.href
+                            ? 'text-primary'
+                            : 'text-muted-foreground hover:text-primary'
+                        )}
                       >
-                        <category.icon className="mr-2 h-4 w-4" />
-                        {category.name}
+                        {link.label}
                       </Link>
                     ))}
-                </div>
+                    <p className='font-bold text-lg text-foreground pt-4'>Free Tools</p>
+                      {toolCategories.map((category) => (
+                        <Link
+                          key={category.name}
+                          href={`/?category=${encodeURIComponent(category.name)}`}
+                          className='flex w-full items-center py-2 text-md font-medium text-muted-foreground hover:text-primary'
+                        >
+                          <category.icon className="mr-2 h-4 w-4" />
+                          {category.name}
+                        </Link>
+                      ))}
+                  </div>
+                </ScrollArea>
               </SheetContent>
             </Sheet>
           </div>
