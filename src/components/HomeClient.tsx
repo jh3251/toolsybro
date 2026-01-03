@@ -2,17 +2,18 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { toolCategories } from '@/lib/data';
 import type { ToolCategory } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { AdPlaceholder } from '@/components/layout/AdPlaceholder';
-import { ArrowLeft, Heart, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Heart, ArrowRight, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { FeatureHighlights } from '@/components/FeatureHighlights';
 import { Stats } from '@/components/Stats';
+import { Input } from '@/components/ui/input';
 
 const toolColors = [
   'border-blue-500',
@@ -51,6 +52,7 @@ export function HomeClient() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get('category');
   const [selectedCategory, setSelectedCategory] = useState<ToolCategory | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const categoryName = searchParams.get('category');
@@ -61,6 +63,22 @@ export function HomeClient() {
       setSelectedCategory(null);
     }
   }, [searchParams]);
+
+  const filteredCategories = useMemo(() => {
+    if (!searchQuery) {
+      return toolCategories;
+    }
+    const lowerCaseQuery = searchQuery.toLowerCase();
+
+    return toolCategories.map(category => {
+        const filteredTools = category.tools.filter(tool => 
+            tool.name.toLowerCase().includes(lowerCaseQuery) || 
+            tool.description.toLowerCase().includes(lowerCaseQuery)
+        );
+        return { ...category, tools: filteredTools };
+    }).filter(category => category.tools.length > 0);
+
+  }, [searchQuery]);
 
   const handleCategoryClick = (category: ToolCategory) => {
     setSelectedCategory(category);
@@ -134,10 +152,22 @@ export function HomeClient() {
         <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
           Free Tools - No Signup - No Limits.
         </p>
+         <div className="mt-6 max-w-lg mx-auto">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Search for a tool (e.g., 'image compressor', 'json')..."
+                className="w-full rounded-full pl-10 h-12 text-base"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+          </div>
       </section>
       
       <div className="grid w-full gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {toolCategories.map((category, categoryIndex) => (
+        {filteredCategories.map((category, categoryIndex) => (
           <button
             key={category.name}
             onClick={() => handleCategoryClick(category)}
