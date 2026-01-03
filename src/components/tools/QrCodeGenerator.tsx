@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useMemo, ChangeEvent, useRef, useEffect } from 'react';
@@ -44,7 +43,7 @@ import { Slider } from '../ui/slider';
 import { Switch } from '../ui/switch';
 import QRCodeStyling, { type Options as QRCodeStylingOptions, type DotType, type CornerSquareType, type CornerDotType } from 'qr-code-styling';
 import { QrCodeBodyStyle, QrCodeEyeFrameStyle, QrCodeEyeBallStyle } from './QrCodeStyles';
-import ReactDOM from 'react-dom';
+import { renderToString } from 'react-dom/server';
 
 type QrType = 'link' | 'text' | 'email' | 'wifi';
 
@@ -109,55 +108,53 @@ export function QrCodeGenerator() {
     }
   }, [activeTab, link, text, emailTo, emailSubject, emailBody, wifiSsid, wifiPassword, wifiEncryption]);
 
-  useEffect(() => {
-    if (qrRef.current) {
-      qrRef.current.innerHTML = '';
-      qrCodeInstanceRef.current = new QRCodeStyling({
+  const qrOptions = useMemo((): QRCodeStylingOptions => {
+    const options: QRCodeStylingOptions = {
         width: 300,
         height: 300,
         type: 'svg',
         data: qrCodeData || 'https://firebasetoolbox.io',
         margin: 5,
-      });
-      qrCodeInstanceRef.current.append(qrRef.current);
+        dotsOptions: {
+            color: fgColor,
+            type: dotStyle,
+        },
+        backgroundOptions: {
+            color: bgColor,
+        },
+        cornersSquareOptions: {
+            type: eyeFrameStyle,
+            color: useMarkerColors ? eyeFrameColor || fgColor : fgColor,
+        },
+        cornersDotOptions: {
+            type: eyeBallStyle,
+            color: useMarkerColors ? eyeBallColor || fgColor : fgColor,
+        },
+        imageOptions: {
+            hideBackgroundDots: removeLogoBg,
+            imageSize: logoSize,
+            margin: 4,
+        },
+    };
+    if(logo) {
+        options.image = logo;
+    } else {
+        // @ts-ignore
+        options.image = null;
     }
-  }, []);
+    return options;
+  }, [qrCodeData, fgColor, bgColor, dotStyle, eyeFrameStyle, eyeBallStyle, logo, logoSize, removeLogoBg, useMarkerColors, eyeFrameColor, eyeBallColor]);
 
   useEffect(() => {
-    if (qrCodeInstanceRef.current) {
-        const options: QRCodeStylingOptions = {
-            data: qrCodeData,
-            dotsOptions: {
-                color: fgColor,
-                type: dotStyle,
-            },
-            backgroundOptions: {
-                color: bgColor,
-            },
-            cornersSquareOptions: {
-                type: eyeFrameStyle,
-                color: useMarkerColors ? eyeFrameColor || fgColor : fgColor,
-            },
-            cornersDotOptions: {
-                type: eyeBallStyle,
-                color: useMarkerColors ? eyeBallColor || fgColor : fgColor,
-            },
-            imageOptions: {
-                hideBackgroundDots: removeLogoBg,
-                imageSize: logoSize,
-                margin: 4,
-            },
-        };
-        if(logo) {
-            options.image = logo;
+    if (qrRef.current) {
+        if (!qrCodeInstanceRef.current) {
+            qrCodeInstanceRef.current = new QRCodeStyling(qrOptions);
+            qrCodeInstanceRef.current.append(qrRef.current);
         } else {
-            // @ts-ignore
-            options.image = null;
+            qrCodeInstanceRef.current.update(qrOptions);
         }
-
-      qrCodeInstanceRef.current.update(options);
     }
-  }, [qrCodeData, fgColor, bgColor, dotStyle, eyeFrameStyle, eyeBallStyle, logo, logoSize, removeLogoBg, useMarkerColors, eyeFrameColor, eyeBallColor]);
+  }, [qrOptions]);
 
 
   const handleDownload = () => {
@@ -176,23 +173,10 @@ export function QrCodeGenerator() {
   };
 
   const handlePredefinedLogoSelect = (Icon: LucideIcon) => {
-    const tempDiv = document.createElement('div');
-    const iconElement = <Icon color="black" size={256} />;
-    
-    // Use ReactDOM to render the icon into the temporary div
-    ReactDOM.render(iconElement, tempDiv, () => {
-        const svgElement = tempDiv.querySelector('svg');
-        if (svgElement) {
-            // Serialize the SVG element to a string
-            const svgString = new XMLSerializer().serializeToString(svgElement);
-            // Create a data URL from the SVG string
-            const dataUrl = `data:image/svg+xml;base64,${btoa(svgString)}`;
-            setLogo(dataUrl);
-        }
-        // Unmount the component and remove the div
-        ReactDOM.unmountComponentAtNode(tempDiv);
-    });
-  }
+    const svgString = renderToString(<Icon color="black" size={256} />);
+    const dataUrl = `data:image/svg+xml;base64,${btoa(svgString)}`;
+    setLogo(dataUrl);
+  };
     
     const handleRemoveLogo = () => {
         setLogo(null);
