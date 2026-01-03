@@ -65,6 +65,7 @@ export function TimeZoneConverter() {
     const [toTimezone, setToTimezone] = useState('Europe/London');
     const [date, setDate] = useState<Date | undefined>(new Date());
     const [time, setTime] = useState(format(new Date(), 'HH:mm'));
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
     const { convertedTime, convertedDate, fromOffset, toOffset } = useMemo(() => {
         if (!date) return { convertedTime: '', convertedDate: 'Invalid Date', fromOffset: '', toOffset: '' };
@@ -109,7 +110,7 @@ export function TimeZoneConverter() {
                         </div>
                         <div className="space-y-2">
                              <Label>Date</Label>
-                             <Popover>
+                             <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
                                 <PopoverTrigger asChild>
                                 <Button
                                     variant={"outline"}
@@ -129,6 +130,10 @@ export function TimeZoneConverter() {
                                     fromYear={new Date().getFullYear() - 100}
                                     toYear={new Date().getFullYear() + 10}
                                 />
+                                <div className="p-2 border-t flex justify-between">
+                                    <Button variant="ghost" onClick={() => { setDate(new Date()); }}>Today</Button>
+                                    <Button variant="ghost" onClick={() => { setDate(undefined); }}>Clear</Button>
+                                </div>
                                 </PopoverContent>
                             </Popover>
                         </div>

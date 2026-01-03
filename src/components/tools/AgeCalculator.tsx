@@ -23,6 +23,7 @@ const StatCard = ({ icon: Icon, title, value, unit }: { icon: React.ElementType;
 
 export function AgeCalculator() {
     const [dateOfBirth, setDateOfBirth] = useState<Date | undefined>(new Date(2000, 0, 1));
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
     const ageDetails = useMemo(() => {
         if (!dateOfBirth || isFuture(dateOfBirth)) return null;
@@ -77,7 +78,7 @@ export function AgeCalculator() {
             <CardContent className="pt-6 space-y-8">
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                      <p className="text-lg font-medium">Your Date of Birth:</p>
-                     <Popover>
+                     <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
                         <PopoverTrigger asChild>
                         <Button
                             variant={"outline"}
@@ -97,6 +98,10 @@ export function AgeCalculator() {
                             fromYear={1900}
                             toYear={new Date().getFullYear()}
                         />
+                         <div className="p-2 border-t flex justify-between">
+                            <Button variant="ghost" onClick={() => { setDateOfBirth(new Date()); }}>Today</Button>
+                            <Button variant="ghost" onClick={() => { setDateOfBirth(undefined); }}>Clear</Button>
+                        </div>
                         </PopoverContent>
                     </Popover>
                 </div>
@@ -139,4 +144,3 @@ export function AgeCalculator() {
         </Card>
     );
 }
-
