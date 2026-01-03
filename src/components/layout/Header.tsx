@@ -1,4 +1,3 @@
-
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -19,7 +18,6 @@ import { ScrollArea } from '../ui/scroll-area';
 import Image from 'next/image';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
   { href: '/blog', label: 'Blog' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
@@ -56,6 +54,15 @@ export function Header() {
                 </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
+            <Link
+              href="/"
+              className={cn(
+                'text-sm font-medium transition-colors hover:text-primary',
+                pathname === '/' ? 'text-primary' : 'text-muted-foreground'
+              )}
+            >
+              Home
+            </Link>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -69,7 +76,7 @@ export function Header() {
               </Link>
             ))}
           </nav>
-            <Link href="https://www.paypal.com/donate/?business=introcarditaly@gmail.com" target="_blank" rel="noopener noreferrer">
+            <Link href="https://revolut.me/jabedhy13p" target="_blank" rel="noopener noreferrer">
                <Button className="bg-pink-500 hover:bg-pink-600 text-white rounded-full shadow-lg transition-transform transform hover:scale-105">
                 <Heart className="h-4 w-4 sm:mr-2" />
                 <span className="hidden sm:inline">Donate</span>
@@ -106,6 +113,17 @@ export function Header() {
                         </Link>
                       ))}
                     <div className="border-t pt-4 mt-4 grid gap-4">
+                      <Link
+                          href="/"
+                          className={cn(
+                            'flex w-full items-center py-2 text-lg font-medium',
+                            pathname === '/'
+                              ? 'text-primary'
+                              : 'text-muted-foreground hover:text-primary'
+                          )}
+                        >
+                          Home
+                        </Link>
                         {navLinks.map((link) => (
                           <Link
                             key={link.href}
