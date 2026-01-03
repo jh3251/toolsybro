@@ -6,14 +6,16 @@ import { blogPosts } from '@/lib/data';
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = 'https://www.toolsybro.com'; // Replace with your actual domain
 
-  // Get all tool pages
+  // Get all tool pages, excluding placeholder pages
   const toolUrls = toolCategories.flatMap(category => 
-    category.tools.map(tool => ({
-      url: `${siteUrl}${tool.href}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    }))
+    category.tools
+      .filter(tool => !tool.href.includes('coming-soon')) // Filter out placeholder pages
+      .map(tool => ({
+        url: `${siteUrl}${tool.href}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      }))
   );
 
   // Get all blog post pages
