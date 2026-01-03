@@ -10,7 +10,13 @@ const contactFormSchema = z.object({
   message: z.string().min(10, "Message must be at least 10 characters."),
 });
 
-export async function submitContactForm(prevState: any, formData: FormData) {
+type FormState = {
+    type: 'success' | 'error';
+    message: string;
+    errors?: any;
+}
+
+export async function submitContactForm(prevState: any, formData: FormData): Promise<FormState> {
   const validatedFields = contactFormSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
@@ -28,8 +34,8 @@ export async function submitContactForm(prevState: any, formData: FormData) {
   try {
     const { name, email, message } = validatedFields.data;
 
-    // Call the GenAI flow to summarize the message
-    const { summary } = await summarizeContactFormSubmission({
+    // Call the Genkit flow to forward the message to the specified email
+    await summarizeContactFormSubmission({
         name,
         email,
         message,
@@ -37,8 +43,7 @@ export async function submitContactForm(prevState: any, formData: FormData) {
 
     return {
       type: "success",
-      message: "Thank you for your message! We've received it.",
-      summary: `AI Summary: "${summary}"`,
+      message: "Thank you for your message!",
     };
   } catch (error) {
     console.error("Error submitting contact form:", error);

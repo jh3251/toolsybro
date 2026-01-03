@@ -1,13 +1,13 @@
 'use client';
 
+import { useActionState, useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
-import { useEffect, useRef, useActionState } from 'react';
 import { submitContactForm } from '@/lib/actions';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 
@@ -15,7 +15,6 @@ const initialState = {
   type: '',
   message: '',
   errors: null,
-  summary: null,
 };
 
 function SubmitButton() {
@@ -40,13 +39,6 @@ export function ContactForm() {
         description: state.message,
         variant: 'default',
       });
-      if (state.summary) {
-         toast({
-            title: 'AI Summary',
-            description: state.summary,
-            variant: 'default',
-         });
-      }
       formRef.current?.reset();
     } else if (state.type === 'error') {
       toast({

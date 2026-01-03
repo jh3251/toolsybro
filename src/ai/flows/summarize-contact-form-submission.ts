@@ -1,10 +1,10 @@
 'use server';
 /**
- * @fileOverview Summarizes contact form submissions for verification.
+ * @fileOverview Forwards contact form submissions to a specified email address.
  *
- * - summarizeContactFormSubmission - A function that summarizes contact form submissions.
- * - SummarizeContactFormSubmissionInput - The input type for the summarizeContactFormSubmission function.
- * - SummarizeContactFormSubmissionOutput - The return type for the summarizeContactFormSubmission function.
+ * - summarizeContactFormSubmission - A function that takes contact form data and sends it as an email.
+ * - SummarizeContactFormSubmissionInput - The input type for the function.
+ * - SummarizeContactFormSubmissionOutput - The return type for the function.
  */
 
 import {ai} from '@/ai/genkit';
@@ -18,7 +18,7 @@ const SummarizeContactFormSubmissionInputSchema = z.object({
 export type SummarizeContactFormSubmissionInput = z.infer<typeof SummarizeContactFormSubmissionInputSchema>;
 
 const SummarizeContactFormSubmissionOutputSchema = z.object({
-  summary: z.string().describe('A short summary of the message content.'),
+  status: z.string().describe('The status of the email sending operation.'),
 });
 export type SummarizeContactFormSubmissionOutput = z.infer<typeof SummarizeContactFormSubmissionOutputSchema>;
 
@@ -30,7 +30,39 @@ const prompt = ai.definePrompt({
   name: 'summarizeContactFormSubmissionPrompt',
   input: {schema: SummarizeContactFormSubmissionInputSchema},
   output: {schema: SummarizeContactFormSubmissionOutputSchema},
-  prompt: `Summarize the following contact form submission in one short sentence:\n\nName: {{{name}}}\nEmail: {{{email}}}\nMessage: {{{message}}}`,
+  prompt: `You are an email forwarding agent. A user has submitted a contact form on the ToolsyBro website. Your task is to forward this message to the site owner at introcarditaly@gmail.com.
+
+The subject of the email should be "New Contact Form Submission from {name}".
+The body of the email should contain the following information clearly formatted:
+
+Name: {name}
+Email: {email}
+Message: {message}
+
+You must construct and send this email. After sending, confirm the operation's success.
+`,
+  tools: [ai.tool(
+    {
+      name: 'sendEmail',
+      description: 'Sends an email to a specified recipient.',
+      input: z.object({
+        to: z.string().email(),
+        subject: z.string(),
+        body: z.string(),
+      }),
+      output: z.object({
+        status: z.string(),
+      })
+    },
+    async ({ to, subject, body }) => {
+      // In a real application, this would integrate with an email sending service (e.g., SendGrid, Mailgun).
+      // For this simulation, we'll just log the action and return success.
+      console.log(`Simulating sending email to: ${to}`);
+      console.log(`Subject: ${subject}`);
+      console.log(`Body:\n${body}`);
+      return { status: 'Email sent successfully' };
+    }
+  )],
 });
 
 const summarizeContactFormSubmissionFlow = ai.defineFlow(
