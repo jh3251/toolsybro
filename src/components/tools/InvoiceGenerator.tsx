@@ -31,8 +31,8 @@ export function InvoiceGenerator() {
   const [invoiceNumber, setInvoiceNumber] = useState('001');
   const [from, setFrom] = useState('Your Company\n123 Street\nCity, State, 12345');
   const [to, setTo] = useState('Client Company\n456 Avenue\nCity, State, 67890');
-  const [date, setDate] = useState<Date | undefined>(new Date());
-  const [dueDate, setDueDate] = useState<Date | undefined>();
+  const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'));
+  const [dueDate, setDueDate] = useState('');
   const [lineItems, setLineItems] = useState<LineItem[]>([
     { id: 1, description: 'Website Design', quantity: '1', rate: '1500' },
   ]);
@@ -97,11 +97,11 @@ export function InvoiceGenerator() {
         page.drawText(`Invoice #: ${invoiceNumber}`, { x: 350, y, font, size: fontSize });
         y -= 15;
         if (date) {
-            page.drawText(`Date: ${format(date, 'MMMM d, yyyy')}`, { x: 350, y, font, size: fontSize });
+            page.drawText(`Date: ${format(new Date(date), 'MMMM d, yyyy')}`, { x: 350, y, font, size: fontSize });
             y -= 15;
         }
         if (dueDate) {
-          page.drawText(`Due Date: ${format(dueDate, 'MMMM d, yyyy')}`, { x: 350, y, font, size: fontSize });
+          page.drawText(`Due Date: ${format(new Date(dueDate), 'MMMM d, yyyy')}`, { x: 350, y, font, size: fontSize });
           y -= 15;
         }
 
@@ -186,46 +186,11 @@ export function InvoiceGenerator() {
                 </div>
                 <div className="space-y-2">
                     <Label htmlFor="date">Date</Label>
-                    <Popover>
-                        <PopoverTrigger asChild>
-                        <Button
-                            variant={"outline"}
-                            className={cn("w-full justify-start text-left font-normal", !date && "text-muted-foreground")}
-                        >
-                            <CalendarIcon className="mr-2 h-4 w-4" />
-                            {date ? format(date, "PPP") : <span>Pick a date</span>}
-                        </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0">
-                        <Calendar
-                            mode="single"
-                            selected={date}
-                            onSelect={setDate}
-                            initialFocus
-                        />
-                        </PopoverContent>
-                    </Popover>
+                    <Input id="date" type="date" value={date} onChange={e => setDate(e.target.value)} />
                 </div>
                  <div className="space-y-2">
                     <Label htmlFor="due-date">Due Date</Label>
-                    <Popover>
-                        <PopoverTrigger asChild>
-                        <Button
-                            variant={"outline"}
-                            className={cn("w-full justify-start text-left font-normal", !dueDate && "text-muted-foreground")}
-                        >
-                            <CalendarIcon className="mr-2 h-4 w-4" />
-                            {dueDate ? format(dueDate, "PPP") : <span>Pick a date</span>}
-                        </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0">
-                        <Calendar
-                            mode="single"
-                            selected={dueDate}
-                            onSelect={setDueDate}
-                        />
-                        </PopoverContent>
-                    </Popover>
+                    <Input id="due-date" type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} />
                 </div>
              </div>
 
