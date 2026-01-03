@@ -38,6 +38,11 @@ export default function RootLayout({
 
   useEffect(() => {
     setIsClient(true);
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(err => {
+        console.error('Service Worker registration failed:', err);
+      });
+    }
   }, []);
 
   return (
@@ -45,6 +50,7 @@ export default function RootLayout({
        <head>
         <title>ToolsyBro | 100% Free Online Tools for Everyone</title>
         <meta name="description" content="A comprehensive collection of 90+ free online tools. No sign-up required, no limits. All tools are privacy-focused and process data locally in your browser." />
+        <link rel="manifest" href="/manifest.webmanifest" />
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
