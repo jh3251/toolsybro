@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { useUser, useFirestore, useCollection, useMemoFirebase } from '@/firebase';
 import { collection, doc, serverTimestamp, Timestamp } from 'firebase/firestore';
 import { initiateAnonymousSignIn, useAuth } from '@/firebase';
@@ -9,6 +9,7 @@ import {
   setDocumentNonBlocking,
   deleteDocumentNonBlocking,
 } from '@/firebase/non-blocking-updates';
+import html2canvas from 'html2canvas';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -19,8 +20,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Loader2, PlusCircle, Trash2, Edit, Calendar as CalendarIcon } from 'lucide-react';
+import { Loader2, PlusCircle, Trash2, Edit, Calendar as CalendarIcon, Camera } from 'lucide-react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -40,8 +40,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { Label } from '../ui/label';
@@ -132,7 +130,7 @@ function TaskForm({
   );
 }
 
-function TaskCard({ task, onEdit, onDelete }: { task: StudyTask, onEdit: () => void, onDelete: () => void }) {
+function TaskCard({ task, onEdit, onDelete, onScreenshot }: { task: StudyTask, onEdit: () => void, onDelete: () => void, onScreenshot: () => void }) {
     const dueDate = task.dueDate ? task.dueDate.toDate() : null;
     const isOverdue = dueDate && !task.status.includes('Done') ? dueDate < new Date() : false;
 
@@ -151,6 +149,7 @@ function TaskCard({ task, onEdit, onDelete }: { task: StudyTask, onEdit: () => v
                 )}
             </CardContent>
             <CardFooter className='flex justify-end gap-1 p-2'>
+                <Button variant="ghost" size="icon" onClick={onScreenshot}><Camera className="h-4 w-4" /></Button>
                 <Button variant="ghost" size="icon" onClick={onEdit}><Edit className="h-4 w-4" /></Button>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
@@ -181,6 +180,8 @@ export function StudyPlanner() {
 
   const [selectedTask, setSelectedTask] = useState<StudyTask | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const taskCardRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const tasksCollectionRef = useMemoFirebase(() => {
     if (firestore && user) {
@@ -220,6 +221,32 @@ export function StudyPlanner() {
     const docRef = doc(firestore, 'users', user.uid, 'studyTasks', taskId);
     deleteDocumentNonBlocking(docRef);
   };
+
+  const handleClearAll = () => {
+    if (passwordInput !== '123') {
+        alert('Incorrect password.');
+        return;
+    }
+    if (!firestore || !user || !tasks) return;
+    tasks.forEach(task => {
+        const docRef = doc(firestore, 'users', user.uid, 'studyTasks', task.id);
+        deleteDocumentNonBlocking(docRef);
+    });
+    setPasswordInput('');
+  };
+
+  const handleScreenshot = (taskId: string) => {
+    const taskElement = taskCardRefs.current[taskId];
+    if (taskElement) {
+      html2canvas(taskElement, { useCORS: true, backgroundColor: null }).then((canvas) => {
+        const link = document.createElement('a');
+        link.download = `task-${taskId}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+  };
+
 
   const openForm = (task?: StudyTask | null) => {
     setSelectedTask(task || null);
@@ -261,7 +288,35 @@ export function StudyPlanner() {
   return (
     <Dialog open={isFormOpen} onOpenChange={(open) => { if (!open) setSelectedTask(null); setIsFormOpen(open);}}>
       <div className="space-y-6">
-        <div className="flex justify-end">
+        <div className="flex justify-end gap-2">
+           <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="destructive" disabled={!tasks || tasks.length === 0}>
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  Clear All
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will permanently delete all your tasks. This action cannot be undone. To confirm, please type '123' below.
+                  </AlertDialogDescription>
+                  <Input
+                    type="password"
+                    placeholder="Enter password to confirm"
+                    value={passwordInput}
+                    onChange={(e) => setPasswordInput(e.target.value)}
+                    />
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel onClick={() => setPasswordInput('')}>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleClearAll} disabled={passwordInput !== '123'}>
+                    Delete All Tasks
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
            <DialogTrigger asChild>
                 <Button onClick={() => openForm(null)}>
                     <PlusCircle className="mr-2 h-4 w-4" /> New Task
@@ -278,12 +333,14 @@ export function StudyPlanner() {
                         <h3 className='font-semibold text-lg mb-4 text-center'>{status}</h3>
                         <div className='space-y-4 min-h-[100px]'>
                             {tasksByStatus[status].map(task => (
-                                <TaskCard 
-                                    key={task.id}
-                                    task={task}
-                                    onEdit={() => openForm(task)}
-                                    onDelete={() => handleDeleteTask(task.id)}
-                                />
+                                <div ref={(el) => (taskCardRefs.current[task.id] = el)} key={task.id}>
+                                  <TaskCard 
+                                      task={task}
+                                      onEdit={() => openForm(task)}
+                                      onDelete={() => handleDeleteTask(task.id)}
+                                      onScreenshot={() => handleScreenshot(task.id)}
+                                  />
+                                </div>
                             ))}
                              {tasksByStatus[status].length === 0 && (
                                 <div className='text-center text-sm text-muted-foreground pt-4'>
