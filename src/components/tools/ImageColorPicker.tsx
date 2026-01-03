@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { UploadCloud, Trash2, Copy, Palette, Eye, Star, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { useColor } from 'color-thief-react';
 import {
   Tooltip,
   TooltipContent,
@@ -23,12 +22,6 @@ export function ImageColorPicker() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { toast } = useToast();
-
-  const { data: colorPalette } = useColor(imageUrl, 'hex', {
-    crossOrigin: 'anonymous',
-    quality: 10,
-    count: 8,
-  });
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -84,7 +77,7 @@ export function ImageColorPicker() {
     const rect = canvas.getBoundingClientRect();
     const x = Math.floor(e.clientX - rect.left);
     const y = Math.floor(e.clientY - rect.top);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
     if (!ctx) return;
     const pixel = ctx.getImageData(x, y, 1, 1).data;
     const r = pixel[0];
@@ -163,35 +156,6 @@ export function ImageColorPicker() {
                 ) : (
                     <div className="h-24 flex items-center justify-center text-muted-foreground text-sm">
                         Hover to see color details
-                    </div>
-                )}
-
-                 <div className="space-y-2">
-                    <h3 className="text-lg font-semibold flex items-center gap-2"><Palette /> Generated Palette</h3>
-                     <p className="text-sm text-muted-foreground">Click a color to add it to your saved palette.</p>
-                </div>
-                {colorPalette ? (
-                  <div className="grid grid-cols-4 lg:grid-cols-8 gap-2">
-                    {colorPalette.map((color) => (
-                      <TooltipProvider key={color}>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <div
-                              className="h-12 w-12 rounded-md border cursor-pointer transition-transform hover:scale-110"
-                              style={{ backgroundColor: color }}
-                              onClick={() => handleSaveColor(color)}
-                            />
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>{color}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    ))}
-                  </div>
-                ) : (
-                    <div className="h-16 flex items-center justify-center text-muted-foreground text-sm">
-                        Generating palette...
                     </div>
                 )}
                  <Button variant="outline" onClick={handleReset} className="w-full">
