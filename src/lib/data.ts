@@ -208,7 +208,6 @@ export const toolCategories: ToolCategory[] = [
       { name: 'GST / VAT Calculator', description: 'Calculate Goods & Services Tax with our free tools for a lifetime.', href: '/tools/gst-vat-calculator', icon: Percent },
       { name: 'Break-Even Calculator', description: 'Calculate your break-even point with our 100% free tools.', href: '/tools/break-even-calculator', icon: CircleDollarSign },
       { name: 'Salary Calculator', description: 'Calculate your take-home salary with our free tools for a lifetime.', href: '/tools/salary-calculator', icon: Calculator },
-      { name: 'Tax Estimator', description: 'Estimate your income tax with our 100% free tools.', href: '/tools/tax-estimator', icon: Landmark },
       { name: 'Currency Profit Calculator', description: 'Calculate currency trading profits with our free tools for a lifetime.', href: '/tools/currency-profit-calculator', icon: Banknote },
     ],
   },
@@ -218,14 +217,7 @@ export const toolCategories: ToolCategory[] = [
     tools: [
       { name: 'Meta Tag Generator', description: 'Generate meta tags for your site with our 100% free tools.', href: '/tools/meta-tag-generator', icon: Tag },
       { name: 'Keyword Density Checker', description: 'Check keyword density of a text with our free tools for a lifetime.', href: '/tools/keyword-density-checker', icon: Search },
-      { name: 'SEO Analyzer', description: 'Analyze your webpage for SEO with our 100% free tools.', href: '/tools/seo-analyzer', icon: Search },
-      { name: 'Page Speed Checker', description: 'Check your website\'s speed with our free tools for a lifetime.', href: '/tools/page-speed-checker', icon: Timer },
-      { name: 'Sitemap Generator', description: 'Generate a sitemap.xml file with our 100% free tools.', href: '/tools/sitemap-generator', icon: Network },
       { name: 'Robots.txt Generator', description: 'Generate a robots.txt file with our free tools for a lifetime.', href: '/tools/robots-txt-generator', icon: Route },
-      { name: 'Open Graph Preview Tool', description: 'Preview Open Graph tags with our 100% free tools.', href: '/tools/open-graph-preview', icon: Share2 },
-      { name: 'Domain Age Checker', description: 'Check the age of a domain with our free tools for a lifetime.', href: '/tools/domain-age-checker', icon: Cake },
-      { name: 'IP Address Lookup', description: 'Find the location of an IP with our 100% free tools.', href: '/tools/ip-address-lookup', icon: Server },
-      { name: 'HTTP Status Checker', description: 'Check HTTP status codes of URLs with our free tools for a lifetime.', href: '/tools/http-status-checker', icon: Fingerprint },
     ],
   },
   {
