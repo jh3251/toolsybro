@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { toolCategories } from '@/lib/data';
+import { toolCategories, tools } from '@/lib/data';
 import type { Tool, ToolCategory } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { AdPlaceholder } from '@/components/layout/AdPlaceholder';
@@ -16,6 +16,13 @@ import { Stats } from '@/components/Stats';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Input } from '@/components/ui/input';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 
 const toolColors = [
@@ -50,6 +57,15 @@ const iconTextColors = [
   'text-indigo-600 dark:text-indigo-300',
   'text-teal-600 dark:text-teal-300',
 ];
+
+const popularTools = [
+  ...toolCategories[0].tools.slice(0, 2), // Word Counter, Character Counter
+  ...toolCategories[1].tools.slice(0, 3), // Image Compressor, Resizer, Cropper
+  ...toolCategories[2].tools.slice(0, 2), // PDF to JPG, JPG to PDF
+  ...toolCategories[3].tools.slice(0, 2), // JSON Formatter, XML Formatter
+  ...toolCategories[4].tools.slice(0, 3), // QR Code, Barcode, Password Gen
+];
+
 
 export function HomeClient() {
   const searchParams = useSearchParams();
@@ -204,6 +220,43 @@ export function HomeClient() {
                 </PopoverContent>
             </Popover>
           </div>
+      </section>
+
+      <section className="space-y-6">
+        <h2 className="text-2xl font-bold text-center font-headline">Popular Tools</h2>
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent>
+            {popularTools.map((tool, index) => (
+              <CarouselItem key={index} className="basis-1/2 md:basis-1/3 lg:basis-1/5">
+                <div className="p-1">
+                  <Link href={tool.href} className="group">
+                    <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary">
+                      <CardContent className="flex flex-col items-center justify-center p-4 gap-3 aspect-square">
+                        <div
+                          className={cn(
+                            'flex h-16 w-16 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110',
+                            iconBgColors[index % iconBgColors.length]
+                          )}
+                        >
+                          <tool.icon className={cn('h-8 w-8', iconTextColors[index % iconTextColors.length])} />
+                        </div>
+                        <p className="text-sm font-semibold text-center group-hover:text-primary">{tool.name}</p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden sm:flex" />
+          <CarouselNext className="hidden sm:flex" />
+        </Carousel>
       </section>
       
       <div className="grid w-full gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
