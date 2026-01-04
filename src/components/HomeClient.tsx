@@ -176,6 +176,7 @@ export function HomeClient() {
     <div className="flex flex-col space-y-12">
       <section className="text-center space-y-6">
         <p className="text-2xl font-semibold text-primary">Fast-Simple & 100% Free Tools.</p>
+        
         <h2 className="text-2xl font-bold font-headline">Popular Tools</h2>
         <Carousel
           plugins={plugins.current}
@@ -187,7 +188,7 @@ export function HomeClient() {
         >
           <CarouselContent>
             {popularTools.map((tool, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+              <CarouselItem key={index} className="basis-1/2 md:basis-1/3 lg:basis-1/4">
                 <div className="p-1">
                   <Link href={tool.href} className="group">
                     <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary">
@@ -229,7 +230,7 @@ export function HomeClient() {
                         className="w-full justify-start rounded-full h-12 text-base text-muted-foreground relative group inline-flex items-center px-4 py-2 text-lg font-medium transition-colors"
                         onClick={() => setIsSearchOpen(true)}
                     >
-                      <div className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-green-400 to-blue-500 opacity-75 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200"></div>
+                      <div className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-green-400 to-green-600 opacity-75 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200"></div>
                        <div className="relative flex h-full w-full items-center justify-start rounded-full bg-background px-4">
                          <Search className="mr-4 h-5 w-5 shrink-0" />
                           <span className="sm:hidden">Search for a tool...</span>
