@@ -15,7 +15,6 @@ import { FeatureHighlights } from '@/components/FeatureHighlights';
 import { Stats } from '@/components/Stats';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Input } from '@/components/ui/input';
 import {
   Carousel,
   CarouselContent,
@@ -175,8 +174,46 @@ export function HomeClient() {
 
   return (
     <div className="flex flex-col space-y-12">
-      <section className="text-center">
-        <p className="text-2xl font-semibold text-primary mb-2">Fast-Simple & 100% Free Tools.</p>
+      <section className="text-center space-y-6">
+        <p className="text-2xl font-semibold text-primary">Fast-Simple & 100% Free Tools.</p>
+        <h2 className="text-2xl font-bold font-headline">Popular Tools</h2>
+        <Carousel
+          plugins={plugins.current}
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent>
+            {popularTools.map((tool, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                <div className="p-1">
+                  <Link href={tool.href} className="group">
+                    <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary">
+                      <CardContent className="flex flex-col items-center justify-center p-4 gap-3 aspect-square">
+                        <div
+                          className={cn(
+                            'flex h-16 w-16 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110',
+                            iconBgColors[index % iconBgColors.length]
+                          )}
+                        >
+                          <tool.icon className={cn('h-8 w-8', iconTextColors[index % iconTextColors.length])} />
+                        </div>
+                        <p className="text-base font-semibold text-center group-hover:text-primary">{tool.name}</p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden sm:flex" />
+          <CarouselNext className="hidden sm:flex" />
+        </Carousel>
+      </section>
+
+      <section className="text-center space-y-6">
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent animate-fade-in-down">
           Our Tools Collection
         </h1>
@@ -226,44 +263,6 @@ export function HomeClient() {
                 </PopoverContent>
             </Popover>
           </div>
-      </section>
-
-      <section className="space-y-6">
-        <h2 className="text-2xl font-bold text-center font-headline">Popular Tools</h2>
-        <Carousel
-          plugins={plugins.current}
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          className="w-full"
-        >
-          <CarouselContent>
-            {popularTools.map((tool, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4">
-                <div className="p-1">
-                  <Link href={tool.href} className="group">
-                    <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary">
-                      <CardContent className="flex flex-col items-center justify-center p-4 gap-3 aspect-square">
-                        <div
-                          className={cn(
-                            'flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110',
-                            iconBgColors[index % iconBgColors.length]
-                          )}
-                        >
-                          <tool.icon className={cn('h-6 w-6', iconTextColors[index % iconTextColors.length])} />
-                        </div>
-                        <p className="text-sm font-semibold text-center group-hover:text-primary">{tool.name}</p>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden sm:flex" />
-          <CarouselNext className="hidden sm:flex" />
-        </Carousel>
       </section>
       
       <div className="grid w-full gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
