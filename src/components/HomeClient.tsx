@@ -2,7 +2,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { toolCategories, tools } from '@/lib/data';
 import type { Tool, ToolCategory } from '@/lib/data';
@@ -23,6 +23,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import Autoplay from "embla-carousel-autoplay"
 
 
 const toolColors = [
@@ -74,6 +75,11 @@ export function HomeClient() {
   const [selectedCategory, setSelectedCategory] = useState<ToolCategory | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  
+  const plugins = useRef([
+    Autoplay({ delay: 2000, stopOnInteraction: true })
+  ]);
+
 
   useEffect(() => {
     const categoryName = searchParams.get('category');
@@ -225,6 +231,7 @@ export function HomeClient() {
       <section className="space-y-6">
         <h2 className="text-2xl font-bold text-center font-headline">Popular Tools</h2>
         <Carousel
+          plugins={plugins.current}
           opts={{
             align: "start",
             loop: true,
@@ -233,20 +240,20 @@ export function HomeClient() {
         >
           <CarouselContent>
             {popularTools.map((tool, index) => (
-              <CarouselItem key={index} className="basis-1/2 md:basis-1/3 lg:basis-1/5">
+              <CarouselItem key={index} className="basis-1/3 md:basis-1/4 lg:basis-1/6">
                 <div className="p-1">
                   <Link href={tool.href} className="group">
                     <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary">
                       <CardContent className="flex flex-col items-center justify-center p-4 gap-3 aspect-square">
                         <div
                           className={cn(
-                            'flex h-16 w-16 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110',
+                            'flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110',
                             iconBgColors[index % iconBgColors.length]
                           )}
                         >
-                          <tool.icon className={cn('h-8 w-8', iconTextColors[index % iconTextColors.length])} />
+                          <tool.icon className={cn('h-6 w-6', iconTextColors[index % iconTextColors.length])} />
                         </div>
-                        <p className="text-sm font-semibold text-center group-hover:text-primary">{tool.name}</p>
+                        <p className="text-xs font-semibold text-center group-hover:text-primary">{tool.name}</p>
                       </CardContent>
                     </Card>
                   </Link>
