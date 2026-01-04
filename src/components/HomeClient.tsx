@@ -173,7 +173,7 @@ export function HomeClient() {
   }
 
   return (
-    <div className="flex flex-col space-y-12">
+    <div className="flex flex-col space-y-8">
       <section className="text-center space-y-6">
         <p className="text-4xl font-semibold text-green-600">Fast-Simple & 100% Free.</p>
         <h2 className="text-2xl font-bold font-headline">Popular Tools</h2>
@@ -299,7 +299,7 @@ export function HomeClient() {
         ))}
       </div>
       <FeatureHighlights />
-      <Card className="bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg">
+      <Card className="bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg">
         <CardHeader className="flex flex-row items-center gap-4">
             <div className="p-3 bg-white/20 rounded-full">
                 <Heart className="h-6 w-6 text-white"/>
@@ -311,7 +311,7 @@ export function HomeClient() {
         </CardHeader>
         <CardContent>
              <Link href="https://revolut.me/jabedhy13p" target="_blank" rel="noopener noreferrer">
-              <Button className="w-full bg-white text-pink-600 hover:bg-white/90 font-bold text-lg py-6 rounded-full shadow-lg transition-transform transform hover:scale-105">
+              <Button className="w-full bg-white text-green-600 hover:bg-white/90 font-bold text-lg py-6 rounded-full shadow-lg transition-transform transform hover:scale-105">
                 Donate Now
               </Button>
             </Link>
