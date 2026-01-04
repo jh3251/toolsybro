@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useFirestore } from '@/firebase';
 import { collection, doc, serverTimestamp } from 'firebase/firestore';
 import { setDocumentNonBlocking } from '@/firebase/non-blocking-updates';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -85,12 +85,15 @@ export function UrlShortener() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Enter URL to Shorten</CardTitle>
+        <CardTitle className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">URL Shortener</CardTitle>
+        <CardDescription className="mt-2 text-xl text-muted-foreground">
+          Turn long, ugly links into short, memorable ones.
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="flex flex-col sm:flex-row items-end gap-4">
           <div className="space-y-2 flex-grow w-full">
-            <Label htmlFor="long-url">Long URL</Label>
+            <Label htmlFor="long-url">Enter URL to Shorten</Label>
             <div className="relative">
               <Link className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
