@@ -176,7 +176,6 @@ export function HomeClient() {
     <div className="flex flex-col space-y-12">
       <section className="text-center space-y-6">
         <p className="text-4xl font-semibold text-green-600">Fast-Simple & 100% Free.</p>
-        
         <h2 className="text-2xl font-bold font-headline">Popular Tools</h2>
         <Carousel
           plugins={plugins.current}
@@ -215,12 +214,6 @@ export function HomeClient() {
       </section>
 
       <section className="text-center space-y-6 pt-8">
-        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent animate-fade-in-down">
-          Our Tools Collection
-        </h1>
-        <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
-          Free Tools - No Signup - No Limits.
-        </p>
          <div className="mt-6 max-w-lg mx-auto">
             <Popover open={isSearchOpen} onOpenChange={setIsSearchOpen}>
                 <PopoverTrigger asChild>
@@ -264,6 +257,12 @@ export function HomeClient() {
                 </PopoverContent>
             </Popover>
           </div>
+        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent animate-fade-in-down">
+          Our Tools Collection
+        </h1>
+        <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+          Free Tools - No Signup - No Limits.
+        </p>
       </section>
       
       <div className="grid w-full gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
