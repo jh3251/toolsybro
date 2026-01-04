@@ -175,7 +175,7 @@ export function HomeClient() {
   return (
     <div className="flex flex-col space-y-12">
       <section className="text-center space-y-6">
-        <p className="text-3xl font-semibold text-accent">Fast-Simple & 100% Free Tools.</p>
+        <p className="text-3xl font-semibold text-accent">Fast-Simple & 100% Free.</p>
         
         <h2 className="text-2xl font-bold font-headline">Popular Tools</h2>
         <Carousel
