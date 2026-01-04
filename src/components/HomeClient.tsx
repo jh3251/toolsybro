@@ -170,7 +170,7 @@ export function HomeClient() {
                         className="w-full justify-start rounded-full h-12 text-base text-muted-foreground relative group inline-flex items-center px-4 py-2 text-lg font-medium transition-colors"
                         onClick={() => setIsSearchOpen(true)}
                     >
-                      <div className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-75 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200"></div>
+                      <div className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-green-400 to-blue-500 opacity-75 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200"></div>
                        <div className="relative flex h-full w-full items-center justify-start rounded-full bg-background px-4">
                          <Search className="mr-4 h-5 w-5 shrink-0" />
                           <span className="sm:hidden">Search for a tool...</span>
