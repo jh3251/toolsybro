@@ -175,7 +175,7 @@ export function HomeClient() {
   return (
     <div className="flex flex-col space-y-12">
       <section className="text-center space-y-6">
-        <p className="text-2xl font-semibold text-primary">Fast-Simple & 100% Free Tools.</p>
+        <p className="text-3xl font-semibold text-accent">Fast-Simple & 100% Free Tools.</p>
         
         <h2 className="text-2xl font-bold font-headline">Popular Tools</h2>
         <Carousel
@@ -188,7 +188,7 @@ export function HomeClient() {
         >
           <CarouselContent>
             {popularTools.map((tool, index) => (
-              <CarouselItem key={index} className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+              <CarouselItem key={index} className="basis-1/2 md:basis-1/3 lg:basis-1/5">
                 <div className="p-1">
                   <Link href={tool.href} className="group">
                     <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary">
