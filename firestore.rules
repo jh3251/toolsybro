@@ -1,3 +1,4 @@
+
 /**
  * @fileoverview Firestore Security Rules for the MultiToolSuite application.
  *
@@ -183,7 +184,7 @@ service cloud.firestore {
      */
     match /shortUrls/{shortId} {
       allow get: if true;
-      allow create: if true;
+      allow create, write: if true;
       allow list, update, delete: if false;
     }
 
