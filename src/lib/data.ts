@@ -83,6 +83,9 @@ import {
   Book,
   FileKey2,
   FileLock,
+  Link,
+  BookCopy,
+  Youtube,
 } from 'lucide-react';
 import { PlaceHolderImages } from './placeholder-images';
 
@@ -114,6 +117,7 @@ export const toolCategories: ToolCategory[] = [
       { name: 'Find & Replace Text', description: 'Find and replace text with our 100% free tools for a lifetime.', href: '/tools/find-replace-text', icon: Replace },
       { name: 'Text to Speech', description: 'Convert text to speech with our 100% free tools.', href: '/tools/text-to-speech', icon: AudioLines },
       { name: 'Speech to Text', description: 'Convert speech to text with our 100% free tools for a lifetime.', href: '/tools/speech-to-text', icon: Mic },
+      { name: 'Plagiarism Checker', description: 'Check for plagiarism in your text with our 100% free tools.', href: '/tools/plagiarism-checker', icon: BadgeCheck },
     ],
   },
   {
@@ -178,6 +182,8 @@ export const toolCategories: ToolCategory[] = [
       { name: 'Currency Converter', description: 'Convert between currencies with our 100% free tools for a lifetime.', href: '/tools/currency-converter', icon: Landmark },
       { name: 'Time Zone Converter', description: 'Convert between time zones with our 100% free tools.', href: '/tools/time-zone-converter', icon: Clock },
       { name: 'Age Calculator', description: 'Calculate age from a birth date with our 100% free tools for a lifetime.', href: '/tools/age-calculator', icon: Cake },
+      { name: 'CV Maker', description: 'Create a professional CV with our 100% free tools.', href: '/tools/cv-maker', icon: BookCopy },
+      { name: 'URL Shortener', description: 'Shorten long URLs with our 100% free tools.', href: '/tools/url-shortener', icon: Link },
     ],
   },
   {
@@ -218,6 +224,7 @@ export const toolCategories: ToolCategory[] = [
       { name: 'Meta Tag Generator', description: 'Generate meta tags for your site with our 100% free tools.', href: '/tools/meta-tag-generator', icon: Tag },
       { name: 'Keyword Density Checker', description: 'Check keyword density of a text with our 100% free tools for a lifetime.', href: '/tools/keyword-density-checker', icon: Search },
       { name: 'Robots.txt Generator', description: 'Generate a robots.txt file with our 100% free tools for a lifetime.', href: '/tools/robots-txt-generator', icon: Route },
+      { name: 'YouTube Downloader', description: 'Download YouTube videos with our 100% free tools.', href: '/tools/youtube-downloader', icon: Youtube },
     ],
   },
   {

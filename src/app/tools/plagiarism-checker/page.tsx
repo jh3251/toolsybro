@@ -1,0 +1,33 @@
+
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
+import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+
+export const metadata: Metadata = {
+  title: 'Plagiarism Checker | Free Tool (Coming Soon) | ToolsyBro',
+  description: 'A 100% free online tool to check your text for plagiarism. This feature is coming soon to ToolsyBro\'s collection of 100% free tools.',
+};
+
+export default function PlaceholderPage() {
+  return (
+    <div className="space-y-8">
+      <header className="flex items-center gap-4">
+        <Link href="/?category=Text+%26+Writing+Tools">
+            <Button variant="outline" size="icon">
+                <ArrowLeft className="h-4 w-4" />
+                <span className="sr-only">Back to Tools</span>
+            </Button>
+        </Link>
+        <div>
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Plagiarism Checker</h1>
+            <p className="mt-2 text-xl text-muted-foreground">
+            This tool is coming soon!
+            </p>
+        </div>
+      </header>
+      <AdvancedFeaturePlaceholder title="Plagiarism Checker" />
+    </div>
+  );
+}
