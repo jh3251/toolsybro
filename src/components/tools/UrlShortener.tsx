@@ -10,7 +10,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Copy, Link, Wand2, CheckCircle } from 'lucide-react';
+import { Copy, Link as LinkIcon, Wand2, CheckCircle, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
 
 export function UrlShortener() {
   const [longUrl, setLongUrl] = useState('');
@@ -84,15 +85,28 @@ export function UrlShortener() {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Enter URL to Shorten</CardTitle>
+       <CardHeader>
+        <div className="flex items-center gap-4 mb-4">
+            <Link href="/?category=Utility+%26+Productivity+Tools">
+                <Button variant="outline" size="icon">
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back to Tools</span>
+                </Button>
+            </Link>
+            <div className="flex-grow">
+                 <CardTitle className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">URL Shortener</CardTitle>
+                 <CardDescription className="mt-2 text-xl text-muted-foreground">
+                    Turn long, ugly links into short, memorable ones.
+                 </CardDescription>
+            </div>
+        </div>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="flex flex-col sm:flex-row items-end gap-4">
           <div className="space-y-2 flex-grow w-full">
             <Label htmlFor="long-url">Long URL</Label>
             <div className="relative">
-              <Link className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+              <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
                 id="long-url"
                 value={longUrl}
