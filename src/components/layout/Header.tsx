@@ -38,7 +38,7 @@ export function Header() {
           <nav className="hidden items-center gap-4 md:flex">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:text-primary focus-visible:ring-0">
+                <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-accent">
                   Free Tools <ChevronDown className="ml-1 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
