@@ -58,7 +58,7 @@ export function WordCounter() {
   }, [debouncedText]);
 
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[2fr_1fr]">
       <div className="space-y-4">
         <Textarea
           value={text}
