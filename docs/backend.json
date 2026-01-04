@@ -241,6 +241,33 @@
         }
       },
       "required": ["id", "userId", "title", "status", "createdAt"]
+    },
+    "ShortUrl": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ShortUrl",
+      "type": "object",
+      "description": "Represents a shortened URL.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The short ID for the URL."
+        },
+        "longUrl": {
+          "type": "string",
+          "description": "The original, long URL.",
+          "format": "uri"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp of when the short URL was created.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "longUrl",
+        "createdAt"
+      ]
     }
   },
   "auth": {
@@ -354,8 +381,24 @@
             }
           ]
         }
+      },
+      {
+        "path": "/shortUrls/{shortId}",
+        "definition": {
+          "entityName": "ShortUrl",
+          "schema": {
+            "$ref": "#/backend/entities/ShortUrl"
+          },
+          "description": "Collection of shortened URLs. Public read and write access.",
+          "params": [
+            {
+              "name": "shortId",
+              "description": "The unique short identifier for the URL."
+            }
+          ]
+        }
       }
     ],
-    "reasoning": "The Firestore data structure is designed to support the MultiToolSuite application, emphasizing security, scalability, and ease of debugging.  The structure adheres to the core design principles of Authorization Independence, Clarity of Intent, DBAC (Database-Based Access Control), QAPs (Rules are not Filters), and Invariants.\n\n**Authorization Independence:**  Path-based ownership (`/users/{userId}/notes/{noteId}`) inherently provides Authorization Independence, as access control rules can be based solely on the path and the `request.auth.uid` without requiring `get()` calls to parent documents.  There is no need to denormalize any data for ownership because the ownership is built into the structure of the data paths.\n\n**QAPs (Rules are not Filters):**  The segregation of user-specific data into `/users/{userId}/notes/{noteId}` ensures secure `list` operations.  A user can only list notes under their own user ID, preventing unauthorized access to other users' notes. Public data (tools, blog posts) will use separate collections to avoid mixing access requirements and enabling QAPs.\n\n**Structure and Rationale:**\n*   `/users/{userId}/notes/{noteId}`:  Each user has their own collection of notes. This structure provides clear ownership and avoids the need for complex queries or security rules to determine access.  Authorization is based solely on the `userId` path parameter matching the `request.auth.uid`.\n\n*   `/users/{userId}/studyTasks/{taskId}`: Each user has their own collection of study tasks. This provides clear ownership and simplifies security rules.\n\n*   `/tools/{toolId}`:  A collection of tools available on the platform.  These are global and accessible, so no user-specific data is mixed in.  Authorization is separate, likely public read access with admin-only write access.\n\n*   `/blog_posts/{blogPostId}`:  A collection of blog posts. Like tools, these are global and publicly accessible with restricted write access.\n\n*   `/contact_messages/{messageId}`: A collection of contact messages.  Creation will be public, but reading should be restricted to administrators. \n\nThe design prioritizes path-based ownership for user-generated content (notes, study tasks) and segregates public data (tools, blog posts) into separate collections.  This segregation simplifies security rules and ensures QAPs. The structure promotes clear authorization intent, debuggability, and adherence to the core design principles."
+    "reasoning": "The Firestore data structure is designed to support the MultiToolSuite application, emphasizing security, scalability, and ease of debugging.  The structure adheres to the core design principles of Authorization Independence, Clarity of Intent, DBAC (Database-Based Access Control), QAPs (Rules are not Filters), and Invariants.\n\n**Authorization Independence:**  Path-based ownership (`/users/{userId}/notes/{noteId}`) inherently provides Authorization Independence, as access control rules can be based solely on the path and the `request.auth.uid` without requiring `get()` calls to parent documents.  There is no need to denormalize any data for ownership because the ownership is built into the structure of the data paths.\n\n**QAPs (Rules are not Filters):**  The segregation of user-specific data into `/users/{userId}/notes/{noteId}` ensures secure `list` operations.  A user can only list notes under their own user ID, preventing unauthorized access to other users' notes. Public data (tools, blog posts, shortUrls) will use separate collections to avoid mixing access requirements and enabling QAPs.\n\n**Structure and Rationale:**\n*   `/users/{userId}/notes/{noteId}`:  Each user has their own collection of notes. This structure provides clear ownership and avoids the need for complex queries or security rules to determine access.  Authorization is based solely on the `userId` path parameter matching the `request.auth.uid`.\n\n*   `/users/{userId}/studyTasks/{taskId}`: Each user has their own collection of study tasks. This provides clear ownership and simplifies security rules.\n\n*   `/tools/{toolId}`:  A collection of tools available on the platform.  These are global and accessible, so no user-specific data is mixed in.  Authorization is separate, likely public read access with admin-only write access.\n\n*   `/blog_posts/{blogPostId}`:  A collection of blog posts. Like tools, these are global and publicly accessible with restricted write access.\n\n*   `/contact_messages/{messageId}`: A collection of contact messages.  Creation will be public, but reading should be restricted to administrators. \n\n*   `/shortUrls/{shortId}`: A global collection for shortened URLs. Public read is required for redirection, and public write allows any user to create a short link, fitting the 'no sign-up' philosophy.\n\nThe design prioritizes path-based ownership for user-generated content (notes, study tasks) and segregates public data (tools, blog posts, short URLs) into separate collections.  This segregation simplifies security rules and ensures QAPs. The structure promotes clear authorization intent, debuggability, and adherence to the core design principles."
   }
 }

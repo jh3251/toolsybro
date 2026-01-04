@@ -175,6 +175,17 @@ service cloud.firestore {
       allow update: if isExistingOwner(resource.data.authorId) && request.resource.data.authorId == resource.data.authorId;
       allow delete: if isExistingOwner(resource.data.authorId);
     }
+    
+    /**
+     * @description Secures the short URLs collection. Allows public read for
+     *   redirection and public write to create new short URLs.
+     * @path /shortUrls/{shortId}
+     */
+    match /shortUrls/{shortId} {
+      allow get: if true;
+      allow create: if true;
+      allow list, update, delete: if false;
+    }
 
     // -------------------------------------------------------------------------
     // Write-Only Rules (/contact_messages)
