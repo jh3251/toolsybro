@@ -188,7 +188,7 @@ export function HomeClient() {
         >
           <CarouselContent>
             {popularTools.map((tool, index) => (
-              <CarouselItem key={index} className="basis-1/2 md:basis-1/3 lg:basis-1/5">
+              <CarouselItem key={index} className="md:basis-1/4 lg:basis-1/5">
                 <div className="p-1">
                   <Link href={tool.href} className="group">
                     <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary">
@@ -214,8 +214,8 @@ export function HomeClient() {
         </Carousel>
       </section>
 
-      <section className="text-center space-y-6">
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent animate-fade-in-down">
+      <section className="text-center space-y-6 pt-8">
+        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent animate-fade-in-down">
           Our Tools Collection
         </h1>
         <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
