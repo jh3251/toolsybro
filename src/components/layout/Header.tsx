@@ -38,7 +38,7 @@ export function Header() {
           <nav className="hidden items-center gap-4 md:flex">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-accent">
+                <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:bg-accent hover:text-white focus-visible:ring-accent">
                   Free Tools <ChevronDown className="ml-1 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -78,7 +78,7 @@ export function Header() {
             ))}
           </nav>
             <Link href="https://revolut.me/jabedhy13p" target="_blank" rel="noopener noreferrer">
-               <Button className="bg-pink-500 hover:bg-pink-600 text-white rounded-full shadow-lg transition-transform transform hover:scale-105">
+               <Button className="bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg transition-transform transform hover:scale-105">
                 <Heart className="h-4 w-4 sm:mr-2" />
                 <span className="hidden sm:inline">Donate</span>
               </Button>
