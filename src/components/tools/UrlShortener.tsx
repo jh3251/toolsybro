@@ -95,7 +95,7 @@ export function UrlShortener() {
                 </Button>
             </Link>
             <div className="flex-grow">
-                 <CardTitle className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">URL Shortener</CardTitle>
+                 <CardTitle className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">URL Shortener</CardTitle>
                  <CardDescription className="mt-2 text-lg text-muted-foreground">
                     Turn long, ugly links into short, memorable ones.
                  </CardDescription>
