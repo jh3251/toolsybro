@@ -213,7 +213,7 @@ export function HomeClient() {
         </Carousel>
       </section>
 
-      <section className="text-center space-y-6 pt-8">
+      <section className="text-center space-y-4">
          <div className="mt-6 max-w-lg mx-auto">
             <Popover open={isSearchOpen} onOpenChange={setIsSearchOpen}>
                 <PopoverTrigger asChild>
