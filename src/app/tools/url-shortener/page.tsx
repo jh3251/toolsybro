@@ -1,8 +1,5 @@
 
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
 import { UrlShortener } from '@/components/tools/UrlShortener';
 
 export const metadata: Metadata = {
