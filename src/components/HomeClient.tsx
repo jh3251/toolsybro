@@ -175,7 +175,7 @@ export function HomeClient() {
   return (
     <div className="flex flex-col space-y-12">
       <section className="text-center space-y-6">
-        <p className="text-3xl font-semibold text-accent">Fast-Simple & 100% Free.</p>
+        <p className="text-4xl font-semibold text-green-600">Fast-Simple & 100% Free.</p>
         
         <h2 className="text-2xl font-bold font-headline">Popular Tools</h2>
         <Carousel
@@ -234,7 +234,7 @@ export function HomeClient() {
                        <div className="relative flex h-full w-full items-center justify-start rounded-full bg-background px-4">
                          <Search className="mr-4 h-5 w-5 shrink-0" />
                           <span className="sm:hidden">Search for a tool...</span>
-                          <span className="hidden sm:inline">Search for a tool (e.g., 'qr code generetor')</span>
+                          <span className="hidden sm:inline">Search for a tool (like-'qr code generetor')</span>
                        </div>
                     </button>
                 </PopoverTrigger>
