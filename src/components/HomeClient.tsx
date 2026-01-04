@@ -240,7 +240,7 @@ export function HomeClient() {
         >
           <CarouselContent>
             {popularTools.map((tool, index) => (
-              <CarouselItem key={index} className="basis-1/3 md:basis-1/4 lg:basis-1/6">
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4">
                 <div className="p-1">
                   <Link href={tool.href} className="group">
                     <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary">
@@ -253,7 +253,7 @@ export function HomeClient() {
                         >
                           <tool.icon className={cn('h-6 w-6', iconTextColors[index % iconTextColors.length])} />
                         </div>
-                        <p className="text-xs font-semibold text-center group-hover:text-primary">{tool.name}</p>
+                        <p className="text-sm font-semibold text-center group-hover:text-primary">{tool.name}</p>
                       </CardContent>
                     </Card>
                   </Link>
