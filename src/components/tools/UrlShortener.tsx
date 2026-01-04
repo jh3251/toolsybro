@@ -85,15 +85,12 @@ export function UrlShortener() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">URL Shortener</CardTitle>
-        <CardDescription className="mt-2 text-xl text-muted-foreground">
-          Turn long, ugly links into short, memorable ones.
-        </CardDescription>
+        <CardTitle>Enter URL to Shorten</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="flex flex-col sm:flex-row items-end gap-4">
           <div className="space-y-2 flex-grow w-full">
-            <Label htmlFor="long-url">Enter URL to Shorten</Label>
+            <Label htmlFor="long-url">Long URL</Label>
             <div className="relative">
               <Link className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
