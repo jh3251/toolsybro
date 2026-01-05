@@ -8,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function UrlShortenerPage() {
-  return (
-    <div className="space-y-8">
-      <UrlShortener />
-    </div>
-  );
+    return <UrlShortener />;
 }
