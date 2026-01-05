@@ -62,7 +62,7 @@ const popularTools = [
   ...toolCategories[0].tools.slice(0, 2), // Word Counter, Character Counter
   ...toolCategories[1].tools.slice(0, 3), // Image Compressor, Resizer, Cropper
   ...toolCategories[2].tools.slice(0, 2), // PDF to JPG, JPG to PDF
-  ...toolCategories[3].tools.slice(0, 2), // JSON Formatter, XML Formatter
+  ...toolCategories[3].tools.slice(1, 2), // XML Formatter
   ...toolCategories[4].tools.slice(0, 3), // QR Code, Barcode, Password Gen
 ];
 
