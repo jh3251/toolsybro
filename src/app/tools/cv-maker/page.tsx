@@ -3,14 +3,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+import { CvMaker } from '@/components/tools/CvMaker';
 
 export const metadata: Metadata = {
-  title: 'CV Maker | Free Professional Resume Builder (Coming Soon) | ToolsyBro',
-  description: 'A 100% free online tool to create professional CVs and resumes. This feature is coming soon to ToolsyBro\'s collection of 100% free tools.',
+  title: 'CV Maker | Free Professional Resume Builder | ToolsyBro',
+  description: 'A 100% free online tool to create professional CVs and resumes. Build and download your resume in minutes with our 100% free tools.',
 };
 
-export default function PlaceholderPage() {
+export default function CVMakerPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center gap-4">
@@ -23,11 +23,11 @@ export default function PlaceholderPage() {
         <div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">CV Maker</h1>
             <p className="mt-2 text-xl text-muted-foreground">
-            This tool is coming soon!
+            Build a professional CV and download it as a PDF.
             </p>
         </div>
       </header>
-      <AdvancedFeaturePlaceholder title="CV Maker" />
+      <CvMaker />
     </div>
   );
 }
