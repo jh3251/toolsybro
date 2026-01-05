@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Gift, Moon, Sun, Hourglass } from 'lucide-react';
 import { format, differenceInYears, differenceInMonths, differenceInDays, differenceInWeeks, differenceInHours, differenceInMinutes, addYears, subDays, addMonths, isFuture } from 'date-fns';
+import { Label } from '../ui/label';
 
 const StatCard = ({ icon: Icon, title, value, unit }: { icon: React.ElementType; title: string; value: string | number; unit: string }) => (
     <div className="flex flex-col items-center justify-center space-y-2 rounded-lg bg-muted/50 p-4 text-center h-full">
@@ -77,8 +78,9 @@ export function AgeCalculator() {
         <Card>
             <CardContent className="pt-6 space-y-8">
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                     <p className="text-lg font-medium">Your Date of Birth:</p>
+                     <Label htmlFor='dob' className="text-lg font-medium">Your Date of Birth:</Label>
                      <Input
+                        id='dob'
                         type="date"
                         value={dateOfBirth}
                         onChange={(e) => setDateOfBirth(e.target.value)}
