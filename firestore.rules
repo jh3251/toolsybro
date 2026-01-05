@@ -184,7 +184,7 @@ service cloud.firestore {
      */
     match /shortUrls/{shortId} {
       allow get: if true;
-      allow create, update: if true;
+      allow write: if true;
       allow list, delete: if false;
     }
 
