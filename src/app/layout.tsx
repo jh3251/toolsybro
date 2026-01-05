@@ -13,6 +13,9 @@ import { FirebaseClientProvider } from '@/firebase';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import type { Metadata } from 'next';
+import { SharedToolsHeader } from '@/components/SharedToolsHeader';
+import { usePathname } from 'next/navigation';
+
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -35,6 +38,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [isClient, setIsClient] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
+  const showSharedHeader = !isHomePage && (pathname.startsWith('/tools/') || pathname.startsWith('/?category='));
+
 
   useEffect(() => {
     setIsClient(true);
@@ -78,7 +85,10 @@ export default function RootLayout({
               <Header />
               <div className="container mx-auto flex-1 px-4 py-8 md:px-6">
                   <div className="flex flex-col gap-8 lg:flex-row">
-                  <main className="flex-1 lg:w-3/4">{children}</main>
+                  <main className="flex-1 lg:w-3/4">
+                    {showSharedHeader && <SharedToolsHeader />}
+                    {children}
+                  </main>
                   <aside className="w-full lg:w-1/4">
                       <div className="sticky top-24 space-y-6">
                       <h3 className="font-semibold text-center text-muted-foreground">Advertisement</h3>
