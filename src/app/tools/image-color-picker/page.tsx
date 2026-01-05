@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 const ImageColorPicker = dynamic(
   () => import('@/components/tools/ImageColorPicker').then(mod => mod.ImageColorPicker),
@@ -24,35 +25,26 @@ const ImageColorPicker = dynamic(
   }
 );
 
-// Metadata is not directly used in client components in the same way,
-// but we can keep it for reference or for parent layouts to potentially use.
-// For app router, you'd typically export this from a server component page.
-// Since we must use 'use client', this won't be picked up for static metadata generation.
-/*
-export const metadata: Metadata = {
-  title: 'Image Color Picker | Free Online Tool | ToolsyBro',
-  description: 'Upload an image to pick colors, get HEX and RGB values, and generate a color palette with our 100% free online tool.',
-};
-*/
-
 export default function ImageColorPickerPage() {
   return (
-    <div className="space-y-8">
-      <header className="flex items-center gap-4">
-        <Link href="/?category=Image+Tools">
-            <Button variant="outline" size="icon">
-                <ArrowLeft className="h-4 w-4" />
-                <span className="sr-only">Back to Tools</span>
-            </Button>
-        </Link>
-        <div>
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">Image Color Picker</h1>
-            <p className="mt-2 text-xl text-muted-foreground">
-            Extract colors and palettes from any image.
-            </p>
+    <Card className="overflow-hidden">
+        <div className="bg-muted/30 p-6 sm:p-8">
+            <div className="flex items-start gap-4 mb-6">
+                <Link href="/?category=Image+Tools" className="hidden sm:block">
+                    <Button variant="outline" size="icon">
+                        <ArrowLeft className="h-4 w-4" />
+                        <span className="sr-only">Back to Tools</span>
+                    </Button>
+                </Link>
+                <div className="flex-grow">
+                    <CardTitle className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">Image Color Picker</CardTitle>
+                    <CardDescription className="mt-2 text-lg text-muted-foreground">
+                        Extract colors and palettes from any image.
+                    </CardDescription>
+                </div>
+            </div>
+            <ImageColorPicker />
         </div>
-      </header>
-      <ImageColorPicker />
-    </div>
+    </Card>
   );
 }

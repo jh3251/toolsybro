@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { CodeMinifier } from '@/components/tools/CodeMinifier';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 export const metadata: Metadata = {
   title: 'JavaScript Minifier | Free Online JS Compressor | ToolsyBro',
@@ -12,22 +13,24 @@ export const metadata: Metadata = {
 
 export default function JavascriptMinifierPage() {
   return (
-    <div className="space-y-8">
-      <header className="flex items-center gap-4">
-        <Link href="/?category=Developer+Tools">
-            <Button variant="outline" size="icon">
-                <ArrowLeft className="h-4 w-4" />
-                <span className="sr-only">Back to Tools</span>
-            </Button>
-        </Link>
-        <div>
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline">JavaScript Minifier</h1>
-            <p className="mt-2 text-xl text-muted-foreground">
-            Shrink your JS files for faster load and execution times.
-            </p>
+    <Card className="overflow-hidden">
+        <div className="bg-muted/30 p-6 sm:p-8">
+            <div className="flex items-start gap-4 mb-6">
+                <Link href="/?category=Developer+Tools" className="hidden sm:block">
+                    <Button variant="outline" size="icon">
+                        <ArrowLeft className="h-4 w-4" />
+                        <span className="sr-only">Back to Tools</span>
+                    </Button>
+                </Link>
+                <div className="flex-grow">
+                    <CardTitle className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">JavaScript Minifier</CardTitle>
+                    <CardDescription className="mt-2 text-lg text-muted-foreground">
+                        Shrink your JS files for faster load and execution times.
+                    </CardDescription>
+                </div>
+            </div>
+            <CodeMinifier language='javascript' />
         </div>
-      </header>
-      <CodeMinifier language='javascript' />
-    </div>
+    </Card>
   );
 }
