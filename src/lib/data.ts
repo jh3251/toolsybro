@@ -226,7 +226,6 @@ export const toolCategories: ToolCategory[] = [
       { name: 'Meta Tag Generator', description: 'Generate meta tags for your site with our 100% free tools.', href: '/tools/meta-tag-generator', icon: Tag },
       { name: 'Keyword Density Checker', description: 'Check keyword density of a text with our 100% free tools for a lifetime.', href: '/tools/keyword-density-checker', icon: Search },
       { name: 'Robots.txt Generator', description: 'Generate a robots.txt file with our 100% free tools for a lifetime.', href: '/tools/robots-txt-generator', icon: Route },
-      { name: 'YouTube Downloader', description: 'Download YouTube videos with our 100% free tools.', href: '/tools/youtube-downloader', icon: Youtube },
     ],
   },
   {
