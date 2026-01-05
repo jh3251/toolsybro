@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -93,20 +94,20 @@ export function SharedToolsHeader() {
         >
           <CarouselContent>
             {popularTools.map((tool, index) => (
-              <CarouselItem key={index} className="md:basis-1/4 lg:basis-1/5">
+              <CarouselItem key={index} className="basis-1/3 md:basis-1/4 lg:basis-1/5">
                 <div className="p-1">
                   <Link href={tool.href} className="group">
                     <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary">
-                      <CardContent className="flex flex-col items-center justify-center p-4 gap-3 aspect-square">
+                      <CardContent className="flex flex-col items-center justify-center p-2 sm:p-4 gap-2 sm:gap-3 aspect-square">
                         <div
                           className={cn(
-                            'flex h-16 w-16 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110',
+                            'flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110',
                             iconBgColors[index % iconBgColors.length]
                           )}
                         >
-                          <tool.icon className={cn('h-8 w-8', iconTextColors[index % iconTextColors.length])} />
+                          <tool.icon className={cn('h-6 w-6 sm:h-8 sm:w-8', iconTextColors[index % iconTextColors.length])} />
                         </div>
-                        <p className="text-base font-semibold text-center group-hover:text-primary">{tool.name}</p>
+                        <p className="text-sm sm:text-base font-semibold text-center group-hover:text-primary">{tool.name}</p>
                       </CardContent>
                     </Card>
                   </Link>
