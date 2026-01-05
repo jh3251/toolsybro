@@ -53,7 +53,7 @@ export function UrlShortener() {
         createdAt: serverTimestamp(),
       };
 
-      setDocumentNonBlocking(docRef, newUrlData, {});
+      await setDocumentNonBlocking(docRef, newUrlData, {});
       
       const fullShortUrl = `${window.location.origin}/r/${shortId}`;
       setShortUrl(fullShortUrl);

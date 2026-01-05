@@ -86,6 +86,7 @@ import {
   Link,
   BookCopy,
   Youtube,
+  Camera,
 } from 'lucide-react';
 import { PlaceHolderImages } from './placeholder-images';
 
@@ -173,6 +174,7 @@ export const toolCategories: ToolCategory[] = [
     icon: Box,
     tools: [
       { name: 'QR Code Generator', description: 'Generate custom QR codes with our 100% free tools.', href: '/tools/qr-code-generator', icon: QrCode },
+      { name: 'QR Code Scanner', description: 'Scan QR codes using your camera with our 100% free tools.', href: '/tools/qr-code-scanner', icon: Camera },
       { name: 'Barcode Generator', description: 'Generate various barcode types with our 100% free tools for a lifetime.', href: '/tools/barcode-generator', icon: Barcode },
       { name: 'Password Generator', description: 'Create strong, random passwords with our 100% free tools.', href: '/tools/password-generator', icon: KeyRound },
       { name: 'Password Strength Checker', description: 'Check password strength with our 100% free tools for a lifetime.', href: '/tools/password-strength-checker', icon: Shield },
