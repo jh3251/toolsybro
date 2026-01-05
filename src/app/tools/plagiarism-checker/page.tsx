@@ -3,15 +3,15 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { AdvancedFeaturePlaceholder } from '@/components/tools/AdvancedFeaturePlaceholder';
+import { PlagiarismChecker } from '@/components/tools/PlagiarismChecker';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Plagiarism Checker | Free Tool (Coming Soon) | ToolsyBro',
-  description: 'A 100% free online tool to check your text for plagiarism. This feature is coming soon to ToolsyBro\'s collection of 100% free tools.',
+  title: 'AI Plagiarism Checker | Free Originality Analysis Tool | ToolsyBro',
+  description: 'Check your text for originality and potential plagiarism with our 100% free, AI-powered tool. Get an originality score and identify non-unique content.',
 };
 
-export default function PlaceholderPage() {
+export default function PlagiarismCheckerPage() {
   return (
     <Card className="overflow-hidden">
       <div className="bg-muted/30 p-6 sm:p-8">
@@ -23,13 +23,13 @@ export default function PlaceholderPage() {
             </Button>
           </Link>
           <div className="flex-grow">
-            <CardTitle className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">Plagiarism Checker</CardTitle>
+            <CardTitle className="text-4xl font-bold tracking-tighter sm:text-5xl font-headline bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">AI Plagiarism Checker</CardTitle>
             <CardDescription className="mt-2 text-lg text-muted-foreground">
-              This tool is coming soon!
+              Analyze your text for originality and potential plagiarism.
             </CardDescription>
           </div>
         </div>
-        <AdvancedFeaturePlaceholder title="Plagiarism Checker" />
+        <PlagiarismChecker />
       </div>
     </Card>
   );

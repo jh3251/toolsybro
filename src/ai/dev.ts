@@ -8,4 +8,4 @@ import '@/ai/flows/remove-image-background.ts';
 import '@/ai/flows/solve-equation-flow.ts';
 import '@/ai/flows/generate-math-formula-flow.ts';
 import '@/ai/flows/generate-user-profile.ts';
-
+import '@/ai/flows/plagiarism-checker-flow.ts';
