@@ -87,6 +87,7 @@ import {
   BookCopy,
   Youtube,
   Camera,
+  Brush,
 } from 'lucide-react';
 import { PlaceHolderImages } from './placeholder-images';
 
