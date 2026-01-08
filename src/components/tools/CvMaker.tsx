@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Download, PlusCircle, Trash2, Mail, Phone, MapPin, Globe, User as UserIcon, UploadCloud, Edit2 } from 'lucide-react';
+import { Download, PlusCircle, Trash2, Mail, Phone, MapPin, Globe, User as UserIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { PDFDocument, rgb, StandardFonts, PDFFont, PageSizes } from 'pdf-lib';
 import { fileSave } from 'browser-fs-access';
@@ -135,60 +135,98 @@ export function CvMaker() {
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
     
-    // Define layout
-    const leftPanelWidth = width * 0.3;
-    const rightPanelX = leftPanelWidth + 20;
-    const rightPanelWidth = width - rightPanelX - 40;
-    let y = height - 40;
+    // --- Define Colors ---
+    const primaryColor = rgb(0.1, 0.1, 0.1); // Near black
+    const secondaryColor = rgb(0.3, 0.3, 0.3); // Dark Gray
+    const accentColor = rgb(34/255, 139/255, 230/255); // A nice blue
+    const whiteColor = rgb(1, 1, 1);
+    const lightGrayColor = rgb(0.95, 0.95, 0.95);
 
-    // --- Left Panel ---
-    // Photo
+    // --- Layout ---
+    const leftPanelWidth = width * 0.35;
+    const rightPanelX = leftPanelWidth + 20;
+    const margin = 30;
+    let y = height - margin;
+
+    // --- Left Panel (Colored Background) ---
+    page.drawRectangle({
+        x: 0,
+        y: 0,
+        width: leftPanelWidth,
+        height: height,
+        color: lightGrayColor,
+    });
+
+    // --- Draw Photo ---
+    y = height - margin;
     if (photo) {
         const imageBytes = await fetch(photo).then(res => res.arrayBuffer());
         const image = await pdfDoc.embedPng(imageBytes);
-        const imgSize = 80;
+        const imgSize = 100;
         page.drawImage(image, {
-            x: (leftPanelWidth - imgSize) / 2 + 20,
+            x: (leftPanelWidth - imgSize) / 2,
             y: y - imgSize,
             width: imgSize,
             height: imgSize,
         });
-        y -= (imgSize + 15);
+        y -= (imgSize + 20);
     }
 
-    // Name
-    page.drawText(data.name, { x: 20, y, font: boldFont, size: 20 });
-    y -= 40;
+    // --- Contact Info (Left Panel) ---
+    page.drawText('Contact', {
+        x: margin, y, font: boldFont, size: 14, color: primaryColor
+    });
+    page.drawLine({ start: { x: margin, y: y-5 }, end: { x: leftPanelWidth - margin, y: y-5 }, thickness: 1, color: accentColor });
+    y -= 30;
 
-    // Contact
-    page.drawText('Contact', { x: 20, y, font: boldFont, size: 14 });
+    const contactInfo = [
+        { text: data.email, icon: 'email' },
+        { text: data.phone, icon: 'phone' },
+        { text: data.address, icon: 'address' },
+        { text: data.website, icon: 'website' }
+    ].filter(item => item.text);
+
+    contactInfo.forEach(item => {
+        page.drawText(item.text, { x: margin, y, font, size: 9, color: secondaryColor, lineHeight: 14 });
+        y -= 15;
+    });
+
     y -= 20;
-    if(data.email) { page.drawText(data.email, { x: 20, y, font, size: 9 }); y -= 15; }
-    if(data.phone) { page.drawText(data.phone, { x: 20, y, font, size: 9 }); y -= 15; }
-    if(data.address) { page.drawText(data.address, { x: 20, y, font, size: 9 }); y -= 15; }
-    if(data.website) { page.drawText(data.website, { x: 20, y, font, size: 9, color: rgb(0, 0, 1) }); y -= 15; }
 
-    y -= 15;
-
-    // Skills
+    // --- Skills (Left Panel) ---
     if(data.skills) {
-        page.drawText('Skills', { x: 20, y, font: boldFont, size: 14 });
-        y -= 20;
-        page.drawText(data.skills.split(',').join('\n'), { x: 20, y, font, size: 9, lineHeight: 12 });
+        page.drawText('Skills', {
+            x: margin, y, font: boldFont, size: 14, color: primaryColor
+        });
+        page.drawLine({ start: { x: margin, y: y-5 }, end: { x: leftPanelWidth - margin, y: y-5 }, thickness: 1, color: accentColor });
+        y -= 30;
+        
+        data.skills.split(',').forEach(skill => {
+            page.drawText(`• ${skill.trim()}`, { x: margin, y, font, size: 10, color: secondaryColor });
+            y -= 15;
+        });
     }
-    
+
     // --- Right Panel ---
-    y = height - 40;
-    
+    y = height - margin;
+
+    // --- Name and Title ---
+    page.drawText(data.name, { x: rightPanelX, y, font: boldFont, size: 28, color: primaryColor });
+    y -= 35;
+    if(data.experience[0]?.title) {
+      page.drawText(data.experience[0].title, { x: rightPanelX, y, font, size: 16, color: accentColor });
+      y -= 25;
+    }
+
     const drawWrappedText = (text: string, options: any) => {
-        const {font, size, lineHeight} = options;
+        const {font, size, lineHeight, maxWidth} = options;
         const words = text.split(' ');
         let line = '';
         for (const word of words) {
-            if (y < 40) return; // Stop if near bottom of page
+            if (y < margin) return; 
             const testLine = line + word + ' ';
             const testWidth = font.widthOfTextAtSize(testLine, size);
-            if (testWidth > rightPanelWidth && line !== '') {
+            if (testWidth > maxWidth && line !== '') {
                 page.drawText(line, { ...options, y });
                 y -= lineHeight;
                 line = word + ' ';
@@ -200,33 +238,36 @@ export function CvMaker() {
         y -= lineHeight;
     }
 
+    // --- Summary ---
     if(data.summary) {
-        page.drawText('Summary', { x: rightPanelX, y, font: boldFont, size: 16 });
+        page.drawText('Summary', { x: rightPanelX, y, font: boldFont, size: 16, color: primaryColor });
         y -= 25;
-        drawWrappedText(data.summary, { x: rightPanelX, y, font, size: 10, lineHeight: 14 });
+        drawWrappedText(data.summary, { x: rightPanelX, y, font, size: 10, lineHeight: 14, color: secondaryColor, maxWidth: width - rightPanelX - margin });
         y -= 20;
     }
     
-    if(data.experience.length > 0) {
-        page.drawText('Experience', { x: rightPanelX, y, font: boldFont, size: 16 });
+    // --- Experience ---
+    if(data.experience.length > 0 && data.experience[0].title) {
+        page.drawText('Experience', { x: rightPanelX, y, font: boldFont, size: 16, color: primaryColor });
         y -= 25;
         data.experience.forEach(exp => {
-            page.drawText(exp.title, { x: rightPanelX, y, font: boldFont, size: 11 });
+            page.drawText(exp.title, { x: rightPanelX, y, font: boldFont, size: 12, color: primaryColor });
+            y -= 18;
+            page.drawText(`${exp.company} | ${exp.dates}`, { x: rightPanelX, y, font, size: 10, color: accentColor });
             y -= 15;
-            page.drawText(`${exp.company} | ${exp.dates}`, { x: rightPanelX, y, font, size: 9, color: rgb(0.3, 0.3, 0.3) });
-            y -= 15;
-            drawWrappedText(exp.description, { x: rightPanelX, y, font, size: 10, lineHeight: 14 });
+            drawWrappedText(exp.description, { x: rightPanelX + 10, y, font, size: 10, lineHeight: 14, color: secondaryColor, maxWidth: width - rightPanelX - margin - 10 });
             y -= 20;
         });
     }
 
-    if(data.education.length > 0) {
-        page.drawText('Education', { x: rightPanelX, y, font: boldFont, size: 16 });
+    // --- Education ---
+    if(data.education.length > 0 && data.education[0].school) {
+        page.drawText('Education', { x: rightPanelX, y, font: boldFont, size: 16, color: primaryColor });
         y -= 25;
         data.education.forEach(edu => {
-             page.drawText(edu.degree, { x: rightPanelX, y, font: boldFont, size: 11 });
-             y -= 15;
-             page.drawText(`${edu.school} | ${edu.dates}`, { x: rightPanelX, y, font, size: 9, color: rgb(0.3, 0.3, 0.3) });
+             page.drawText(edu.degree, { x: rightPanelX, y, font: boldFont, size: 12, color: primaryColor });
+             y -= 18;
+             page.drawText(`${edu.school} | ${edu.dates}`, { x: rightPanelX, y, font, size: 10, color: accentColor });
              y -= 20;
         });
     }
@@ -317,4 +358,3 @@ export function CvMaker() {
     </Card>
   );
 }
-
