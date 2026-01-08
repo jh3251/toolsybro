@@ -48,6 +48,7 @@ const popularTools = [
   ...toolCategories[2].tools.slice(0, 2), // PDF to JPG, JPG to PDF
   ...toolCategories[4].tools.slice(0, 3), // QR Code, Barcode, Password Gen
   ...toolCategories[0].tools.slice(10, 11), // Plagiarism Checker
+  ...toolCategories[4].tools.slice(11, 12), // CV Maker
 ];
 
 
