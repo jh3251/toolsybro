@@ -46,7 +46,8 @@ const popularTools = [
   ...toolCategories[0].tools.slice(0, 2), // Word Counter, Character Counter
   ...toolCategories[1].tools.slice(0, 3), // Image Compressor, Resizer, Cropper
   ...toolCategories[2].tools.slice(0, 2), // PDF to JPG, JPG to PDF
-  ...toolCategories[4].tools.slice(0, 3), // QR Code, Barcode, Password Gen
+  ...toolCategories[4].tools.slice(0, 1), // QR Code Generator
+  ...toolCategories[4].tools.slice(2, 4), // Barcode, Password Gen
   ...toolCategories[0].tools.slice(10, 11), // Plagiarism Checker
   ...toolCategories[4].tools.slice(11, 12), // CV Maker
 ];
