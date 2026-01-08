@@ -14,7 +14,7 @@ import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import type { Metadata } from 'next';
 import { SharedToolsHeader } from '@/components/SharedToolsHeader';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -39,8 +39,14 @@ export default function RootLayout({
 }>) {
   const [isClient, setIsClient] = useState(false);
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get('category');
+  
   const isHomePage = pathname === '/';
-  const showSharedHeader = !isHomePage && (pathname.startsWith('/tools/') || pathname.startsWith('/?category='));
+  const isCategoryPage = isHomePage && !!categoryParam;
+  const isToolPage = pathname.startsWith('/tools/');
+
+  const showSharedHeader = isToolPage || isCategoryPage;
 
 
   useEffect(() => {

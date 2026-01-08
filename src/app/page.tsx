@@ -9,7 +9,10 @@ export const metadata: Metadata = {
   description: 'Your one-stop destination for over 90+ 100% free tools. From image and text utilities to developer and finance calculators. No limits, no sign-up, and 100% privacy-focused.',
 };
 
-export default function Home() {
+export default function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined }}) {
+    // This allows the HomeClient to be aware of search params on initial server render
+    const category = searchParams?.category;
+
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <HomeClient />
