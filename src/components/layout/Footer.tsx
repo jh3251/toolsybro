@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import { AdPlaceholder } from "./AdPlaceholder";
+import { FooterAd } from '../ads/FooterAd';
 
 const footerLinks = [
   { href: '/about', label: 'About Us' },
@@ -14,14 +14,7 @@ export function Footer() {
     <footer className="w-full border-t bg-background">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center justify-center gap-4 py-8">
-            {/* Show on medium screens and up */}
-            <div className="hidden md:block">
-              <AdPlaceholder width={728} height={90} title="Footer Ad (728x90)" className="mb-4" />
-            </div>
-            {/* Show on small screens */}
-            <div className="block md:hidden">
-                <AdPlaceholder width={320} height={100} title="Footer Ad (320x100)" className="mb-4" />
-            </div>
+            <FooterAd />
         </div>
         <div className="flex flex-col items-center justify-between gap-4 border-t py-6 text-center sm:flex-row sm:text-left">
           <p className="text-sm text-muted-foreground">
