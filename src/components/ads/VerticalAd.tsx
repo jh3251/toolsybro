@@ -23,7 +23,7 @@ export function VerticalAd() {
           className="adsbygoogle"
           style={{ display: 'block' }}
           data-ad-client="ca-pub-5214845531760839"
-          data-ad-slot="4538606574"
+          data-ad-slot="3290987981"
           data-ad-format="auto"
           data-full-width-responsive="true"
         ></ins>
