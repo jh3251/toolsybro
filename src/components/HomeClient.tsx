@@ -7,7 +7,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { toolCategories, tools } from '@/lib/data';
 import type { Tool, ToolCategory } from '@/lib/data';
 import { cn } from '@/lib/utils';
-import { AdPlaceholder } from '@/components/layout/AdPlaceholder';
+import { HorizontalAd } from '@/components/ads/HorizontalAd';
 import { ArrowLeft, Heart, ArrowRight, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -111,7 +111,7 @@ export function HomeClient() {
         </div>
 
         <div className="flex justify-center pt-8">
-            <AdPlaceholder width={728} height={90} title="Horizontal Ad" />
+            <HorizontalAd />
         </div>
       </div>
     );
