@@ -1,7 +1,6 @@
 'use client'
 
 import { usePathname, useSearchParams } from 'next/navigation'
-import { AdPlaceholder } from '@/components/layout/AdPlaceholder'
 import { SharedToolsHeader } from '@/components/SharedToolsHeader'
 import { VerticalAd } from './ads/VerticalAd'
 
